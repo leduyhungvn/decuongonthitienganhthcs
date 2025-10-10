@@ -166,6 +166,11 @@
             padding: 15px;
             border-radius: 4px;
             min-height: 180px;
+            /* Ngăn chặn chọn văn bản trong giao diện làm bài */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .question-text {
@@ -187,6 +192,11 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 14px;
+            /* Cho phép chọn văn bản trong các ô đáp án */
+            user-select: auto;
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
         }
 
         .answer-option:hover {
@@ -388,7 +398,8 @@
             z-index: 1000;
             display: none;
         }
-/* Thêm CSS cho phần thông tin liên hệ */
+
+        /* Thêm CSS cho phần thông tin liên hệ */
         .contact-info {
             margin-top: 30px;
             padding: 15px;
@@ -437,12 +448,33 @@
         .contact-link:hover {
             text-decoration: underline;
         }
+
+        /* Thêm CSS cho cảnh báo chống sao chép */
+        .copy-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            z-index: 1001;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
     <!-- Cảnh báo gian lận -->
     <div id="warningMessage" class="warning-message">
         CẢNH BÁO: Đã phát hiện hành vi gian lận! Bài thi sẽ được kết thúc.
+    </div>
+
+    <!-- Cảnh báo chống sao chép -->
+    <div id="copyWarning" class="copy-warning">
+        Vui lòng không sao chép nội dung đề thi!
     </div>
 
     <!-- Giao diện chính -->
@@ -478,7 +510,8 @@
             </div>
             
             <button id="startButton" class="btn-primary">Bắt đầu làm bài</button>
-<!-- Thêm phần thông tin liên hệ -->
+            
+            <!-- Thêm phần thông tin liên hệ -->
             <div class="contact-info">
                 <div class="contact-title">THÔNG TIN LIÊN HỆ</div>
                 
@@ -1840,7 +1873,6 @@
                 }
             ]
         };
-
       
         // Kho đề cho L9GK1
         const L9GK1 = {
@@ -6826,6 +6858,7 @@
 
 
 
+
         // Định nghĩa tất cả các kho đề
         const questionBank = {
             L4GK1: L4GK1,
@@ -6963,6 +6996,15 @@
             // Xử lý sự kiện khi người dùng chuyển sang tab khác
             document.addEventListener('mouseleave', handleMouseLeave);
             document.addEventListener('mouseenter', handleMouseEnter);
+            
+            // Xử lý sự kiện sao chép trong giao diện làm bài
+            document.addEventListener('copy', handleCopy);
+            
+            // Xử lý sự kiện nhấp chuột phải trong giao diện làm bài
+            document.addEventListener('contextmenu', handleContextMenu);
+            
+            // Xử lý sự kiện nhấp chuột trái trong giao diện làm bài
+            document.addEventListener('mousedown', handleMouseDown);
         });
 
         // Kiểm tra xem đề thi có dữ liệu không
@@ -7620,6 +7662,57 @@
                 blurTime = null;
                 focusTime = null;
             }
+        }
+
+        // Xử lý sự kiện sao chép trong giao diện làm bài
+        function handleCopy(e) {
+            if (currentScreen === 'exam') {
+                e.preventDefault();
+                showCopyWarning();
+                return false;
+            }
+        }
+
+        // Xử lý sự kiện nhấp chuột phải trong giao diện làm bài
+        function handleContextMenu(e) {
+            if (currentScreen === 'exam') {
+                e.preventDefault();
+                showCopyWarning();
+                return false;
+            }
+        }
+
+        // Xử lý sự kiện nhấp chuột trái trong giao diện làm bài
+        function handleMouseDown(e) {
+            if (currentScreen === 'exam') {
+                // Kiểm tra nếu người dùng nhấp vào nội dung câu hỏi
+                const questionContent = document.getElementById('questionContent');
+                const instruction = document.getElementById('instruction');
+                
+                // Nếu nhấp chuột trái 2 lần vào nội dung câu hỏi hoặc hướng dẫn
+                if (e.detail === 2 && (questionContent.contains(e.target) || instruction.contains(e.target))) {
+                    // Kiểm tra xem có phải là ô đáp án không
+                    const answerOption = e.target.closest('.answer-option');
+                    
+                    // Nếu không phải ô đáp án, hiển thị cảnh báo
+                    if (!answerOption) {
+                        e.preventDefault();
+                        showCopyWarning();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Hiển thị thông báo cảnh báo sao chép
+        function showCopyWarning() {
+            const copyWarning = document.getElementById('copyWarning');
+            copyWarning.style.display = 'block';
+            
+            // Tự động ẩn sau 2 giây
+            setTimeout(() => {
+                copyWarning.style.display = 'none';
+            }, 2000);
         }
 
         // Hiển thị thông báo cảnh báo gian lận
