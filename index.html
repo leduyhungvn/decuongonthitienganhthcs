@@ -166,11 +166,6 @@
             padding: 15px;
             border-radius: 4px;
             min-height: 180px;
-            /* Ngăn chặn chọn văn bản trong giao diện làm bài */
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
         }
 
         .question-text {
@@ -192,11 +187,6 @@
             cursor: pointer;
             transition: all 0.3s;
             font-size: 14px;
-            /* Cho phép chọn văn bản trong các ô đáp án */
-            user-select: auto;
-            -webkit-user-select: auto;
-            -moz-user-select: auto;
-            -ms-user-select: auto;
         }
 
         .answer-option:hover {
@@ -303,8 +293,12 @@
         }
 
         .part-questions {
+            display: none;
             padding: 8px;
-            display: block; /* Sửa lỗi: luôn hiển thị thay vì display: none */
+        }
+
+        .part-questions.show {
+            display: block;
         }
 
         .part-exam-code {
@@ -444,33 +438,12 @@
         .contact-link:hover {
             text-decoration: underline;
         }
-
-        /* Thêm CSS cho cảnh báo chống sao chép */
-        .copy-warning {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 16px;
-            z-index: 1001;
-            display: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
     </style>
 </head>
 <body>
     <!-- Cảnh báo gian lận -->
     <div id="warningMessage" class="warning-message">
         CẢNH BÁO: Đã phát hiện hành vi gian lận! Bài thi sẽ được kết thúc.
-    </div>
-
-    <!-- Cảnh báo chống sao chép -->
-    <div id="copyWarning" class="copy-warning">
-        Vui lòng không sao chép nội dung đề thi!
     </div>
 
     <!-- Giao diện chính -->
@@ -1869,6 +1842,7 @@
                 }
             ]
         };
+
 // Kho đề cho L6GK1
         const L6GK1 = {
             P1: [
@@ -1996,77 +1970,525 @@
                 }
             ],
             P3: [
-                {
-                    id: "C1",
-                    passage: " Choose the word(s) OPPOSITE in meaning to the underlined word(s) in each of the following questions.",
-                    questions: [
-                        { id: 1, question: "CLOSEST <br>All the lessons at my new school are very <span style=\"text-decoration: underline; color: red;\">interesting</span>.", correct: "exciting", wrong1: "boring", wrong2: "outgoing", wrong3: "humorous" },
-  { id: 2, question: "CLOSEST <br>There are 30 children in his class, and it’s <span style=\"text-decoration: underline; color: red;\">difficult</span> for the teacher to teach all of them.", correct: "hard", wrong1: "simple", wrong2: "early", wrong3: "easy" },
-  { id: 3, question: "CLOSEST <br>Do you like <span style=\"text-decoration: underline; color: red;\">learning</span> English?", correct: "studying", wrong1: "singing", wrong2: "writing", wrong3: "speaking" },
-  { id: 4, question: "CLOSEST <br>Let me <span style=\"text-decoration: underline; color: red;\">put on</span> my dress. Then we can go.", correct: "wear", wrong1: "remove", wrong2: "change", wrong3: "open" },
-  { id: 5, question: "CLOSEST <br>She often rides her bicycle to school.", correct: "bike", wrong1: "car", wrong2: "motorbike", wrong3: "train" },
-  { id: 6, question: "CLOSEST <br>Mum, I <span style=\"text-decoration: underline; color: red;\">love</span> my old bed room. It’s so comfortable.", correct: "like", wrong1: "hate", wrong2: "dislike", wrong3: "tidy" },
-  { id: 7, question: "CLOSEST <br>An’s bedroom is big but <span style=\"text-decoration: underline; color: red;\">messy</span>.", correct: "untidy", wrong1: "uncomfortable", wrong2: "comfortable", wrong3: "tidy" },
-  { id: 8, question: "CLOSEST <br>We are staying in a big room and the window has a <span style=\"text-decoration: underline; color: red;\">strange</span> shape.", correct: "unusual", wrong1: "simple", wrong2: "beautiful", wrong3: "new" },
-  { id: 9, question: "CLOSEST <br>There is a <span style=\"text-decoration: underline; color: red;\">crazy</span> house hotel in Da Lat city.", correct: "horror", wrong1: "beautiful", wrong2: "comfortable", wrong3: "wonderful" },
-  { id: 10, question: "CLOSEST <br>Her <span style=\"text-decoration: underline; color: red;\">favorite</span> room is her bedroom.", correct: "best-loved", wrong1: "interesting", wrong2: "boring", wrong3: "beautiful" },
-  { id: 11, question: "CLOSEST <br>He always <span style=\"text-decoration: underline; color: red;\">puts on</span> uniform to school.", correct: "wears", wrong1: "works", wrong2: "does", wrong3: "studies" },
-  { id: 12, question: "CLOSEST <br>It is <span style=\"text-decoration: underline; color: red;\">essential</span> that you do your homework before going to school.", correct: "necessary", wrong1: "fast", wrong2: "convenient", wrong3: "quickly" },
-  { id: 13, question: "CLOSEST <br>The music concert performed on TV last night was <span style=\"text-decoration: underline; color: red;\">exciting</span>.", correct: "interesting", wrong1: "important", wrong2: "necessary", wrong3: "happy" },
-  { id: 14, question: "CLOSEST <br>She <span style=\"text-decoration: underline; color: red;\">works very hard</span>.", correct: "is hard-working", wrong1: "is active", wrong2: "is friendly", wrong3: "is kind" },
-  { id: 15, question: "CLOSEST <br>The synonym of <span style=\"text-decoration: underline; color: red;\">interesting</span> is ______.", correct: "exciting", wrong1: "boring", wrong2: "happy", wrong3: "shy" },
-  { id: 16, question: "CLOSEST <br>My new school is <span style=\"text-decoration: underline; color: red;\">nice</span> and modern.", correct: "beautiful", wrong1: "old", wrong2: "big", wrong3: "small" },
-  { id: 17, question: "CLOSEST <br>I <span style=\"text-decoration: underline; color: red;\">do</span> my homework after dinner.", correct: "complete", wrong1: "play", wrong2: "read", wrong3: "forget" },
-  { id: 18, question: "CLOSEST <br>Lan is very <span style=\"text-decoration: underline; color: red;\">active</span>. She loves playing sports and games.", correct: "energetic", wrong1: "funny", wrong2: "kind", wrong3: "careful" },
-  { id: 19, question: "CLOSEST <br>My friend, Minh, is very <span style=\"text-decoration: underline; color: red;\">friendly</span>. He talks to everyone in the class.", correct: "kind and pleasant", wrong1: "smart and funny", wrong2: "shy and quiet", wrong3: "hard-working" },
-  { id: 20, question: "CLOSEST <br>My brother is <span style=\"text-decoration: underline; color: red;\">talkative</span>. He talks all the time!", correct: "chatty", wrong1: "shy", wrong2: "creative", wrong3: "clever" },
-  { id: 21, question: "CLOSEST <br>The students <span style=\"text-decoration: underline; color: red;\">finish</span> their classes at 5 p.m. every day.", correct: "end", wrong1: "start", wrong2: "enjoy", wrong3: "practice" },
-  { id: 22, question: "CLOSEST <br>My house is <span style=\"text-decoration: underline; color: red;\">near</span> the supermarket, so it's very convenient.", correct: "close to", wrong1: "far from", wrong2: "behind", wrong3: "inside" },
-  { id: 23, question: "CLOSEST <br>During break time, students often <span style=\"text-decoration: underline; color: red;\">chat</span> with their friends.", correct: "talk", wrong1: "study", wrong2: "eat", wrong3: "play" },
-  { id: 24, question: "CLOSEST <br>My mother is <span style=\"text-decoration: underline; color: red;\">preparing</span> lunch in the kitchen.", correct: "cooking", wrong1: "eating", wrong2: "buying", wrong3: "cleaning" },
-  { id: 25, question: "CLOSEST <br>Our school has a large <span style=\"text-decoration: underline; color: red;\">library</span> with many interesting books.", correct: "book collection", wrong1: "computer room", wrong2: "swimming pool", wrong3: "music hall" },
-  { id: 26, question: "CLOSEST <br>My friend has a very <span style=\"text-decoration: underline; color: red;\">helpful</span> brother who always helps us with our homework.", correct: "supportive", wrong1: "funny", wrong2: "tall", wrong3: "shy" },
-  { id: 27, question: "CLOSEST <br>I need to <span style=\"text-decoration: underline; color: red;\">review</span> the lessons before the test tomorrow.", correct: "go over", wrong1: "forget", wrong2: "write", wrong3: "listen to" },
-  { id: 28, question: "CLOSEST <br>The living room is very <span style=\"text-decoration: underline; color: red;\">spacious</span>. We can have a party here.", correct: "having a lot of space", wrong1: "beautiful", wrong2: "comfortable", wrong3: "modern" },
-  { id: 29, question: "CLOSEST <br>My sister is a <span style=\"text-decoration: underline; color: red;\">careful</span> person. She always checks her work twice.", correct: "attentive", wrong1: "creative", wrong2: "friendly", wrong3: "active" },
-  { id: 30, question: "CLOSEST <br>We often <span style=\"text-decoration: underline; color: red;\">gather</span> in the school yard every morning.", correct: "meet", wrong1: "study", wrong2: "play", wrong3: "run" },
-  { id: 31, question: "CLOSEST <br>Susan lives with her family in a <span style=\"text-decoration: underline; color: red;\">flat</span> in Dong Anh Ward.", correct: "villa", wrong1: "still house", wrong2: "apartment  ", wrong3: "house" },
-  { id: 32, question: "CLOSEST <br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school", correct: "bike", wrong1: "car", wrong2: "motorbike  ", wrong3: "truck" },
-  { id: 33, question: "OPPOSITE <br>Everyday, he comes to school very early to <span style=\"text-decoration: underline; color: red;\">open</span> all the windows and clean the blackboard.", correct: "close", wrong1: "clean", wrong2: "break", wrong3: "hold" },
-  { id: 34, question: "OPPOSITE <br>Jim went for a walk and found a <span style=\"text-decoration: underline; color: red;\">big</span> box between some rocks.", correct: "small", wrong1: "huge", wrong2: "light", wrong3: "heavy" },
-  { id: 35, question: "OPPOSITE <br>It has big buildings and <span style=\"text-decoration: underline; color: red;\">modern</span> equipment. ", correct: "old", wrong1: "new", wrong2: "good", wrong3: "bad" },
-  { id: 36, question: "OPPOSITE <br>How is your <span style=\"text-decoration: underline; color: red;\">old</span> school?", correct: "new", wrong1: "small", wrong2: "big", wrong3: "beautiful" },
-  { id: 37, question: "OPPOSITE <br>Hoa goes to the <span style=\"text-decoration: underline; color: red;\">same</span> school as me.", correct: "different", wrong1: "like", wrong2: "familiar", wrong3: "similar" },
-  { id: 38, question: "OPPOSITE <br>The cat is <span style=\"text-decoration: underline; color: red;\">in front of</span> the chair.", correct: "behind", wrong1: "next to", wrong2: "on", wrong3: "under" },
-  { id: 39, question: "OPPOSITE <br>Mai <span style=\"text-decoration: underline; color: red;\">dislikes</span> her room because it’s small.", correct: "loves", wrong1: "hates", wrong2: "bored", wrong3: "sad" },
-  { id: 40, question: "OPPOSITE <br>There is a cap <span style=\"text-decoration: underline; color: red;\">under</span> the pillow.", correct: "on", wrong1: "behind", wrong2: "to the left", wrong3: "near" },
-  { id: 41, question: "OPPOSITE <br>The room is <span style=\"text-decoration: underline; color: red;\">cool</span> in the summer because there is a ceiling fan.", correct: "hot", wrong1: "comfortable", wrong2: "tidy", wrong3: "cozy" },
-  { id: 42, question: "OPPOSITE <br>There is a <span style=\"text-decoration: underline; color: red;\">modern</span> fridge in the kitchen.", correct: "old", wrong1: "new", wrong2: "big", wrong3: "strange" },
-  { id: 43, question: "OPPOSITE <br>Nam usually gets bad marks because she is <span style=\"text-decoration: underline; color: red;\">lazy</span>.", correct: "hard-working", wrong1: "quiet", wrong2: "confident", wrong3: "kind" },
-  { id: 44, question: "OPPOSITE <br>Ba plays football <span style=\"text-decoration: underline; color: red;\">well</span>.", correct: "badly", wrong1: "beautifully", wrong2: "bad", wrong3: "good" },
-  { id: 45, question: "OPPOSITE <br>Nga is a <span style=\"text-decoration: underline; color: red;\">confident</span> girl. She likes to meet new people.", correct: "shy", wrong1: "creative", wrong2: "friendly", wrong3: "hard-working" },
-  { id: 46, question: "OPPOSITE <br>My friend thinks English is very <span style=\"text-decoration: underline; color: red;\">difficult</span>.", correct: "easy", wrong1: "good", wrong2: "bad", wrong3: "hard" },
-  { id: 47, question: "OPPOSITE <br>John studies <span style=\"text-decoration: underline; color: red;\">excellent</span>.", correct: "poor", wrong1: "good", wrong2: "fair", wrong3: "rich" },
-  { id: 48, question: "OPPOSITE <br>My school is very <span style=\"text-decoration: underline; color: red;\">noisy</span> during break time.", correct: "quiet", wrong1: "loud", wrong2: "busy", wrong3: "happy" },
-  { id: 49, question: "OPPOSITE <br>I always <span style=\"text-decoration: underline; color: red;\">turn on</span> the lights when I study in the evening.", correct: "turn off", wrong1: "turn up", wrong2: "look at", wrong3: "clean" },
-  { id: 50, question: "OPPOSITE <br>My bedroom is very <span style=\"text-decoration: underline; color: red;\">tidy</span>.", correct: "messy", wrong1: "clean", wrong2: "big", wrong3: "small" },
-  { id: 51, question: "OPPOSITE <br>My best friend has a new bicycle. It's very <span style=\"text-decoration: underline; color: red;\">old</span>.", correct: "new", wrong1: "bad", wrong2: "ugly", wrong3: "broken" },
-  { id: 52, question: "OPPOSITE <br>The lesson today was <span style=\"text-decoration: underline; color: red;\">boring</span>.", correct: "interesting", wrong1: "difficult", wrong2: "easy", wrong3: "long" },
-  { id: 53, question: "OPPOSITE <br>My brother is very <span style=\"text-decoration: underline; color: red;\">tall</span>.", correct: "short", wrong1: "strong", wrong2: "thin", wrong3: "young" },
-  { id: 54, question: "OPPOSITE <br>The books are <span style=\"text-decoration: underline; color: red;\">inside</span> the school bag.", correct: "outside", wrong1: "on", wrong2: "under", wrong3: "near" },
-  { id: 55, question: "OPPOSITE <br>This book is very <span style=\"text-decoration: underline; color: red;\">expensive</span>.", correct: "cheap", wrong1: "thick", wrong2: "thin", wrong3: "good" },
-  { id: 56, question: "OPPOSITE <br>Our classroom is very <span style=\"text-decoration: underline; color: red;\">big</span>.", correct: "small", wrong1: "bright", wrong2: "clean", wrong3: "nice" },
-  { id: 57, question: "OPPOSITE <br>My friend never <span style=\"text-decoration: underline; color: red;\">forgets</span> to do his homework.", correct: "remembers", wrong1: "likes", wrong2: "hates", wrong3: "learns" },
-  { id: 58, question: "OPPOSITE <br>The students are <span style=\"text-decoration: underline; color: red;\">sad</span> because they have a holiday.", correct: "happy", wrong1: "bored", wrong2: "angry", wrong3: "tired" },
-  { id: 59, question: "OPPOSITE <br>Our school yard is very <span style=\"text-decoration: underline; color: red;\">clean</span>.", correct: "dirty", wrong1: "large", wrong2: "beautiful", wrong3: "empty" },
-  { id: 60, question: "OPPOSITE <br>The computer is <span style=\"text-decoration: underline; color: red;\">in front of</span> the printer.", correct: "behind", wrong1: "next to", wrong2: "near", wrong3: "between" },
-  { id: 61, question: "OPPOSITE <br>My sister is <span style=\"text-decoration: underline; color: red;\">weak</span> at playing sports.", correct: "strong", wrong1: "good", wrong2: "bad", wrong3: "fast" },
-  { id: 62, question: "OPPOSITE <br>Our classes <span style=\"text-decoration: underline; color: red;\">start</span> at 7 a.m. every day.", correct: "finish", wrong1: "begin", wrong2: "end", wrong3: "break" },
-  { id: 63, question: "OPPOSITE <br>Ha Anh always gets up early, so she is usually <span style=\"text-decoration: underline; color: red;\">early</span> for school.  ", correct: "late", wrong1: "on time", wrong2: "in time", wrong3: "soon" },
-  { id: 64, question: "OPPOSITE <br>The homeroom teacher can <span style=\"text-decoration: underline; color: red;\">remember</span> all her students' names easily.", correct: "forget", wrong1: "learn", wrong2: "collect", wrong3: "share " }
-                    ]
-                }
-            ],
+{
+    "id": "C1",
+    "passage": "Choose the word(s) OPPOSITE in meaning to the underlined word(s) in each of the following questions.",
+    "questions": [
+        {
+            "id": 1,
+            "question": "CLOSEST <br>All the lessons at my new school are very <span style=\"text-decoration: underline; color: red;\">interesting</span>.",
+            "correct": "exciting",
+            "wrong1": "boring",
+            "wrong2": "outgoing",
+            "wrong3": "humorous"
+        },
+        {
+            "id": 2,
+            "question": "CLOSEST <br>There are 30 children in his class, and it's <span style=\"text-decoration: underline; color: red;\">difficult</span> for the teacher to teach all of them.",
+            "correct": "hard",
+            "wrong1": "simple",
+            "wrong2": "early",
+            "wrong3": "easy"
+        },
+        {
+            "id": 3,
+            "question": "CLOSEST <br>Do you like <span style=\"text-decoration: underline; color: red;\">learning</span> English?",
+            "correct": "studying",
+            "wrong1": "singing",
+            "wrong2": "writing",
+            "wrong3": "speaking"
+        },
+        {
+            "id": 4,
+            "question": "CLOSEST <br>Let me <span style=\"text-decoration: underline; color: red;\">put on</span> my dress. Then we can go.",
+            "correct": "wear",
+            "wrong1": "remove",
+            "wrong2": "change",
+            "wrong3": "open"
+        },
+        {
+            "id": 5,
+            "question": "CLOSEST <br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school.",
+            "correct": "bike",
+            "wrong1": "car",
+            "wrong2": "motorbike",
+            "wrong3": "train"
+        },
+        {
+            "id": 6,
+            "question": "CLOSEST <br>Mum, I <span style=\"text-decoration: underline; color: red;\">love</span> my old bed room. It's so comfortable.",
+            "correct": "like",
+            "wrong1": "hate",
+            "wrong2": "dislike",
+            "wrong3": "tidy"
+        },
+        {
+            "id": 7,
+            "question": "CLOSEST <br>An's bedroom is big but <span style=\"text-decoration: underline; color: red;\">messy</span>.",
+            "correct": "untidy",
+            "wrong1": "uncomfortable",
+            "wrong2": "comfortable",
+            "wrong3": "tidy"
+        },
+        {
+            "id": 8,
+            "question": "CLOSEST <br>We are staying in a big room and the window has a <span style=\"text-decoration: underline; color: red;\">strange</span> shape.",
+            "correct": "unusual",
+            "wrong1": "simple",
+            "wrong2": "beautiful",
+            "wrong3": "new"
+        },
+        {
+            "id": 9,
+            "question": "CLOSEST <br>There is a <span style=\"text-decoration: underline; color: red;\">crazy</span> house hotel in Da Lat city.",
+            "correct": "horror",
+            "wrong1": "beautiful",
+            "wrong2": "comfortable",
+            "wrong3": "wonderful"
+        },
+        {
+            "id": 10,
+            "question": "CLOSEST <br>Her <span style=\"text-decoration: underline; color: red;\">favorite</span> room is her bedroom.",
+            "correct": "best-loved",
+            "wrong1": "interesting",
+            "wrong2": "boring",
+            "wrong3": "beautiful"
+        },
+        {
+            "id": 11,
+            "question": "CLOSEST <br>He always <span style=\"text-decoration: underline; color: red;\">puts on</span> uniform to school.",
+            "correct": "wears",
+            "wrong1": "works",
+            "wrong2": "does",
+            "wrong3": "studies"
+        },
+        {
+            "id": 12,
+            "question": "CLOSEST <br>It is <span style=\"text-decoration: underline; color: red;\">essential</span> that you do your homework before going to school.",
+            "correct": "necessary",
+            "wrong1": "fast",
+            "wrong2": "convenient",
+            "wrong3": "quickly"
+        },
+        {
+            "id": 13,
+            "question": "CLOSEST <br>The music concert performed on TV last night was <span style=\"text-decoration: underline; color: red;\">exciting</span>.",
+            "correct": "interesting",
+            "wrong1": "important",
+            "wrong2": "necessary",
+            "wrong3": "happy"
+        },
+        {
+            "id": 14,
+            "question": "CLOSEST <br>She <span style=\"text-decoration: underline; color: red;\">works very hard</span>.",
+            "correct": "is hard-working",
+            "wrong1": "is active",
+            "wrong2": "is friendly",
+            "wrong3": "is kind"
+        },
+        {
+            "id": 15,
+            "question": "CLOSEST <br>The synonym of <span style=\"text-decoration: underline; color: red;\">interesting</span> is ______.",
+            "correct": "exciting",
+            "wrong1": "boring",
+            "wrong2": "happy",
+            "wrong3": "shy"
+        },
+        {
+            "id": 16,
+            "question": "CLOSEST <br>My new school is <span style=\"text-decoration: underline; color: red;\">nice</span> and modern.",
+            "correct": "beautiful",
+            "wrong1": "old",
+            "wrong2": "big",
+            "wrong3": "small"
+        },
+        {
+            "id": 17,
+            "question": "CLOSEST <br>I <span style=\"text-decoration: underline; color: red;\">do</span> my homework after dinner.",
+            "correct": "complete",
+            "wrong1": "play",
+            "wrong2": "read",
+            "wrong3": "forget"
+        },
+        {
+            "id": 18,
+            "question": "CLOSEST <br>Lan is very <span style=\"text-decoration: underline; color: red;\">active</span>. She loves playing sports and games.",
+            "correct": "energetic",
+            "wrong1": "funny",
+            "wrong2": "kind",
+            "wrong3": "careful"
+        },
+        {
+            "id": 19,
+            "question": "CLOSEST <br>My friend, Minh, is very <span style=\"text-decoration: underline; color: red;\">friendly</span>. He talks to everyone in the class.",
+            "correct": "kind and pleasant",
+            "wrong1": "smart and funny",
+            "wrong2": "shy and quiet",
+            "wrong3": "hard-working"
+        },
+        {
+            "id": 20,
+            "question": "CLOSEST <br>My brother is <span style=\"text-decoration: underline; color: red;\">talkative</span>. He talks all the time!",
+            "correct": "chatty",
+            "wrong1": "shy",
+            "wrong2": "creative",
+            "wrong3": "clever"
+        },
+        {
+            "id": 21,
+            "question": "CLOSEST <br>The students <span style=\"text-decoration: underline; color: red;\">finish</span> their classes at 5 p.m. every day.",
+            "correct": "end",
+            "wrong1": "start",
+            "wrong2": "enjoy",
+            "wrong3": "practice"
+        },
+        {
+            "id": 22,
+            "question": "CLOSEST <br>My house is <span style=\"text-decoration: underline; color: red;\">near</span> the supermarket, so it's very convenient.",
+            "correct": "close to",
+            "wrong1": "far from",
+            "wrong2": "behind",
+            "wrong3": "inside"
+        },
+        {
+            "id": 23,
+            "question": "CLOSEST <br>During break time, students often <span style=\"text-decoration: underline; color: red;\">chat</span> with their friends.",
+            "correct": "talk",
+            "wrong1": "study",
+            "wrong2": "eat",
+            "wrong3": "play"
+        },
+        {
+            "id": 24,
+            "question": "CLOSEST <br>My mother is <span style=\"text-decoration: underline; color: red;\">preparing</span> lunch in the kitchen.",
+            "correct": "cooking",
+            "wrong1": "eating",
+            "wrong2": "buying",
+            "wrong3": "cleaning"
+        },
+        {
+            "id": 25,
+            "question": "CLOSEST <br>Our school has a large <span style=\"text-decoration: underline; color: red;\">library</span> with many interesting books.",
+            "correct": "book collection",
+            "wrong1": "computer room",
+            "wrong2": "swimming pool",
+            "wrong3": "music hall"
+        },
+        {
+            "id": 26,
+            "question": "CLOSEST <br>My friend has a very <span style=\"text-decoration: underline; color: red;\">helpful</span> brother who always helps us with our homework.",
+            "correct": "supportive",
+            "wrong1": "funny",
+            "wrong2": "tall",
+            "wrong3": "shy"
+        },
+        {
+            "id": 27,
+            "question": "CLOSEST <br>I need to <span style=\"text-decoration: underline; color: red;\">review</span> the lessons before the test tomorrow.",
+            "correct": "go over",
+            "wrong1": "forget",
+            "wrong2": "write",
+            "wrong3": "listen to"
+        },
+        {
+            "id": 28,
+            "question": "CLOSEST <br>The living room is very <span style=\"text-decoration: underline; color: red;\">spacious</span>. We can have a party here.",
+            "correct": "having a lot of space",
+            "wrong1": "beautiful",
+            "wrong2": "comfortable",
+            "wrong3": "modern"
+        },
+        {
+            "id": 29,
+            "question": "CLOSEST <br>My sister is a <span style=\"text-decoration: underline; color: red;\">careful</span> person. She always checks her work twice.",
+            "correct": "attentive",
+            "wrong1": "creative",
+            "wrong2": "friendly",
+            "wrong3": "active"
+        },
+        {
+            "id": 30,
+            "question": "CLOSEST <br>We often <span style=\"text-decoration: underline; color: red;\">gather</span> in the school yard every morning.",
+            "correct": "meet",
+            "wrong1": "study",
+            "wrong2": "play",
+            "wrong3": "run"
+        },
+        {
+            "id": 31,
+            "question": "CLOSEST <br>Susan lives with her family in a <span style=\"text-decoration: underline; color: red;\">flat</span> in Dong Anh Ward.",
+            "correct": "villa",
+            "wrong1": "still house",
+            "wrong2": "apartment",
+            "wrong3": "house"
+        },
+        {
+            "id": 32,
+            "question": "CLOSEST <br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school",
+            "correct": "bike",
+            "wrong1": "car",
+            "wrong2": "motorbike",
+            "wrong3": "truck"
+        },
+        {
+            "id": 33,
+            "question": "OPPOSITE <br>Everyday, he comes to school very early to <span style=\"text-decoration: underline; color: red;\">open</span> all the windows and clean the blackboard.",
+            "correct": "close",
+            "wrong1": "clean",
+            "wrong2": "break",
+            "wrong3": "hold"
+        },
+        {
+            "id": 34,
+            "question": "OPPOSITE <br>Jim went for a walk and found a <span style=\"text-decoration: underline; color: red;\">big</span> box between some rocks.",
+            "correct": "small",
+            "wrong1": "huge",
+            "wrong2": "light",
+            "wrong3": "heavy"
+        },
+        {
+            "id": 35,
+            "question": "OPPOSITE <br>It has big buildings and <span style=\"text-decoration: underline; color: red;\">modern</span> equipment.",
+            "correct": "old",
+            "wrong1": "new",
+            "wrong2": "good",
+            "wrong3": "bad"
+        },
+        {
+            "id": 36,
+            "question": "OPPOSITE <br>How is your <span style=\"text-decoration: underline; color: red;\">old</span> school?",
+            "correct": "new",
+            "wrong1": "small",
+            "wrong2": "big",
+            "wrong3": "beautiful"
+        },
+        {
+            "id": 37,
+            "question": "OPPOSITE <br>Hoa goes to the <span style=\"text-decoration: underline; color: red;\">same</span> school as me.",
+            "correct": "different",
+            "wrong1": "like",
+            "wrong2": "familiar",
+            "wrong3": "similar"
+        },
+        {
+            "id": 38,
+            "question": "OPPOSITE <br>The cat is <span style=\"text-decoration: underline; color: red;\">in front of</span> the chair.",
+            "correct": "behind",
+            "wrong1": "next to",
+            "wrong2": "on",
+            "wrong3": "under"
+        },
+        {
+            "id": 39,
+            "question": "OPPOSITE <br>Mai <span style=\"text-decoration: underline; color: red;\">dislikes</span> her room because it's small.",
+            "correct": "loves",
+            "wrong1": "hates",
+            "wrong2": "bored",
+            "wrong3": "sad"
+        },
+        {
+            "id": 40,
+            "question": "OPPOSITE <br>There is a cap <span style=\"text-decoration: underline; color: red;\">under</span> the pillow.",
+            "correct": "on",
+            "wrong1": "behind",
+            "wrong2": "to the left",
+            "wrong3": "near"
+        },
+        {
+            "id": 41,
+            "question": "OPPOSITE <br>The room is <span style=\"text-decoration: underline; color: red;\">cool</span> in the summer because there is a ceiling fan.",
+            "correct": "hot",
+            "wrong1": "comfortable",
+            "wrong2": "tidy",
+            "wrong3": "cozy"
+        },
+        {
+            "id": 42,
+            "question": "OPPOSITE <br>There is a <span style=\"text-decoration: underline; color: red;\">modern</span> fridge in the kitchen.",
+            "correct": "old",
+            "wrong1": "new",
+            "wrong2": "big",
+            "wrong3": "strange"
+        },
+        {
+            "id": 43,
+            "question": "OPPOSITE <br>Nam usually gets bad marks because she is <span style=\"text-decoration: underline; color: red;\">lazy</span>.",
+            "correct": "hard-working",
+            "wrong1": "quiet",
+            "wrong2": "confident",
+            "wrong3": "kind"
+        },
+        {
+            "id": 44,
+            "question": "OPPOSITE <br>Ba plays football <span style=\"text-decoration: underline; color: red;\">well</span>.",
+            "correct": "badly",
+            "wrong1": "beautifully",
+            "wrong2": "bad",
+            "wrong3": "good"
+        },
+        {
+            "id": 45,
+            "question": "OPPOSITE <br>Nga is a <span style=\"text-decoration: underline; color: red;\">confident</span> girl. She likes to meet new people.",
+            "correct": "shy",
+            "wrong1": "creative",
+            "wrong2": "friendly",
+            "wrong3": "hard-working"
+        },
+        {
+            "id": 46,
+            "question": "OPPOSITE <br>My friend thinks English is very <span style=\"text-decoration: underline; color: red;\">difficult</span>.",
+            "correct": "easy",
+            "wrong1": "good",
+            "wrong2": "bad",
+            "wrong3": "hard"
+        },
+        {
+            "id": 47,
+            "question": "OPPOSITE <br>John studies <span style=\"text-decoration: underline; color: red;\">excellent</span>.",
+            "correct": "poor",
+            "wrong1": "good",
+            "wrong2": "fair",
+            "wrong3": "rich"
+        },
+        {
+            "id": 48,
+            "question": "OPPOSITE <br>My school is very <span style=\"text-decoration: underline; color: red;\">noisy</span> during break time.",
+            "correct": "quiet",
+            "wrong1": "loud",
+            "wrong2": "busy",
+            "wrong3": "happy"
+        },
+        {
+            "id": 49,
+            "question": "OPPOSITE <br>I always <span style=\"text-decoration: underline; color: red;\">turn on</span> the lights when I study in the evening.",
+            "correct": "turn off",
+            "wrong1": "turn up",
+            "wrong2": "look at",
+            "wrong3": "clean"
+        },
+        {
+            "id": 50,
+            "question": "OPPOSITE <br>My bedroom is very <span style=\"text-decoration: underline; color: red;\">tidy</span>.",
+            "correct": "messy",
+            "wrong1": "clean",
+            "wrong2": "big",
+            "wrong3": "small"
+        },
+        {
+            "id": 51,
+            "question": "OPPOSITE <br>My best friend has a new bicycle. It's very <span style=\"text-decoration: underline; color: red;\">old</span>.",
+            "correct": "new",
+            "wrong1": "bad",
+            "wrong2": "ugly",
+            "wrong3": "broken"
+        },
+        {
+            "id": 52,
+            "question": "OPPOSITE <br>The lesson today was <span style=\"text-decoration: underline; color: red;\">boring</span>.",
+            "correct": "interesting",
+            "wrong1": "difficult",
+            "wrong2": "easy",
+            "wrong3": "long"
+        },
+        {
+            "id": 53,
+            "question": "OPPOSITE <br>My brother is very <span style=\"text-decoration: underline; color: red;\">tall</span>.",
+            "correct": "short",
+            "wrong1": "strong",
+            "wrong2": "thin",
+            "wrong3": "young"
+        },
+        {
+            "id": 54,
+            "question": "OPPOSITE <br>The books are <span style=\"text-decoration: underline; color: red;\">inside</span> the school bag.",
+            "correct": "outside",
+            "wrong1": "on",
+            "wrong2": "under",
+            "wrong3": "near"
+        },
+        {
+            "id": 55,
+            "question": "OPPOSITE <br>This book is very <span style=\"text-decoration: underline; color: red;\">expensive</span>.",
+            "correct": "cheap",
+            "wrong1": "thick",
+            "wrong2": "thin",
+            "wrong3": "good"
+        },
+        {
+            "id": 56,
+            "question": "OPPOSITE <br>Our classroom is very <span style=\"text-decoration: underline; color: red;\">big</span>.",
+            "correct": "small",
+            "wrong1": "bright",
+            "wrong2": "clean",
+            "wrong3": "nice"
+        },
+        {
+            "id": 57,
+            "question": "OPPOSITE <br>My friend never <span style=\"text-decoration: underline; color: red;\">forgets</span> to do his homework.",
+            "correct": "remembers",
+            "wrong1": "likes",
+            "wrong2": "hates",
+            "wrong3": "learns"
+        },
+        {
+            "id": 58,
+            "question": "OPPOSITE <br>The students are <span style=\"text-decoration: underline; color: red;\">sad</span> because they have a holiday.",
+            "correct": "happy",
+            "wrong1": "bored",
+            "wrong2": "angry",
+            "wrong3": "tired"
+        },
+        {
+            "id": 59,
+            "question": "OPPOSITE <br>Our school yard is very <span style=\"text-decoration: underline; color: red;\">clean</span>.",
+            "correct": "dirty",
+            "wrong1": "large",
+            "wrong2": "beautiful",
+            "wrong3": "empty"
+        },
+        {
+            "id": 60,
+            "question": "OPPOSITE <br>The computer is <span style=\"text-decoration: underline; color: red;\">in front of</span> the printer.",
+            "correct": "behind",
+            "wrong1": "next to",
+            "wrong2": "near",
+            "wrong3": "between"
+        },
+        {
+            "id": 61,
+            "question": "OPPOSITE <br>My sister is <span style=\"text-decoration: underline; color: red;\">weak</span> at playing sports.",
+            "correct": "strong",
+            "wrong1": "good",
+            "wrong2": "bad",
+            "wrong3": "fast"
+        },
+        {
+            "id": 62,
+            "question": "OPPOSITE <br>Our classes <span style=\"text-decoration: underline; color: red;\">start</span> at 7 a.m. every day.",
+            "correct": "finish",
+            "wrong1": "begin",
+            "wrong2": "end",
+            "wrong3": "break"
+        },
+        {
+            "id": 63,
+            "question": "OPPOSITE <br>Ha Anh always gets up early, so she is usually <span style=\"text-decoration: underline; color: red;\">early</span> for school.",
+            "correct": "late",
+            "wrong1": "on time",
+            "wrong2": "in time",
+            "wrong3": "soon"
+        },
+        {
+            "id": 64,
+            "question": "OPPOSITE <br>The homeroom teacher can <span style=\"text-decoration: underline; color: red;\">remember</span> all her students' names easily.",
+            "correct": "forget",
+            "wrong1": "learn",
+            "wrong2": "collect",
+            "wrong3": "share"
+        }
+    ]
+}
+],
             P4: [
                 {
                     id: "C1",
@@ -4934,194 +5356,984 @@
 
             ],
             P9: [
-                {
-                    id: "C1",
-                    passage: "Complete the following dialogue.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "<br>Shop assistant: (1) ____________?<br>Customer: Yes, I'm looking for a gift for my friend's birthday.<br>Shop assistant: (2) ____________?<br>Customer: She likes reading books.<br>Shop assistant: (3) ____________?<br>Customer: That's a great idea. I'll take it.<br>(1) is:", 
-                            correct: "Can I help you", 
-                            wrong1: "How are you today", 
-                            wrong2: "What time is it", 
-                            wrong3: "Where are you from" 
-                        },
-                        { 
-                            id: 2, 
-                            question: "<br>Doctor: (1) ____________?<br>Patient: I have a headache and a sore throat.<br>Doctor: (2) ____________?<br>Patient: For two days.<br>Doctor: (3) ____________?<br>Patient: No, I don't have a fever.<br>(1) is:", 
-                            correct: "What's wrong with you", 
-                            wrong1: "How old are you", 
-                            wrong2: "Where do you live", 
-                            wrong3: "What's your job" 
-                        },
-                        { 
-                            id: 3, 
-                            question: "<br>Teacher: (1) ____________?<br>Student: I'm sorry, I don't understand this question.<br>Teacher: (2) ____________?<br>Student: Could you explain it again, please?<br>Teacher: (3) ____________?<br>Student: Yes, thank you very much.<br>(1) is:", 
-                            correct: "Do you have any questions", 
-                            wrong1: "What time is it", 
-                            wrong2: "Where is your book", 
-                            wrong3: "How are you today" 
-                        },
-                        { 
-                            id: 4, 
-                            question: "<br>Interviewer: (1) ____________?<br>Candidate: I graduated from Ha Noi University in 2020.<br>Interviewer: (2) ____________?<br>Candidate: My major was Business Administration.<br>Interviewer: (3) ____________?<br>Candidate: I have two years of experience in marketing.<br>(1) is:", 
-                            correct: "When did you graduate from university", 
-                            wrong1: "Where did you study", 
-                            wrong2: "What was your major", 
-                            wrong3: "How much experience do you have" 
-                        },
-                        { 
-                            id: 5, 
-                            question: "<br>Travel agent: (1) ____________?<br>Customer: I'd like to book a flight to Ho Chi Minh City.<br>Travel agent: (2) ____________?<br>Customer: I want to leave on Friday and return on Sunday.<br>Travel agent: (3) ____________?<br>Customer: Just one person, please.<br>(1) is:", 
-                            correct: "How can I help you", 
-                            wrong1: "Where are you from", 
-                            wrong2: "What time is it", 
-                            wrong3: "How old are you" 
-                        }
-                    ]
-                }
+{
+    "id": "C1",
+    "passage": "Complete the following dialogue.",
+    "questions": [
+        { 
+                  "id": 1,
+      "question": "<br>Tom: Thank you for the present, Jimmy.<br>Jimmy: _________",
+      "correct": "You're welcome.",
+      "wrong1": "I'm sorry.",
+      "wrong2": "Very glad.",
+      "wrong3": "No, of course."
+ 
+        },
+        {
+    "id": 2,
+    "question": "<br>Phuong: I’m taking my TOEFL test tomorrow.<br>Daisy: _________",
+    "correct": "Good luck.",
+    "wrong1": "Good fortune.",
+    "wrong2": "Good outcome.",
+    "wrong3": "Good success."
+},
+{
+    "id": 3,
+    "question": "<br>Lan: Mom, I’ve got the first rank in class this semester.<br>Mom: _________",
+    "correct": "Well done.",
+    "wrong1": "Thank you.",
+    "wrong2": "Never mind.",
+    "wrong3": "Let’s go."
+},
+{
+    "id": 4,
+    "question": "<br>Tom: I will pick you up at eight o’clock on my way to the airport.<br>Daisy: _________",
+    "correct": "Great. I’ll see you then.",
+    "wrong1": "For pleasure.",
+    "wrong2": "I have a phone.",
+    "wrong3": "Would be."
+},
+{
+    "id": 5,
+    "question": "<br>Phuong: Thank you very much for your help.<br>Daisy: _________",
+    "correct": "You’re welcome.",
+    "wrong1": "It’s quite OK.",
+    "wrong2": "That’s right.",
+    "wrong3": "I’d love to."
+},
+{
+    "id": 6,
+    "question": "<br>Mai: I love studying science as it allows me to answer questions about the natural world.<br>Tim: _________",
+    "correct": "So do I.",
+    "wrong1": "No, I won't.",
+    "wrong2": "Neither do I.",
+    "wrong3": "Yes, I like it."
+},
+{
+    "id": 7,
+    "question": "<br>Tim: How do you feel about your English now?<br>Tom: _________",
+    "correct": "I'm fluent in English now.",
+    "wrong1": "All right.",
+    "wrong2": "English is not my mother tongue.",
+    "wrong3": "English is the official language in the world."
+},
+{
+    "id": 8,
+    "question": "<br>Nam: Thank you so much for showing me around today.<br>Tuan: _________ , It'll be good fun.",
+    "correct": "That's ok",
+    "wrong1": "Thank you so much.",
+    "wrong2": "Yes, please",
+    "wrong3": "Sure"
+},
+{
+    "id": 9,
+    "question": "<br>Peter: You must be Mary's mother.<br>Mary's mother: _________ , I am.",
+    "correct": "That's right",
+    "wrong1": "You are welcome",
+    "wrong2": "Certainly, I am",
+    "wrong3": "No worries"
+},
+{
+    "id": 10,
+    "question": "<br>Waiter: What would you like to drink now?<br>You: _________",
+    "correct": "Orange juice, please",
+    "wrong1": "No, thank you",
+    "wrong2": "Yes, please",
+    "wrong3": "I like to do nothing"
+},
+{
+    "id": 11,
+    "question": "<br>Tom: What are you doing this afternoon?<br>Tim: I don't know, but I'd like to...swimming.",
+    "correct": "go",
+    "wrong1": "have",
+    "wrong2": "do",
+    "wrong3": "play"
+},
+{
+    "id": 12,
+    "question": "<br>Tom: Where is the cat?<br>Mary: It's _________ the table and the bookshelf.",
+    "correct": "between",
+    "wrong1": "on",
+    "wrong2": "behind",
+    "wrong3": "under"
+},
+{
+    "id": 13,
+    "question": "<br>Peter: _________________ class are you in?<br>You: Class 6B.",
+    "correct": "Which",
+    "wrong1": "Where",
+    "wrong2": "When",
+    "wrong3": "Whose"
+},
+{
+    "id": 14,
+    "question": "<br>Tom: What do you usually_________________ for breakfast?<br>Henry: Bread and milk.",
+    "correct": "have",
+    "wrong1": "to have",
+    "wrong2": "having",
+    "wrong3": "has"
+},
+{
+    "id": 15,
+    "question": "<br>Lan: Where are you, Hoa?<br>Hoa: I'm downstairs. I ______________ to music.",
+    "correct": "am listening",
+    "wrong1": "to listen",
+    "wrong2": "listen",
+    "wrong3": "listens"
+},
+{
+    "id": 16,
+    "question": "<br>Lan: How's your class this year?<br>Tom: Great. ______________ forty-seven students, and they are good friends.",
+    "correct": "There're",
+    "wrong1": "It's",
+    "wrong2": "They're",
+    "wrong3": "There's"
+},
+{
+    "id": 17,
+    "question": "<br>Teacher: How many ______________ are there in your class?<br>You: There are 35.",
+    "correct": "benches",
+    "wrong1": "benchies",
+    "wrong2": "bench",
+    "wrong3": "benchs"
+},
+{
+    "id": 18,
+    "question": "<br>Tom: ______________ does your father do?<br>Lan: He's a doctor.",
+    "correct": "What",
+    "wrong1": "How",
+    "wrong2": "Who",
+    "wrong3": "Where"
+},
+{
+    "id": 19,
+    "question": "<br>Minh: Good morning, Mai and Lan. How are you?<br>Hoa: ____________________",
+    "correct": "We're fine, and you?",
+    "wrong1": "I'm fine, thanks.",
+    "wrong2": "They're fine, thank you.",
+    "wrong3": "She is fine."
+},
+{
+    "id": 20,
+    "question": "<br>Quang: ______________<br>Linh: They are chairs.",
+    "correct": "What are these?",
+    "wrong1": "Who are they?",
+    "wrong2": "What is this?",
+    "wrong3": "who is he?"
+},
+{
+    "id": 21,
+    "question": "<br>Hoang: Where is your father?<br>Hoa: He is _______ home.",
+    "correct": "at",
+    "wrong1": "in",
+    "wrong2": "on",
+    "wrong3": "up"
+},
+{
+    "id": 22,
+    "question": "<br>Phong: Is this an _______?<br>Lan: Yes, it is.",
+    "correct": "eraser",
+    "wrong1": "ruler",
+    "wrong2": "window",
+    "wrong3": "door"
+},
+{
+    "id": 23,
+    "question": "<br>Tom: ________ is he?<br>Lan: He is my teacher.",
+    "correct": "Who",
+    "wrong1": "Where",
+    "wrong2": "How do",
+    "wrong3": "How old"
+},
+{
+    "id": 24,
+    "question": "<br>Hoa: Is his father a doctor?<br>Lan: Yes, ______.",
+    "correct": "he is",
+    "wrong1": "I am",
+    "wrong2": "she is",
+    "wrong3": "it is"
+},
+{
+    "id": 25,
+    "question": "<br>Teacher: Nam, stand _______ and open your book, please.<br>Nam: Yes, sir.",
+    "correct": "up",
+    "wrong1": "down",
+    "wrong2": "in",
+    "wrong3": "on"
+},
+{
+    "id": 26,
+    "question": "<br>Minh: How many __________ are there?<br>Phong: There are four.",
+    "correct": "pens",
+    "wrong1": "pen",
+    "wrong2": "pencil",
+    "wrong3": "penes"
+},
+{
+    "id": 27,
+    "question": "<br>Linh: Do the girls like playing football?<br>Lan: ____________.",
+    "correct": "No, they don't.",
+    "wrong1": "No, they aren't.",
+    "wrong2": "No, they doesn't.",
+    "wrong3": "Yes, they are."
+},
+{
+    "id": 28,
+    "question": "<br>Minh: Phong, this is Duy, my classmate.<br>Phong: Hi Duy, ____________",
+    "correct": "Nice to meet you!",
+    "wrong1": "Good luck!",
+    "wrong2": "Long time no see.",
+    "wrong3": "Many happy returns!"
+},
+{
+    "id": 29,
+    "question": "<br>Mai: There isn't any cheese in the fridge.<br>Bobby: _________________",
+    "correct": "Let's go to the supermarket and buy some.",
+    "wrong1": "What about buying some fast food?",
+    "wrong2": "Let's buy some vegetables.",
+    "wrong3": "What about eating out tonight?"
+},
+{
+    "id": 30,
+    "question": "<br>Hoa: _________ apples do you have, little Max?<br>Linh: I have three.",
+    "correct": "How many",
+    "wrong1": "How much",
+    "wrong2": "How",
+    "wrong3": "What"
+},
+{
+    "id": 31,
+    "question": "<br>Hoa: Mom, _______ flour do you need to make that cake?<br>Lan: About 300 grams.",
+    "correct": "How much",
+    "wrong1": "How",
+    "wrong2": "What",
+    "wrong3": "How many"
+},
+{
+    "id": 32,
+    "question": "<br>Lan: There's no food in the fridge.<br>Minh: ____________________________",
+    "correct": "Let's go to the supermarket to buy some.",
+    "wrong1": "Let's clean the fridge.",
+    "wrong2": "Let's go out.",
+    "wrong3": "Let's come in."
+},
+{
+    "id": 33,
+    "question": "<br>Hoa: What are you doing now?<br>Minh: ____________________________",
+    "correct": "I’m eating lunch with my friends now.",
+    "wrong1": "I always go to school.",
+    "wrong2": "I’m visiting my grandparents.",
+    "wrong3": "We always go to school."
+},
+{
+    "id": 34,
+    "question": "<br>Lan: Who is that girl?<br>Hoa: ____________________________",
+    "correct": "She is my best friend.",
+    "wrong1": "She is very funny",
+    "wrong2": "She studies at Rocky Secondary School",
+    "wrong3": "She goes to school everyday."
+},
+{
+    "id": 35,
+    "question": "<br>Lan: Do you speak Vietnamese?<br>Minh: ____________________________",
+    "correct": "Yes, I do.",
+    "wrong1": "No, I’m not.",
+    "wrong2": "I like it.",
+    "wrong3": "We like it."
+},
+{
+    "id": 36,
+    "question": "<br>Minh: What does your friend look like?<br>Hoa: ____________________________",
+    "correct": "She has black eyes.",
+    "wrong1": "She is very active.",
+    "wrong2": "She has a long ruler.",
+    "wrong3": "She has a black dog."
+},
+{
+    "id": 37,
+    "question": "<br>Minh: What is he like?<br>Mai: ____________________________",
+    "correct": "He is creative.",
+    "wrong1": "He has short hair.",
+    "wrong2": "He is tall.",
+    "wrong3": "He has a black dog."
+}
+
+]
+}
             ],
             P10: [
                 {
-                    id: "C1",
-                    passage: "SIGNS – MESSAGES – NOTES",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"red\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">NO SMOKING</text></svg>' alt='No smoking sign'>", 
-                            correct: "Cấm hút thuốc", 
-                            wrong1: "Cho phép hút thuốc", 
-                            wrong2: "Khu vực hút thuốc", 
-                            wrong3: "Hút thuốc gây hại" 
-                        },
-                        { 
-                            id: 2, 
-                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"blue\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">WIFI</text></svg>' alt='Wifi sign'>", 
-                            correct: "Khu vực có wifi", 
-                            wrong1: "Cấm dùng wifi", 
-                            wrong2: "Hỏi mật khẩu wifi", 
-                            wrong3: "Wifi miễn phí" 
-                        },
-                        { 
-                            id: 3, 
-                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"green\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">EXIT</text></svg>' alt='Exit sign'>", 
-                            correct: "Lối thoát", 
-                            wrong1: "Lối vào", 
-                            wrong2: "Cấm vào", 
-                            wrong3: "Cấm ra" 
-                        },
-                        { 
-                            id: 4, 
-                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"orange\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\">CAUTION</text></svg>' alt='Caution sign'>", 
-                            correct: "Cảnh báo", 
-                            wrong1: "Nguy hiểm", 
-                            wrong2: "An toàn", 
-                            wrong3: "Yêu cầu" 
-                        },
-                        { 
-                            id: 5, 
-                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"purple\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">RESTROOM</text></svg>' alt='Restroom sign'>", 
-                            correct: "Nhà vệ sinh", 
-                            wrong1: "Phòng nghỉ", 
-                            wrong2: "Phòng ăn", 
-                            wrong3: "Phòng ngủ" 
-                        }
+    "id": "C1",
+    "passage": "SIGNS – MESSAGES – NOTES",
+    "questions": [
+        {
+      "id": 1,
+      "question": "<span style=\"color: blue;\">EXIT</span>",
+      "correct": "This is the way out.",
+      "wrong1": "This is the entrance.",
+      "wrong2": "This is a restroom.",
+      "wrong3": "This is an elevator."
+    },
+    {
+      "id": 2,
+      "question": "<span style=\"color: green;\">OPEN 24 HOURS</span>",
+      "correct": "This place is always open.",
+      "wrong1": "This place is closed.",
+      "wrong2": "This place opens at night only.",
+      "wrong3": "This place opens for 12 hours."
+    },
+    {
+      "id": 3,
+      "question": "<span style=\"color: red;\">PUSH</span>",
+      "correct": "You should push the door to open.",
+      "wrong1": "You should pull the door to open.",
+      "wrong2": "The door is locked.",
+      "wrong3": "The door is broken."
+    },
+    {
+      "id": 4,
+      "question": "<span style=\"color: orange;\">CAUTION: WET FLOOR</span>",
+      "correct": "Be careful because the floor has water on it.",
+      "wrong1": "The floor is clean and dry.",
+      "wrong2": "The floor is being repaired.",
+      "wrong3": "The floor is very hot."
+    },
+    {
+      "id": 5,
+      "question": "<span style=\"color: purple;\">SILENCE PLEASE</span>",
+      "correct": "Please be quiet here.",
+      "wrong1": "Please speak loudly.",
+      "wrong2": "Please sing a song.",
+      "wrong3": "Please make some noise."
+    },
+{
+      "id": 6,
+      "question": "<span style=\"color: brown;\">ENTRANCE</span>",
+      "correct": "This is where you go in.",
+      "wrong1": "This is where you go out.",
+      "wrong2": "This is a parking area.",
+      "wrong3": "This is a waiting room."
+    },
+    {
+      "id": 7,
+      "question": "<span style=\"color: darkblue;\">PULL</span>",
+      "correct": "You should pull the door toward you.",
+      "wrong1": "You should push the door away.",
+      "wrong2": "You should knock first.",
+      "wrong3": "You should slide the door."
+    },
+    {
+      "id": 8,
+      "question": "<span style=\"color: darkred;\">CLOSED</span>",
+      "correct": "This place is not open for business.",
+      "wrong1": "This place is open now.",
+      "wrong2": "This place opens soon.",
+      "wrong3": "This place is very busy."
+    },
+    {
+      "id": 9,
+      "question": "<span style=\"color: teal;\">RESTROOM</span>",
+      "correct": "This is the toilet area.",
+      "wrong1": "This is the eating area.",
+      "wrong2": "This is the sleeping room.",
+      "wrong3": "This is the office."
+    },
+    {
+      "id": 10,
+      "question": "<span style=\"color: maroon;\">NO PARKING</span>",
+      "correct": "You cannot leave your car here.",
+      "wrong1": "You can park your car here.",
+      "wrong2": "You should park carefully.",
+      "wrong3": "You need to pay for parking."
+    },
+    {
+      "id": 11,
+      "question": "<span style=\"color: navy;\">STAIRS</span>",
+      "correct": "You can walk up or down here.",
+      "wrong1": "You can take an elevator here.",
+      "wrong2": "You can slide down here.",
+      "wrong3": "You can sit and rest here."
+    },
+    {
+      "id": 12,
+      "question": "<span style=\"color: darkgreen;\">ELEVATOR</span>",
+      "correct": "You can use this to go up or down floors.",
+      "wrong1": "You can walk up steps here.",
+      "wrong2": "You can wash your hands here.",
+      "wrong3": "You can buy tickets here."
+    },
+    {
+      "id": 13,
+      "question": "<span style=\"color: purple;\">INFORMATION</span>",
+      "correct": "You can get help or directions here.",
+      "wrong1": "You can buy food here.",
+      "wrong2": "You can watch movies here.",
+      "wrong3": "You can exercise here."
+    },
+    {
+      "id": 14,
+      "question": "<span style=\"color: orange;\">EMERGENCY EXIT</span>",
+      "correct": "Use this door only in dangerous situations.",
+      "wrong1": "Use this door for normal entering.",
+      "wrong2": "Use this door for delivery.",
+      "wrong3": "Use this door for staff only."
+    },
+    {
+      "id": 15,
+      "question": "<span style=\"color: red;\">FIRE EXTINGUISHER</span>",
+      "correct": "Use this to put out small fires.",
+      "wrong1": "Use this to drink water.",
+      "wrong2": "Use this to call for help.",
+      "wrong3": "Use this to clean the floor."
+    },
+    {
+      "id": 16,
+      "question": "<span style=\"color: blue;\">KEEP RIGHT</span>",
+      "correct": "Stay on the right side when moving.",
+      "wrong1": "Stay on the left side when moving.",
+      "wrong2": "Stop and wait here.",
+      "wrong3": "Turn around and go back."
+    },
+    {
+      "id": 17,
+      "question": "<span style=\"color: green;\">CAUTION: HOT SURFACE</span>",
+      "correct": "Be careful because this thing has high temperature.",
+      "wrong1": "Be careful because this thing is very cold.",
+      "wrong2": "Be careful because this thing is sharp.",
+      "wrong3": "Be careful because this thing is fragile."
+    },
+    {
+      "id": 18,
+      "question": "<span style=\"color: darkorange;\">NO FOOD OR DRINK</span>",
+      "correct": "You cannot eat or drink here.",
+      "wrong1": "You can eat and drink here.",
+      "wrong2": "You can buy food here.",
+      "wrong3": "You can cook food here."
+    },
+    {
+      "id": 19,
+      "question": "<span style=\"color: darkcyan;\">WAITING AREA</span>",
+      "correct": "You can sit here until your turn comes.",
+      "wrong1": "You can play games here.",
+      "wrong2": "You can work here.",
+      "wrong3": "You can sleep here."
+    },
+    {
+      "id": 20,
+      "question": "<span style=\"color: crimson;\">DANGER: HIGH VOLTAGE</span>",
+      "correct": "This area has strong electricity that can hurt you.",
+      "wrong1": "This area has loud sounds.",
+      "wrong2": "This area has bright lights.",
+      "wrong3": "This area has bad smells."
+    }
                     ]
                 }
             ],
+
             P11: [
-                {
-                    id: "C1",
-                    passage: "Rewrite the following sentences without changing their meaning.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "I am not as tall as my brother.", 
-                            correct: "My brother is taller than me.", 
-                            wrong1: "My brother is not as tall as me.", 
-                            wrong2: "My brother is the tallest.", 
-                            wrong3: "I am taller than my brother." 
-                        },
-                        { 
-                            id: 2, 
-                            question: "No one in my class is more intelligent than Lan.", 
-                            correct: "Lan is the most intelligent student in my class.", 
-                            wrong1: "Lan is more intelligent than no one in my class.", 
-                            wrong2: "Lan is as intelligent as no one in my class.", 
-                            wrong3: "No one is as intelligent as Lan in my class." 
-                        },
-                        { 
-                            id: 3, 
-                            question: "The last time I saw him was two weeks ago.", 
-                            correct: "I haven't seen him for two weeks.", 
-                            wrong1: "I last saw him for two weeks.", 
-                            wrong2: "I saw him two weeks ago.", 
-                            wrong3: "I have seen him for two weeks." 
-                        },
-                        { 
-                            id: 4, 
-                            question: "It takes me 30 minutes to go to school by bike.", 
-                            correct: "I spend 30 minutes going to school by bike.", 
-                            wrong1: "I spend 30 minutes to go to school by bike.", 
-                            wrong2: "It takes 30 minutes for me to go to school by bike.", 
-                            wrong3: "Going to school by bike takes me 30 minutes." 
-                        },
-                        { 
-                            id: 5, 
-                            question: "Despite the bad weather, they went to school.", 
-                            correct: "Although the weather was bad, they went to school.", 
-                            wrong1: "Because the weather was bad, they went to school.", 
-                            wrong2: "In spite of the bad weather, but they went to school.", 
-                            wrong3: "Because of the bad weather, they went to school." 
-                        }
-                    ]
-                }
-            ],
+{
+    "id": "C1",
+    "passage": "Rewrite the following sentences without changing their meaning.",
+    "questions": [
+        {
+      "id": 1,
+      "question": "My house has two bedrooms.<br>=> _____________________________ .",
+      "correct": "There are two bedrooms in my house.",
+      "wrong1": "These are two bedrooms in my house.",
+      "wrong2": "Those are two bedrooms in my house.",
+      "wrong3": "This is two bedrooms in my house."
+    },
+    {
+      "id": 2,
+      "question": "I have a black dog.<br>=> _____________________________.",
+      "correct": "My dog is black.",
+      "wrong1": "My dogs are black.",
+      "wrong2": "The dog is black.",
+      "wrong3": "That dog is black."
+    },
+    {
+      "id": 3,
+      "question": " Chi’s hair is long and black.<br>=> Chi has __________________________.",
+      "correct": "long black hair",
+      "wrong1": "black long hair",
+      "wrong2": "hair long black",
+      "wrong3": "hair black long"
+    },
+{
+  "id": 4,
+  "question": "We have a sink, a fridge, and a cooker in our kitchen.<br>=> There ________________________________________________.",
+  "correct": "is a sink, a fridge, and a cooker in our kitchen",
+  "wrong1": "are a sink, a fridge, and a cooker in our kitchen",
+  "wrong2": "is sink, fridge, and cooker in our kitchen",
+  "wrong3": "is a sink, a fridge, cooker in our kitchen"
+},
+{
+  "id": 5,
+  "question": "I don’t have many chairs in my bedroom.<br>=> There ___________________________________.",
+  "correct": "aren't many chairs in my bedroom",
+  "wrong1": "isn't many chairs in my bedroom",
+  "wrong2": "aren't many chair in my bedroom",
+  "wrong3": "don't have many chairs in my bedroom"
+},
+{
+  "id": 6,
+  "question": "My favorite room in the house is the living room.<br>=> I like _____________________________________.",
+  "correct": "the living room best",
+  "wrong1": "best the living room",
+  "wrong2": "the living room in the house",
+  "wrong3": "the living room is my favorite"
+},
+{
+  "id": 7,
+  "question": "The notebook is on the books.<br>=> The books ____________________________.",
+  "correct": "are under the notebook",
+  "wrong1": "is under the notebook",
+  "wrong2": "are on the notebook",
+  "wrong3": "under the notebook"
+},
+{
+  "id": 8,
+  "question": "The cat is in front of the computer.<br>=> The computer _____________________________.",
+  "correct": "is behind the cat",
+  "wrong1": "are behind the cat",
+  "wrong2": "is in front of the cat",
+  "wrong3": "behind the cat"
+},
+{
+  "id": 9,
+  "question": "How many classrooms does your dream school have?<br>=> How many __________________________________________________?",
+  "correct": "classrooms are there in your dream school",
+  "wrong1": "classroom are there in your dream school",
+  "wrong2": "classrooms are in your dream school",
+  "wrong3": "classrooms there are in your dream school"
+},
+{
+  "id": 10,
+  "question": "Is there a hall in your house?<br>=> Does __________________________?",
+  "correct": "your house have a hall",
+  "wrong1": "your house has a hall",
+  "wrong2": "there a hall in your house",
+  "wrong3": "your house have hall"
+},
+{
+  "id": 11,
+  "question": "Let’s go to the cinema tonight.<br>=> What about ___________________________?",
+  "correct": "going to the cinema tonight",
+  "wrong1": "go to the cinema tonight",
+  "wrong2": "to go to the cinema tonight",
+  "wrong3": "we go to the cinema tonight"
+},
+{
+  "id": 12,
+  "question": "The chair of the teacher is next to the window.<br>=> The teacher’s ___________________________.",
+  "correct": "chair is next to the window",
+  "wrong1": "chair next to the window",
+  "wrong2": "is chair next to the window",
+  "wrong3": "chair of the teacher is next to the window"
+},
+{
+  "id": 13,
+  "question": "Nam has a rubber and it’s on the table.<br>=> Nam’s _______________________________________.",
+  "correct": "rubber is on the table",
+  "wrong1": "rubber on the table",
+  "wrong2": "is rubber on the table",
+  "wrong3": "rubber and it's on the table"
+},
+{
+  "id": 14,
+  "question": "The lamp is behind the computer.(of)<br>=> The computer _________________________ the lamp.",
+  "correct": "is in front of",
+  "wrong1": "is behind of",
+  "wrong2": "is next to",
+  "wrong3": "is under"
+},
+{
+  "id": 15,
+  "question": "There is an air conditioner and a ceiling fan in our living room.(has)<br>=> Our living room ___________________________________ ceiling fan.",
+  "correct": "has an air conditioner and a",
+  "wrong1": "have an air conditioner and a",
+  "wrong2": "has a air conditioner and a",
+  "wrong3": "has an air conditioner but a"
+},
+{
+  "id": 16,
+  "question": "My favorite room in the house is the living room.(best)<br>=> I like _________________________ in the house.",
+  "correct": "the living room best",
+  "wrong1": "best the living room",
+  "wrong2": "the living room the best",
+  "wrong3": "the best living room"
+},
+{
+  "id": 17,
+  "question": "The dog is to the left of the sofa and to the right of the wardrobe.(between)<br>=> The dog _____________________________ the wardrobe.",
+  "correct": "is between the sofa and",
+  "wrong1": "is between and the sofa",
+  "wrong2": "between the sofa and",
+  "wrong3": "is between sofa and"
+},
+{
+  "id": 18,
+  "question": "Tom's bedroom has two bookshelves.(in)<br>=> There ____________________________ Tom's bedroom.",
+  "correct": "are two bookshelves in",
+  "wrong1": "is two bookshelves in",
+  "wrong2": "are two bookshelf in",
+  "wrong3": "have two bookshelves in"
+},
+{
+  "id": 19,
+  "question": "I don't have a bookshelf in my bedroom.(isn't)<br>=> There _________________________ in my bedroom.",
+  "correct": "isn't a bookshelf",
+  "wrong1": "aren't a bookshelf",
+  "wrong2": "isn't any bookshelf",
+  "wrong3": "doesn't have a bookshelf"
+},
+{
+  "id": 20,
+  "question": "Mr. Nam's house has a flower garden.<br>=> There _____________________________ .",
+  "correct": "is a flower garden in Mr. Nam's house",
+  "wrong1": "are a flower garden in Mr. Nam's house",
+  "wrong2": "has a flower garden in Mr. Nam's house",
+  "wrong3": "is flower garden in Mr. Nam's house"
+},
+{
+  "id": 21,
+  "question": "This is Hoa, she is a beautiful girl.<br>=> Hoa ____________________________ .",
+  "correct": "is a beautiful girl",
+  "wrong1": "are a beautiful girl",
+  "wrong2": "is beautiful girl",
+  "wrong3": "a beautiful girl"
+},
+{
+  "id": 22,
+  "question": "The school is old and small.<br>=> That's ____________________________ .",
+  "correct": "an old and small school",
+  "wrong1": "a old and small school",
+  "wrong2": "old and small school",
+  "wrong3": "an old small school"
+},
+{
+  "id": 23,
+  "question": "Mr. Minh is Nam's teacher.<br>=> Nam is _______________________ .",
+  "correct": "Mr. Minh's student",
+  "wrong1": "student of Mr. Minh",
+  "wrong2": "Mr. Minh student",
+  "wrong3": "the student of Mr. Minh"
+},
+{
+  "id": 24,
+  "question": "What is the time?<br>=> What time _____________________ ?",
+  "correct": "is it",
+  "wrong1": "it is",
+  "wrong2": "is",
+  "wrong3": "does it"
+},
+{
+  "id": 25,
+  "question": "My sister walks to the supermarket.<br>=> My sister goes _____________________________ .",
+  "correct": "to the supermarket on foot",
+  "wrong1": "to supermarket on foot",
+  "wrong2": "to the supermarket by foot",
+  "wrong3": "to the supermarket walking"
+},
+{
+  "id": 26,
+  "question": "There are many flowers in our garden.<br>=> Our garden _______________________ .",
+  "correct": "has many flowers",
+  "wrong1": "have many flowers",
+  "wrong2": "has many flower",
+  "wrong3": "are many flowers"
+},
+{
+  "id": 27,
+  "question": "Does your father cycle to work?<br>=> Does your father get _______________________ ?",
+  "correct": "to work by bicycle",
+  "wrong1": "to work by bike",
+  "wrong2": "to work on bicycle",
+  "wrong3": "work by bicycle"
+},
+{
+  "id": 28,
+  "question": "The garden is behind Nam's classroom.<br>=> Nam's classroom ____________________________ .",
+  "correct": "is in front of the garden",
+  "wrong1": "is behind the garden",
+  "wrong2": "in front of the garden",
+  "wrong3": "is next to the garden"
+},
+{
+  "id": 29,
+  "question": "Tom drives to work every morning.<br>=> Tom travels ______________________________ .",
+  "correct": "to work by car every morning",
+  "wrong1": "to work on car every morning",
+  "wrong2": "work by car every morning",
+  "wrong3": "to work driving every morning"
+},
+{
+  "id": 30,
+  "question": "My brother rides his bike to school every day.<br>=> My brother goes ____________________________________________ .",
+  "correct": "to school by bike every day",
+  "wrong1": "to school on bike every day",
+  "wrong2": "school by bike every day",
+  "wrong3": "to school with bike every day"
+}
+
+]
+}
+],
+
+
             P12: [
                 {
-                    id: "C1",
-                    passage: "Rearrange the words to make complete sentences.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "Rearrange the words:<br>I / to / every / go / school / day.", 
-                            correct: "I go to school every day.", 
-                            wrong1: "I every day go to school.", 
-                            wrong2: "Every day I go to school.", 
-                            wrong3: "Go to school I every day." 
-                        },
-                        { 
-                            id: 2, 
-                            question: "Rearrange the words: <br>She / is / a / student / good.", 
-                            correct: "She is a good student.", 
-                            wrong1: "She a good student is.", 
-                            wrong2: "A good student she is.", 
-                            wrong3: "Is she a good student." 
-                        },
-                        { 
-                            id: 3, 
-                            question: "Rearrange the words: <br>They / football / played / yesterday.", 
-                            correct: "They played football yesterday.", 
-                            wrong1: "They football played yesterday.", 
-                            wrong2: "Played they football yesterday.", 
-                            wrong3: "Yesterday they played football." 
-                        },
-                        { 
-                            id: 4, 
-                            question: "Rearrange the words: <br>English / I / like / very much.", 
-                            correct: "I like English very much.", 
-                            wrong1: "I very much like English.", 
-                            wrong2: "English I like very much.", 
-                            wrong3: "Like English I very much." 
-                        },
-                        { 
-                            id: 5, 
-                            question: "Rearrange the words:<br>Book / this / is / interesting / an.", 
-                            correct: "This is an interesting book.", 
-                            wrong1: "This an interesting book is.", 
-                            wrong2: "An interesting book this is.", 
-                            wrong3: "Is this an interesting book." 
-                        }
+    "id": "C1",
+    "passage": "Rearrange the words to make complete sentences.",
+    "questions": [
+        { 
+            "id": 1,
+            "question": "Rearrange the words:<br>I/ to/ every/ go/ school/ day",
+            "correct": "I go to school every day.",
+            "wrong1": "I every day go to school.",
+            "wrong2": "Every day I go to school.",
+            "wrong3": "Go to school I every day."
+        },
+        {
+            "id": 2,
+            "question": "Rearrange the words:<br>She/ good/ a/ student/ is",
+            "correct": "She is a good student.",
+            "wrong1": "She a good student is.",
+            "wrong2": "A good student she is.",
+            "wrong3": "Is she a good student."
+        },
+        {
+            "id": 3,
+            "question": "Rearrange the words:<br>can/ turn on/ the/ please/ lights/ you/ ?",
+            "correct": "Can you turn on the lights, please?",
+            "wrong1": "Can turn on you the lights, please?",
+            "wrong2": "You can turn on the lights please?",
+            "wrong3": "Turn on the lights can you please?"
+        },
+        {
+            "id": 4,
+            "question": "Rearrange the words:<br>you/ would/ have/ a picnic/ to/ like/ next Sunday/ ?",
+            "correct": "Would you like to have a picnic next Sunday?",
+            "wrong1": "You would like to have a picnic next Sunday?",
+            "wrong2": "Would you have to like a picnic next Sunday?",
+            "wrong3": "To have a picnic would you like next Sunday?"
+        },
+        {
+            "id": 5,
+            "question": "Rearrange the words:<br>do / what / she / does / ?",
+            "correct": "What does she do?",
+            "wrong1": "What she does do?",
+            "wrong2": "Does she what do?",
+            "wrong3": "She does what do?"
+        },
+        {
+            "id": 6,
+            "question": "Rearrange the words:<br>school / I / and / this / my/ student / am / a / is",
+            "correct": "I am a student and this is my school.",
+            "wrong1": "I am a student and my school this is.",
+            "wrong2": "This is my school and I a student am.",
+            "wrong3": "My school is this and I am a student."
+        },
+        {
+            "id": 7,
+            "question": "Rearrange the words:<br>eraser / that / is / your / ?",
+            "correct": "Is that your eraser?",
+            "wrong1": "That is your eraser?",
+            "wrong2": "Your eraser is that?",
+            "wrong3": "Is your eraser that?"
+        },
+        {
+            "id": 8,
+            "question": "Rearrange the words:<br>Mai's class / students / are / twenty / in / there",
+            "correct": "There are twenty students in Mai's class.",
+            "wrong1": "In Mai's class there are twenty students.",
+            "wrong2": "Twenty students are there in Mai's class.",
+            "wrong3": "Mai's class there are twenty students in."
+        },
+        {
+            "id": 9,
+            "question": "Rearrange the words:<br>book / where / my / is?",
+            "correct": "Where is my book?",
+            "wrong1": "My book where is?",
+            "wrong2": "Where my book is?",
+            "wrong3": "Is where my book?"
+        },
+{
+            "id": 10,
+            "question": "Rearrange the words:<br>on/ The/ table/ books/ are/ the/.",
+            "correct": "The books are on the table.",
+            "wrong1": "On the table are the books.",
+            "wrong2": "The books on the table are.",
+            "wrong3": "Are the books on the table."
+        },
+        {
+            "id": 11,
+            "question": "Rearrange the words:<br>sofa / a / living room / in / new / There's / the /.",
+            "correct": "There's a new sofa in the living room.",
+            "wrong1": "In the living room there's a new sofa.",
+            "wrong2": "A new sofa there's in the living room.",
+            "wrong3": "There's in the living room a new sofa."
+        },
+        {
+            "id": 12,
+            "question": "Rearrange the words:<br>have / Do / you/ furniture / enough /?",
+            "correct": "Do you have enough furniture?",
+            "wrong1": "You do have enough furniture?",
+            "wrong2": "Do have you enough furniture?",
+            "wrong3": "Enough furniture do you have?"
+        },
+        {
+            "id": 13,
+            "question": "Rearrange the words:<br>your/ volleyball/ week/ are/ brother/ next/ you/ playing/ and/ beach/?",
+            "correct": "Are you and your brother playing beach volleyball next week?",
+            "wrong1": "You and your brother are playing beach volleyball next week?",
+            "wrong2": "Are your brother and you playing beach volleyball next week?",
+            "wrong3": "Next week are you and your brother playing beach volleyball?"
+        },
+        {
+            "id": 14,
+            "question": "Rearrange the words:<br>you/ like/ come/ to/ to/ my/ would/ party?",
+            "correct": "Would you like to come to my party?",
+            "wrong1": "You would like to come to my party?",
+            "wrong2": "Would like you to come to my party?",
+            "wrong3": "To come to my party would you like?"
+        },
+        {
+            "id": 15,
+            "question": "Rearrange the words:<br>curly/ brown/ hair/ black/ and/ has/ eyes/ Tom/.",
+            "correct": "Tom has curly brown hair and black eyes.",
+            "wrong1": "Tom has black eyes and curly brown hair.",
+            "wrong2": "Has Tom curly brown hair and black eyes.",
+            "wrong3": "Curly brown hair and black eyes Tom has."
+        },
+        {
+            "id": 16,
+            "question": "Rearrange the words:<br>likes/ drawing/ stories/ She/ pictures/and/ writing/.",
+            "correct": "She likes drawing pictures and writing stories.",
+            "wrong1": "She likes writing stories and drawing pictures.",
+            "wrong2": "Drawing pictures and writing stories she likes.",
+            "wrong3": "Likes she drawing pictures and writing stories."
+        },
+        {
+            "id": 17,
+            "question": "Rearrange the words:<br>best/ Mai/ are/ Mi / talking/ and/ their/ about/ friends/.",
+            "correct": "Mai and Mi are talking about their best friends.",
+            "wrong1": "Are Mai and Mi talking about their best friends.",
+            "wrong2": "Talking about their best friends Mai and Mi are.",
+            "wrong3": "Their best friends Mai and Mi are talking about."
+        },
+        {
+            "id": 18,
+            "question": "Rearrange the words:<br>arms/ fingers/ the/ are/ ten/ two/ in/ body/ and/ there/.",
+            "correct": "There are two arms and ten fingers in the body.",
+            "wrong1": "In the body there are two arms and ten fingers.",
+            "wrong2": "Two arms and ten fingers there are in the body.",
+            "wrong3": "The body there are two arms and ten fingers in."
+        },
+        {
+            "id": 19,
+            "question": "Rearrange the words:<br>he/ kind and honest/ his friends/ is/ with/.",
+            "correct": "He is kind and honest with his friends.",
+            "wrong1": "With his friends he is kind and honest.",
+            "wrong2": "He is with his friends kind and honest.",
+            "wrong3": "Kind and honest he is with his friends."
+        },
+{
+            "id": 20,
+            "question": "Rearrange the words:<br>living/ in/ TV/ your father/ watching/ is/ the/?",
+            "correct": "Is your father watching TV in the living room?",
+            "wrong1": "Your father is watching TV in the living?",
+            "wrong2": "Is in the living your father watching TV?",
+            "wrong3": "Watching TV is your father in the living?"
+        },
+        {
+            "id": 21,
+            "question": "Rearrange the words:<br>Hoa/ blond/ nose/ has/ big / and/ hair/.",
+            "correct": "Hoa has blond hair and a big nose.",
+            "wrong1": "Hoa has big nose and blond hair.",
+            "wrong2": "Blond hair and big nose Hoa has.",
+            "wrong3": "Has Hoa blond hair and big nose."
+        },
+        {
+            "id": 22,
+            "question": "Rearrange the words:<br>your father / jogging / how often / does / go / in the morning / ?",
+            "correct": "How often does your father go jogging in the morning?",
+            "wrong1": "Your father how often does go jogging in the morning?",
+            "wrong2": "How often your father does go jogging in the morning?",
+            "wrong3": "Does your father how often go jogging in the morning?"
+        },
+        {
+            "id": 23,
+            "question": "Rearrange the words:<br>my grandmother/ at home/ always/ is/ in the evening/.",
+            "correct": "My grandmother is always at home in the evening.",
+            "wrong1": "My grandmother always is at home in the evening.",
+            "wrong2": "In the evening my grandmother is always at home.",
+            "wrong3": "At home my grandmother is always in the evening."
+        },
+        {
+            "id": 24,
+            "question": "Rearrange the words:<br>Ann/ two/ and/ a/ has/ cats/ dog/.",
+            "correct": "Ann has a dog and two cats.",
+            "wrong1": "Ann has two cats and a dog.",
+            "wrong2": "A dog and two cats Ann has.",
+            "wrong3": "Has Ann a dog and two cats."
+        },
+        {
+            "id": 25,
+            "question": "Rearrange the words:<br>like/ I/ to/ swimming/ in/ the/ summer/.",
+            "correct": "I like swimming in the summer.",
+            "wrong1": "I like to swimming in the summer.",
+            "wrong2": "I swimming like in the summer.",
+            "wrong3": "In the summer I like swimming."
+        },
+        {
+            "id": 26,
+            "question": "Rearrange the words:<br>play/ every/ They/ football/ Saturday/.",
+            "correct": "They play football every Saturday.",
+            "wrong1": "They every Saturday play football.",
+            "wrong2": "Play they football every Saturday.",
+            "wrong3": "Every Saturday they play football."
+        },
+        {
+            "id": 27,
+            "question": "Rearrange the words:<br>books/ read/ She/ likes/ in/ the/ evening/ to/.",
+            "correct": "She likes to read books in the evening.",
+            "wrong1": "She likes reading books in the evening.",
+            "wrong2": "She to read books likes in the evening.",
+            "wrong3": "In the evening she likes to read books."
+        },
+{
+            "id": 28,
+            "question": "Rearrange the words:<br>subjects/ and geography/ favourite/ my/ English/ are/.",
+            "correct": "My favourite subjects are English and geography.",
+            "wrong1": "English and geography are my favourite subjects.",
+            "wrong2": "My favourite are English and geography subjects.",
+            "wrong3": "Subjects my favourite are English and geography."
+        },
+        {
+            "id": 29,
+            "question": "Rearrange the words:<br>rooms/ how many/ in/ are/ your/ there/ house/?",
+            "correct": "How many rooms are there in your house?",
+            "wrong1": "How many there are rooms in your house?",
+            "wrong2": "There are how many rooms in your house?",
+            "wrong3": "In your house how many rooms are there?"
+        },
+        {
+            "id": 30,
+            "question": "Rearrange the words:<br>Louis/ does/ yoga/ in the morning/often/.",
+            "correct": "Louis often does yoga in the morning.",
+            "wrong1": "Louis does often yoga in the morning.",
+            "wrong2": "Does Louis often yoga in the morning?",
+            "wrong3": "In the morning Louis does often yoga."
+        },
+        {
+            "id": 31,
+            "question": "Rearrange the words:<br>uniforms/our/ wearing/ are/ We/ present/ at/.",
+            "correct": "We are wearing our uniforms at present.",
+            "wrong1": "We are at present wearing our uniforms.",
+            "wrong2": "Our uniforms we are wearing at present.",
+            "wrong3": "Wearing our uniforms we are at present."
+        }
                     ]
                 }
             ]
@@ -10112,7 +11324,6 @@
 
 
 
-
         // Định nghĩa tất cả các kho đề
         const questionBank = {
             L4GK1: L4GK1,
@@ -10251,14 +11462,29 @@
             document.addEventListener('mouseleave', handleMouseLeave);
             document.addEventListener('mouseenter', handleMouseEnter);
             
-            // Xử lý sự kiện sao chép trong giao diện làm bài
-            document.addEventListener('copy', handleCopy);
-            
-            // Xử lý sự kiện nhấp chuột phải trong giao diện làm bài
-            document.addEventListener('contextmenu', handleContextMenu);
-            
-            // Xử lý sự kiện nhấp chuột trái trong giao diện làm bài
-            document.addEventListener('mousedown', handleMouseDown);
+            // Thêm sự kiện chặn click và contextmenu trên examScreen
+            const examScreen = document.getElementById('examScreen');
+            if (examScreen) {
+                examScreen.addEventListener('click', function(event) {
+                    // Kiểm tra xem phần tử được click có phải là các phần tử được phép không
+                    if (!event.target.closest('.question-button') && 
+                        !event.target.closest('.answer-option') && 
+                        !event.target.closest('#nextButton')) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                });
+
+                examScreen.addEventListener('contextmenu', function(event) {
+                    // Kiểm tra xem phần tử được click có phải là các phần tử được phép không
+                    if (!event.target.closest('.question-button') && 
+                        !event.target.closest('.answer-option') && 
+                        !event.target.closest('#nextButton')) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                });
+            }
         });
 
         // Kiểm tra xem đề thi có dữ liệu không
@@ -10780,12 +12006,12 @@
             }
         }
 
-        // Chọn đáp án
+        // Chọn đáp án - ĐÃ SỬA LỖI
         function selectAnswer(questionKey, answerIndex) {
             // Lưu đáp án được chọn
             selectedAnswers[questionKey] = answerIndex;
             
-            // Cập nhật giao diện
+            // Cập nhật giao diện - Sửa lỗi ở đây
             const answerOptions = document.querySelectorAll('.answer-option');
             answerOptions.forEach((option, index) => {
                 if (index === answerIndex) {
@@ -10918,57 +12144,6 @@
             }
         }
 
-        // Xử lý sự kiện sao chép trong giao diện làm bài
-        function handleCopy(e) {
-            if (currentScreen === 'exam') {
-                e.preventDefault();
-                showCopyWarning();
-                return false;
-            }
-        }
-
-        // Xử lý sự kiện nhấp chuột phải trong giao diện làm bài
-        function handleContextMenu(e) {
-            if (currentScreen === 'exam') {
-                e.preventDefault();
-                showCopyWarning();
-                return false;
-            }
-        }
-
-        // Xử lý sự kiện nhấp chuột trái trong giao diện làm bài
-        function handleMouseDown(e) {
-            if (currentScreen === 'exam') {
-                // Kiểm tra nếu người dùng nhấp vào nội dung câu hỏi
-                const questionContent = document.getElementById('questionContent');
-                const instruction = document.getElementById('instruction');
-                
-                // Nếu nhấp chuột trái 2 lần vào nội dung câu hỏi hoặc hướng dẫn
-                if (e.detail === 2 && (questionContent.contains(e.target) || instruction.contains(e.target))) {
-                    // Kiểm tra xem có phải là ô đáp án không
-                    const answerOption = e.target.closest('.answer-option');
-                    
-                    // Nếu không phải ô đáp án, hiển thị cảnh báo
-                    if (!answerOption) {
-                        e.preventDefault();
-                        showCopyWarning();
-                        return false;
-                    }
-                }
-            }
-        }
-
-        // Hiển thị thông báo cảnh báo sao chép
-        function showCopyWarning() {
-            const copyWarning = document.getElementById('copyWarning');
-            copyWarning.style.display = 'block';
-            
-            // Tự động ẩn sau 2 giây
-            setTimeout(() => {
-                copyWarning.style.display = 'none';
-            }, 2000);
-        }
-
         // Hiển thị thông báo cảnh báo gian lận
         function showWarningMessage() {
             const warningElement = document.getElementById('warningMessage');
@@ -11070,12 +12245,25 @@
                 const partKey = `P${part}`;
                 const partResult = {
                     correct: 0,
-                    total: questionCounts[partKey],
+                    total: 0,
                     percentage: 0
                 };
                 
+                // Xác định số câu hỏi thực tế cho phần
+                let actualQuestionCount = 0;
+                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
+                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
+                    if (selectedQuestions[partKey]) {
+                        actualQuestionCount = selectedQuestions[partKey].length;
+                    }
+                } else if (part === 6 || part === 7) {
+                    if (selectedQuestions[partKey] && selectedQuestions[partKey].questions) {
+                        actualQuestionCount = selectedQuestions[partKey].questions.length;
+                    }
+                }
+                
                 // Duyệt qua từng câu hỏi trong phần
-                for (let question = 1; question <= questionCounts[partKey]; question++) {
+                for (let question = 1; question <= actualQuestionCount; question++) {
                     const questionKey = `${partKey}.${question}`;
                     
                     // Lấy dữ liệu câu hỏi
@@ -11096,6 +12284,7 @@
                     
                     if (questionData) {
                         result.total++;
+                        partResult.total++;
                         
                         // Kiểm tra nếu đã chọn đáp án
                         if (selectedAnswers[questionKey] !== undefined) {
@@ -11107,18 +12296,14 @@
                                 if (part === 1) {
                                     // Lấy nội dung thực tế của đáp án đúng (loại bỏ thẻ HTML)
                                     const correctText = questionData.correct.replace(/<[^>]*>/g, '');
-                                    
-                                    // Lấy nội dung thực tế của đáp án được chọn
                                     const selectedText = shuffledAnswers[selectedAnswers[questionKey]].text.replace(/<[^>]*>/g, '');
                                     
-                                    // Kiểm tra nếu đáp án được chọn là đúng
                                     if (selectedText === correctText) {
                                         result.correct++;
                                         partResult.correct++;
                                     }
                                 } else {
-                                    // Xử lý cho các phần khác
-                                    // Kiểm tra nếu đáp án được chọn là đúng
+                                    // Các phần khác - so sánh đơn giản
                                     if (shuffledAnswers[selectedAnswers[questionKey]].isCorrect) {
                                         result.correct++;
                                         partResult.correct++;
@@ -11132,6 +12317,8 @@
                 // Tính tỷ lệ đúng cho phần
                 if (partResult.total > 0) {
                     partResult.percentage = Math.round((partResult.correct / partResult.total) * 100);
+                } else {
+                    partResult.percentage = 0;
                 }
                 
                 result.partResults[partKey] = partResult;
@@ -11140,6 +12327,8 @@
             // Tính tỷ lệ đúng tổng thể
             if (result.total > 0) {
                 result.percentage = Math.round((result.correct / result.total) * 100);
+            } else {
+                result.percentage = 0;
             }
             
             return result;
@@ -11150,47 +12339,41 @@
             const chartContainer = document.getElementById('resultChart');
             chartContainer.innerHTML = '';
             
-            // Duyệt qua từng phần
+            // Tạo phần tử cho mỗi phần
             for (let part = 1; part <= 12; part++) {
                 const partKey = `P${part}`;
-                const partResult = partResults[partKey];
+                const partResult = partResults[partKey] || { correct: 0, total: 0, percentage: 0 };
                 
-                // Tạo div chứa kết quả phần
                 const partDiv = document.createElement('div');
                 partDiv.className = 'part-result';
                 
-                // Tạo div chứa tên phần
-                const partNameDiv = document.createElement('div');
-                partNameDiv.className = 'part-name';
-                partNameDiv.textContent = `Phần ${part}`;
-                partDiv.appendChild(partNameDiv);
+                const partName = document.createElement('div');
+                partName.className = 'part-name';
+                partName.textContent = `Phần ${part}`;
                 
-                // Tạo div chứa thanh progress
-                const partProgressDiv = document.createElement('div');
-                partProgressDiv.className = 'part-progress';
+                const partProgress = document.createElement('div');
+                partProgress.className = 'part-progress';
                 
-                // Tạo thanh progress
-                const partProgressBarDiv = document.createElement('div');
-                partProgressBarDiv.className = 'part-progress-bar';
-                partProgressBarDiv.style.width = `${partResult.percentage}%`;
+                const partProgressBar = document.createElement('div');
+                partProgressBar.className = 'part-progress-bar';
+                partProgressBar.style.width = `${partResult.percentage}%`;
                 
-                // Thiết lập màu sắc cho thanh progress
                 if (partResult.percentage >= 80) {
-                    partProgressBarDiv.classList.add('high');
+                    partProgressBar.classList.add('high');
                 } else if (partResult.percentage >= 51) {
-                    partProgressBarDiv.classList.add('medium');
+                    partProgressBar.classList.add('medium');
                 } else {
-                    partProgressBarDiv.classList.add('low');
+                    partProgressBar.classList.add('low');
                 }
                 
-                partProgressDiv.appendChild(partProgressBarDiv);
-                partDiv.appendChild(partProgressDiv);
+                const partPercentage = document.createElement('div');
+                partPercentage.className = 'part-percentage';
+                partPercentage.textContent = `${partResult.correct}/${partResult.total} (${partResult.percentage}%)`;
                 
-                // Tạo div chứa phần trăm
-                const partPercentageDiv = document.createElement('div');
-                partPercentageDiv.className = 'part-percentage';
-                partPercentageDiv.textContent = `${partResult.percentage}% (${partResult.correct}/${partResult.total})`;
-                partDiv.appendChild(partPercentageDiv);
+                partProgress.appendChild(partProgressBar);
+                partDiv.appendChild(partName);
+                partDiv.appendChild(partProgress);
+                partDiv.appendChild(partPercentage);
                 
                 chartContainer.appendChild(partDiv);
             }
@@ -11201,80 +12384,69 @@
             const questionListContainer = document.getElementById('questionList');
             questionListContainer.innerHTML = '';
             
-            // Duyệt qua từng phần
+            // Tạo phần tử cho mỗi phần
             for (let part = 1; part <= 12; part++) {
                 const partKey = `P${part}`;
+                const partResult = partResults[partKey] || { correct: 0, total: 0, percentage: 0 };
                 
-                // Tạo div chứa phần
-                const partSectionDiv = document.createElement('div');
-                partSectionDiv.className = 'part-section';
+                const partSection = document.createElement('div');
+                partSection.className = 'part-section';
                 
-                // Tạo mã đề
-                let examCode = `${currentExam} – ${partKey}`;
-                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
-                    if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
-                        examCode += `.C1`;
-                    }
-                } else if (part === 6 || part === 7) {
-                    if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
-                        examCode += `.${selectedQuestions[partKey].section.id}`;
-                    }
-                }
+                const partHeader = document.createElement('div');
+                partHeader.className = 'part-header';
+                partHeader.textContent = `Phần ${part} (${partResult.correct}/${partResult.total} - ${partResult.percentage}%)`;
                 
-                // Tạo div chứa mã đề
-                const partExamCodeDiv = document.createElement('div');
-                partExamCodeDiv.className = 'part-exam-code';
-                partExamCodeDiv.textContent = `Mã đề: ${examCode}`;
-                partSectionDiv.appendChild(partExamCodeDiv);
+                const partQuestions = document.createElement('div');
+                partQuestions.className = 'part-questions';
                 
-                // Tạo div chứa passage
-                const examData = questionBank[currentExam];
-                let passage = '';
-                
-                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
-                    if (examData && examData[partKey] && examData[partKey][0]) {
-                        passage = examData[partKey][0].passage;
-                    }
-                } else if (part === 6 || part === 7) {
-                    if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
-                        passage = selectedQuestions[partKey].section.passage;
-                    }
-                }
-                
-                if (passage) {
-                    const partPassageDiv = document.createElement('div');
-                    partPassageDiv.className = 'part-passage';
-                    partPassageDiv.innerHTML = passage;
-                    partSectionDiv.appendChild(partPassageDiv);
-                }
-                
-                // Tạo div chứa header phần
-                const partHeaderDiv = document.createElement('div');
-                partHeaderDiv.className = 'part-header';
-                partHeaderDiv.textContent = `Phần ${part}`;
-                
-                // Thêm sự kiện click để mở/đóng
-                partHeaderDiv.addEventListener('click', function() {
-                    const partQuestionsDiv = partSectionDiv.querySelector('.part-questions');
-                    if (partQuestionsDiv.style.display === 'none') {
-                        partQuestionsDiv.style.display = 'block';
-                        partHeaderDiv.classList.add('expanded');
-                    } else {
-                        partQuestionsDiv.style.display = 'none';
-                        partHeaderDiv.classList.remove('expanded');
-                    }
+                // Thêm sự kiện click để mở/đóng phần
+                partHeader.addEventListener('click', function() {
+                    partHeader.classList.toggle('expanded');
+                    partQuestions.classList.toggle('show');
                 });
                 
-                partSectionDiv.appendChild(partHeaderDiv);
+                // Xác định số câu hỏi thực tế cho phần
+                let actualQuestionCount = 0;
+                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
+                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
+                    if (selectedQuestions[partKey]) {
+                        actualQuestionCount = selectedQuestions[partKey].length;
+                    }
+                } else if (part === 6 || part === 7) {
+                    if (selectedQuestions[partKey] && selectedQuestions[partKey].questions) {
+                        actualQuestionCount = selectedQuestions[partKey].questions.length;
+                    }
+                }
                 
-                // Tạo div chứa các câu hỏi
-                const partQuestionsDiv = document.createElement('div');
-                partQuestionsDiv.className = 'part-questions';
+                // Hiển thị mã nguồn của phần
+                const partExamCode = document.createElement('div');
+                partExamCode.className = 'part-exam-code';
+                
+                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
+                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
+                    // Các phần chỉ có 1 yêu cầu
+                    if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
+                        partExamCode.textContent = `Mã nguồn: ${currentExam} – ${partKey}.C1`;
+                    }
+                } else if (part === 6 || part === 7) {
+                    // Các phần có nhiều yêu cầu
+                    if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
+                        partExamCode.textContent = `Mã nguồn: ${currentExam} – ${partKey}.${selectedQuestions[partKey].section.id}`;
+                    }
+                }
+                
+                partQuestions.appendChild(partExamCode);
+                
+                // Hiển thị đoạn văn cho phần 6 và 7
+                if ((part === 6 || part === 7) && selectedQuestions[partKey] && selectedQuestions[partKey].section) {
+                    const passage = document.createElement('div');
+                    passage.className = 'part-passage';
+                    passage.innerHTML = selectedQuestions[partKey].section.passage;
+                    partQuestions.appendChild(passage);
+                }
                 
                 // Duyệt qua từng câu hỏi trong phần
-                for (let question = 1; question <= questionCounts[partKey]; question++) {
+                for (let question = 1; question <= actualQuestionCount; question++) {
                     const questionKey = `${partKey}.${question}`;
                     
                     // Lấy dữ liệu câu hỏi
@@ -11294,213 +12466,84 @@
                     }
                     
                     if (questionData) {
-                        // Tạo div chứa câu hỏi
-                        const questionItemDiv = document.createElement('div');
-                        questionItemDiv.className = 'question-item';
+                        const questionItem = document.createElement('div');
+                        questionItem.className = 'question-item';
                         
-                        // Tạo div chứa mã nguồn câu hỏi
+                        const questionText = document.createElement('div');
+                        questionText.className = 'question-text';
+                        
+                        // Thêm mã nguồn của câu hỏi
+                        let sourceCode = '';
                         if (questionCodes[questionKey]) {
                             const { sectionId, questionId } = questionCodes[questionKey];
-                            const questionCodeDiv = document.createElement('div');
-                            questionCodeDiv.className = 'question-code';
-                            questionCodeDiv.textContent = `Mã câu hỏi: ${sectionId}.${questionId}`;
-                            questionCodeDiv.style.fontStyle = 'italic';
-                            questionCodeDiv.style.color = '#666';
-                            questionCodeDiv.style.fontSize = '12px';
-                            questionCodeDiv.style.marginBottom = '5px';
-                            questionItemDiv.appendChild(questionCodeDiv);
+                            sourceCode = ` (${sectionId}.${questionId})`;
                         }
                         
-                        // Tạo div chứa nội dung câu hỏi
-                        const questionTextDiv = document.createElement('div');
-                        questionTextDiv.className = 'question-text';
+                        questionText.innerHTML = `<strong>Câu ${question}${sourceCode}:</strong> ${questionData.question}`;
                         
-                        // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                        if (part === 1) {
-                            questionTextDiv.innerHTML = `<strong>Câu ${question}:</strong> ${questionData.question}`;
-                        } else {
-                            questionTextDiv.innerHTML = `<strong>Câu ${question}:</strong> ${questionData.question}`;
-                        }
-                        
-                        questionItemDiv.appendChild(questionTextDiv);
-                        
-                        // Tạo div chứa trạng thái đáp án
-                        const answerStatusDiv = document.createElement('div');
-                        answerStatusDiv.className = 'answer-status';
+                        const answerStatus = document.createElement('div');
+                        answerStatus.className = 'answer-status';
                         
                         // Lấy thứ tự các đáp án đã đảo
-                        const shuffledAnswers = answerOrders[questionKey];
+                        const shuffledAnswers = answerOrders[questionKey] || [];
                         
-                        if (shuffledAnswers) {
-                            // Kiểm tra nếu đã chọn đáp án
-                            if (selectedAnswers[questionKey] !== undefined) {
-                                // Xử lý đặc biệt cho phần 1 - xác định đáp án đúng bằng nội dung thực tế
-                                if (part === 1) {
-                                    // Lấy nội dung thực tế của đáp án đúng (loại bỏ thẻ HTML)
-                                    const correctText = questionData.correct.replace(/<[^>]*>/g, '');
-                                    
-                                    // Hiển thị các đáp án với trạng thái đúng/sai
-                                    shuffledAnswers.forEach((answer, index) => {
-                                        const answerDiv = document.createElement('div');
-                                        
-                                        // Lấy nội dung thực tế của đáp án
-                                        const answerText = answer.text.replace(/<[^>]*>/g, '');
-                                        
-                                        if (index === selectedAnswers[questionKey]) {
-                                            if (answerText === correctText) {
-                                                answerDiv.className = 'correct-answer';
-                                            } else {
-                                                answerDiv.className = 'incorrect-answer';
-                                            }
-                                        } else {
-                                            if (answerText === correctText) {
-                                                answerDiv.className = 'correct-answer';
-                                            } else {
-                                                answerDiv.className = 'no-answer';
-                                            }
-                                        }
-                                        
-                                        // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                                        if (part === 1) {
-                                            answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                                        } else {
-                                            answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                                        }
-                                        
-                                        answerStatusDiv.appendChild(answerDiv);
-                                    });
-                                } else {
-                                    // Xử lý cho các phần khác - giữ nguyên cách cũ
-                                    // Hiển thị các đáp án với trạng thái đúng/sai
-                                    shuffledAnswers.forEach((answer, index) => {
-                                        const answerDiv = document.createElement('div');
-                                        
-                                        if (index === selectedAnswers[questionKey]) {
-                                            if (answer.isCorrect) {
-                                                answerDiv.className = 'correct-answer';
-                                            } else {
-                                                answerDiv.className = 'incorrect-answer';
-                                            }
-                                        } else {
-                                            if (answer.isCorrect) {
-                                                answerDiv.className = 'correct-answer';
-                                            } else {
-                                                answerDiv.className = 'no-answer';
-                                            }
-                                        }
-                                        
-                                        // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                                        if (part === 1) {
-                                            answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                                        } else {
-                                            answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                                        }
-                                        
-                                        answerStatusDiv.appendChild(answerDiv);
-                                    });
+                        // Tạo các phần tử đáp án
+                        for (let i = 0; i < 4; i++) {
+                            const answerDiv = document.createElement('div');
+                            
+                            if (shuffledAnswers[i]) {
+                                const answer = shuffledAnswers[i];
+                                let status = 'no-answer';
+                                
+                                // Kiểm tra xem đáp án này có phải là đáp án đúng không
+                                if (answer.isCorrect) {
+                                    status = 'correct-answer';
                                 }
-                            } else {
-                                // Hiển thị các đáp án không có trạng thái
-                                shuffledAnswers.forEach((answer, index) => {
-                                    const answerDiv = document.createElement('div');
-                                    answerDiv.className = 'no-answer';
-                                    
-                                    // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                                    if (part === 1) {
-                                        answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
+                                
+                                // Kiểm tra xem đáp án này có được chọn không
+                                if (selectedAnswers[questionKey] === i) {
+                                    if (answer.isCorrect) {
+                                        status = 'correct-answer';
                                     } else {
-                                        answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
+                                        status = 'incorrect-answer';
                                     }
-                                    
-                                    answerStatusDiv.appendChild(answerDiv);
-                                });
+                                }
+                                
+                                answerDiv.className = status;
+                                answerDiv.innerHTML = `${String.fromCharCode(65 + i)}. ${answer.text}`;
+                            } else {
+                                answerDiv.className = 'no-answer';
+                                answerDiv.innerHTML = `${String.fromCharCode(65 + i)}. `;
                             }
+                            
+                            answerStatus.appendChild(answerDiv);
                         }
                         
-                        questionItemDiv.appendChild(answerStatusDiv);
-                        partQuestionsDiv.appendChild(questionItemDiv);
+                        questionItem.appendChild(questionText);
+                        questionItem.appendChild(answerStatus);
+                        partQuestions.appendChild(questionItem);
                     }
                 }
                 
-                partSectionDiv.appendChild(partQuestionsDiv);
-                questionListContainer.appendChild(partSectionDiv);
+                partSection.appendChild(partHeader);
+                partSection.appendChild(partQuestions);
+                questionListContainer.appendChild(partSection);
             }
         }
 
         // Làm lại bài thi
         function retryExam() {
-            // Reset các biến
-            selectedAnswers = {};
-            selectedQuestions = {};
-            answerOrders = {};
-            questionCodes = {};
-            isTabSwitched = false;
-            blurTime = null;
-            focusTime = null;
-            isPageVisible = true;
-            startTime = new Date();
-            endTime = null;
-            
-            // Chọn lại câu hỏi ngẫu nhiên
-            selectRandomQuestions();
-            
-            // Hiển thị giao diện làm bài
-            showScreen('exam');
-            
-            // Hiển thị phần đầu tiên
-            showPart(1);
+            startExam();
         }
 
         // Làm mới (quay về giao diện chính)
         function newExam() {
-            // Reset các biến
-            currentExam = '';
-            currentPart = 1;
-            currentQuestion = 1;
-            selectedAnswers = {};
-            selectedQuestions = {};
-            answerOrders = {};
-            questionCodes = {};
-            isTabSwitched = false;
-            blurTime = null;
-            focusTime = null;
-            isPageVisible = true;
-            startTime = null;
-            endTime = null;
-            
-            // Hiển thị giao diện chính
             showScreen('main');
-            
-            // Reset form
-            document.getElementById('studentName').value = '';
-            document.getElementById('classSelect').selectedIndex = 0;
-            document.getElementById('examSelect').selectedIndex = 0;
         }
 
         // Quay lại giao diện chính
         function backToMain() {
-            // Reset các biến
-            currentExam = '';
-            currentPart = 1;
-            currentQuestion = 1;
-            selectedAnswers = {};
-            selectedQuestions = {};
-            answerOrders = {};
-            questionCodes = {};
-            isTabSwitched = false;
-            blurTime = null;
-            focusTime = null;
-            isPageVisible = true;
-            startTime = null;
-            endTime = null;
-            
-            // Hiển thị giao diện chính
             showScreen('main');
-            
-            // Reset form
-            document.getElementById('studentName').value = '';
-            document.getElementById('classSelect').selectedIndex = 0;
-            document.getElementById('examSelect').selectedIndex = 0;
         }
     </script>
 </body>
