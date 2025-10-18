@@ -214,6 +214,15 @@
             font-weight: bold;
         }
 
+        .correct-rate {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .correct-rate strong {
+            color: #0066cc;
+        }
+
         .overall-progress {
             margin-bottom: 15px;
         }
@@ -222,32 +231,34 @@
             margin-bottom: 15px;
         }
 
-        /* CSS mới cho bố cục 3 cột */
-        .chart-grid {
+        /* CSS mới cho bố cục 4 cột 3 hàng */
+        .part-results-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
         }
 
         .part-result {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
         }
 
         .part-name {
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
             font-size: 14px;
+            text-align: center;
         }
 
         .part-progress {
-            height: 10px;
+            height: 12px;
             background-color: #f0f0f0;
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
         }
 
         .part-progress-bar {
@@ -271,7 +282,7 @@
             text-align: center;
             margin-top: 3px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .question-list {
@@ -449,11 +460,6 @@
         .contact-link:hover {
             text-decoration: underline;
         }
-
-        /* CSS cho màn hình chính */
-        .screen {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -521,7 +527,7 @@
     </div>
 
     <!-- Giao diện làm bài -->
-    <div id="examScreen" class="screen">
+    <div id="examScreen" class="screen" style="display: none;">
         <div class="container">
             <div class="exam-header">
                 <h1 class="main-title">ĐỀ CƯƠNG ÔN THI TIẾNG ANH</h1>
@@ -559,7 +565,7 @@
     </div>
 
     <!-- Giao diện báo cáo -->
-    <div id="reportScreen" class="screen">
+    <div id="reportScreen" class="screen" style="display: none;">
         <div class="container">
             <div class="report-header">
                 <h1 class="main-title">ĐỀ CƯƠNG ÔN THI TIẾNG ANH</h1>
@@ -573,7 +579,8 @@
                 <p><strong>Thời điểm kết thúc:</strong> <span id="endTime">...</span></p>
                 <p><strong>Tổng thời gian làm bài:</strong> <span id="totalTime">...</span></p>
                 <p><strong>Số câu làm đúng:</strong> <span id="correctCount">...</span></p>
-                <p><strong>Tỷ lệ đúng:</strong> <span id="correctRate">...</span></p>
+                <!-- Đã sửa phần này -->
+                <p class="correct-rate"><strong>Tỷ lệ đúng: <span id="correctRate">...</span></strong></p>
                 <p id="cheatingWarning" style="color: #f5222d; font-weight: bold; display: none;">⚠️ Đã phát hiện hành vi gian lận!</p>
             </div>
             
@@ -583,8 +590,8 @@
             
             <div class="chart-container">
                 <h3>Biểu đồ kết quả</h3>
-                <div id="resultChart" class="chart-grid">
-                    <!-- Biểu đồ kết quả từng phần -->
+                <div id="resultChart" class="part-results-grid">
+                    <!-- Biểu đồ kết quả từng phần - sắp xếp theo lưới 4x3 -->
                 </div>
             </div>
             
@@ -603,7 +610,7 @@
     </div>
 
     <!-- Giao diện lỗi -->
-    <div id="errorScreen" class="screen">
+    <div id="errorScreen" class="screen" style="display: none;">
         <div class="container">
             <div class="error-message">
                 <h1 class="main-title">ĐỀ CƯƠNG ÔN THI TIẾNG ANH</h1>
@@ -1858,6 +1865,7 @@
                 }
             ]
         };
+
 // Kho đề cho L6GK1
         const L6GK1 = {
             P1: [
@@ -2044,7 +2052,7 @@
         {
             "id": 23,
             "question": "<span style=\"text-decoration: underline; color: red;\">underlined</span>",
-            "correct": "s<span style=\"text-decoration: underline; color: red;\">o</span>omeone",
+            "correct": "s<span style=\"text-decoration: underline; color: red;\">o</span>meone",
             "wrong1": "cart<span style=\"text-decoration: underline; color: red;\">o</span>n",
             "wrong2": "calculat<span style=\"text-decoration: underline; color: red;\">o</span>r",
             "wrong3": ""
@@ -2265,489 +2273,633 @@
             "wrong2": "ben<span style=\"text-decoration: underline; color: red;\">ch</span>",
             "wrong3": "<span style=\"text-decoration: underline; color: red;\">ch</span>eap"
         }
-              ]
+                    ]
                 }
             ],
             P2: [
-{
+                {
     "id": "C1",
-    "passage": "Choose the word that has the main stress placed differently from the others.",
+    "passage": "Choose the word that has the main <strong style=\"color:blue;\">stress </strong> placed differently from the others.",
     "questions": [
         {
             "id": 1,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "afternoon",
-            "wrong1": "correct",
-            "wrong2": "together",
-            "wrong3": "department"
+            "question": "<strong style=\"color:blue;\">sometimes</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 2,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "magazine",
-            "wrong1": "again",
-            "wrong2": "hotel",
-            "wrong3": "creative"
+            "question": "<strong style=\"color:blue;\">rarely</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 3,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "afternoon",
-            "wrong1": "locker",
-            "wrong2": "exercise",
-            "wrong3": "country"
+            "question": "<strong style=\"color:blue;\">never</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 4,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "magazine",
-            "wrong1": "evening",
-            "wrong2": "compass",
-            "wrong3": "calculator"
+            "question": "<strong style=\"color:blue;\">interesting</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 5,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "together",
-            "wrong1": "sometimes",
-            "wrong2": "sharpener",
-            "wrong3": "calculator"
+            "question": "<strong style=\"color:blue;\">healthy</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 6,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "eraser",
-            "wrong1": "rarely",
-            "wrong2": "student",
-            "wrong3": "classmate"
+            "question": "<strong style=\"color:blue;\">heavy</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 7,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "exam",
-            "wrong1": "never",
-            "wrong2": "subject",
-            "wrong3": "classroom"
+            "question": "<strong style=\"color:blue;\">boarding</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 8,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "computer",
-            "wrong1": "interesting",
-            "wrong2": "morning",
-            "wrong3": "backpack"
+            "question": "<strong style=\"color:blue;\">textbook</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 9,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "canteen",
-            "wrong1": "healthy",
-            "wrong2": "mountain",
-            "wrong3": "teacher"
+            "question": "<strong style=\"color:blue;\">uniform</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 10,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "advice",
-            "wrong1": "heavy",
-            "wrong2": "music",
-            "wrong3": "diary"
+            "question": "<strong style=\"color:blue;\">village</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 11,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "assembly",
-            "wrong1": "boarding",
-            "wrong2": "notebook",
-            "wrong3": "calculator"
+            "question": "<strong style=\"color:blue;\">whiteboard</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 12,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "assignment",
-            "wrong1": "textbook",
-            "wrong2": "painting",
-            "wrong3": "classmate"
+            "question": "<strong style=\"color:blue;\">rubber</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 13,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "correct",
-            "wrong1": "uniform",
-            "wrong2": "history",
-            "wrong3": "classroom"
+            "question": "<strong style=\"color:blue;\">ruler</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 14,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "again",
-            "wrong1": "village",
-            "wrong2": "homework",
-            "wrong3": "backpack"
+            "question": "<strong style=\"color:blue;\">schedule</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 15,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "together",
-            "wrong1": "whiteboard",
-            "wrong2": "library",
-            "wrong3": "teacher"
+            "question": "<strong style=\"color:blue;\">science</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 16,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "hotel",
-            "wrong1": "rubber",
-            "wrong2": "locker",
-            "wrong3": "diary"
+            "question": "<strong style=\"color:blue;\">secret</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 17,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "department",
-            "wrong1": "ruler",
-            "wrong2": "evening",
-            "wrong3": "calculator"
+            "question": "<strong style=\"color:blue;\">sharpener</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 18,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "creative",
-            "wrong1": "schedule",
-            "wrong2": "exercise",
-            "wrong3": "classmate"
+            "question": "<strong style=\"color:blue;\">student</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 19,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "surprise",
-            "wrong1": "science",
-            "wrong2": "compass",
-            "wrong3": "classroom"
+            "question": "<strong style=\"color:blue;\">subject</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 20,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "description",
-            "wrong1": "secret",
-            "wrong2": "country",
-            "wrong3": "backpack"
+            "question": "<strong style=\"color:blue;\">morning</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 21,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "sometimes",
-            "wrong1": "together",
-            "wrong2": "description",
-            "wrong3": "surprise"
+            "question": "<strong style=\"color:blue;\">mountain</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 22,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "rarely",
-            "wrong1": "eraser",
-            "wrong2": "together",
-            "wrong3": "description"
+            "question": "<strong style=\"color:blue;\">music</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 23,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "never",
-            "wrong1": "exam",
-            "wrong2": "eraser",
-            "wrong3": "together"
+            "question": "<strong style=\"color:blue;\">notebook</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 24,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "interesting",
-            "wrong1": "computer",
-            "wrong2": "exam",
-            "wrong3": "eraser"
+            "question": "<strong style=\"color:blue;\">painting</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 25,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "healthy",
-            "wrong1": "canteen",
-            "wrong2": "computer",
-            "wrong3": "exam"
+            "question": "<strong style=\"color:blue;\">history</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 26,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "heavy",
-            "wrong1": "advice",
-            "wrong2": "canteen",
-            "wrong3": "computer"
+            "question": "<strong style=\"color:blue;\">homework</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 27,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "boarding",
-            "wrong1": "assembly",
-            "wrong2": "advice",
-            "wrong3": "canteen"
+            "question": "<strong style=\"color:blue;\">library</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 28,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "textbook",
-            "wrong1": "assignment",
-            "wrong2": "assembly",
-            "wrong3": "advice"
+            "question": "<strong style=\"color:blue;\">locker</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 29,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "uniform",
-            "wrong1": "correct",
-            "wrong2": "assignment",
-            "wrong3": "assembly"
+            "question": "<strong style=\"color:blue;\">evening</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 30,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "village",
-            "wrong1": "again",
-            "wrong2": "correct",
-            "wrong3": "assignment"
+            "question": "<strong style=\"color:blue;\">exercise</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 31,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "whiteboard",
-            "wrong1": "together",
-            "wrong2": "again",
-            "wrong3": "correct"
+            "question": "<strong style=\"color:blue;\">compass</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 32,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "rubber",
-            "wrong1": "hotel",
-            "wrong2": "together",
-            "wrong3": "again"
+            "question": "<strong style=\"color:blue;\">country</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 33,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "ruler",
-            "wrong1": "department",
-            "wrong2": "hotel",
-            "wrong3": "together"
+            "question": "<strong style=\"color:blue;\">calculator</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 34,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "schedule",
-            "wrong1": "creative",
-            "wrong2": "department",
-            "wrong3": "hotel"
+            "question": "<strong style=\"color:blue;\">classmate</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 35,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "science",
-            "wrong1": "surprise",
-            "wrong2": "creative",
-            "wrong3": "department"
+            "question": "<strong style=\"color:blue;\">classroom</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 36,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "secret",
-            "wrong1": "description",
-            "wrong2": "surprise",
-            "wrong3": "creative"
+            "question": "<strong style=\"color:blue;\">backpack</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 37,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "sharpener",
-            "wrong1": "together",
-            "wrong2": "surprise",
-            "wrong3": "department"
+            "question": "<strong style=\"color:blue;\">teacher</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 38,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "student",
-            "wrong1": "eraser",
-            "wrong2": "description",
-            "wrong3": "creative"
+            "question": "<strong style=\"color:blue;\">diary</strong>",
+            "correct": "1",
+            "wrong1": "2",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 39,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "subject",
-            "wrong1": "exam",
-            "wrong2": "together",
-            "wrong3": "surprise"
+            "question": "<strong style=\"color:blue;\">together</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 40,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "morning",
-            "wrong1": "computer",
-            "wrong2": "eraser",
-            "wrong3": "description"
+            "question": "<strong style=\"color:blue;\">eraser</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 41,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "mountain",
-            "wrong1": "canteen",
-            "wrong2": "exam",
-            "wrong3": "together"
+            "question": "<strong style=\"color:blue;\">exam</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 42,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "music",
-            "wrong1": "advice",
-            "wrong2": "computer",
-            "wrong3": "eraser"
+            "question": "<strong style=\"color:blue;\">computer</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 43,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "notebook",
-            "wrong1": "assembly",
-            "wrong2": "canteen",
-            "wrong3": "exam"
+            "question": "<strong style=\"color:blue;\">canteen</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 44,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "painting",
-            "wrong1": "assignment",
-            "wrong2": "advice",
-            "wrong3": "computer"
+            "question": "<strong style=\"color:blue;\">advice</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 45,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "history",
-            "wrong1": "correct",
-            "wrong2": "assembly",
-            "wrong3": "canteen"
+            "question": "<strong style=\"color:blue;\">assembly</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 46,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "homework",
-            "wrong1": "again",
-            "wrong2": "assignment",
-            "wrong3": "advice"
+            "question": "<strong style=\"color:blue;\">assignment</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 47,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "library",
-            "wrong1": "together",
-            "wrong2": "correct",
-            "wrong3": "assembly"
+            "question": "<strong style=\"color:blue;\">correct</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 48,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "locker",
-            "wrong1": "hotel",
-            "wrong2": "again",
-            "wrong3": "assignment"
+            "question": "<strong style=\"color:blue;\">again</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 49,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "evening",
-            "wrong1": "department",
-            "wrong2": "together",
-            "wrong3": "correct"
+            "question": "<strong style=\"color:blue;\">hotel</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 50,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "exercise",
-            "wrong1": "creative",
-            "wrong2": "hotel",
-            "wrong3": "again"
+            "question": "<strong style=\"color:blue;\">department</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 51,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "compass",
-            "wrong1": "surprise",
-            "wrong2": "department",
-            "wrong3": "together"
+            "question": "<strong style=\"color:blue;\">creative</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 52,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "country",
-            "wrong1": "description",
-            "wrong2": "creative",
-            "wrong3": "hotel"
+            "question": "<strong style=\"color:blue;\">surprise</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 53,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "calculator",
-            "wrong1": "together",
-            "wrong2": "assembly",
-            "wrong3": "department"
+            "question": "<strong style=\"color:blue;\">description</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 54,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "classmate",
-            "wrong1": "eraser",
-            "wrong2": "assignment",
-            "wrong3": "creative"
+            "question": "<strong style=\"color:blue;\">afternoon</strong>",
+            "correct": "3",
+            "wrong1": "1",
+            "wrong2": "2",
+            "wrong3": "4"
         },
         {
             "id": 55,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "classroom",
-            "wrong1": "exam",
-            "wrong2": "correct",
-            "wrong3": "surprise"
+            "question": "<strong style=\"color:blue;\">magazine</strong>",
+            "correct": "3",
+            "wrong1": "1",
+            "wrong2": "2",
+            "wrong3": "4"
         },
         {
             "id": 56,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "backpack",
-            "wrong1": "computer",
-            "wrong2": "again",
-            "wrong3": "description"
+            "question": "<strong style=\"color:blue;\">banana</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 57,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "teacher",
-            "wrong1": "canteen",
-            "wrong2": "together",
-            "wrong3": "surprise"
+            "question": "<strong style=\"color:blue;\">examine</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         },
         {
             "id": 58,
-            "question": "<span style=\"text-decoration: underline; color: red;\">stress</span>",
-            "correct": "diary",
-            "wrong1": "advice",
-            "wrong2": "hotel",
-            "wrong3": "description"
+            "question": "<strong style=\"color:blue;\">attention</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 59,
+            "question": "<strong style=\"color:blue;\">routine</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 60,
+            "question": "<strong style=\"color:blue;\">bacteria</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 61,
+            "question": "<strong style=\"color:blue;\">disease</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 62,
+            "question": "<strong style=\"color:blue;\">project</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 63,
+            "question": "<strong style=\"color:blue;\">above</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 64,
+            "question": "<strong style=\"color:blue;\">beside</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 65,
+            "question": "<strong style=\"color:blue;\">aquarium</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 66,
+            "question": "<strong style=\"color:blue;\">pagoda</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 67,
+            "question": "<strong style=\"color:blue;\">arrive</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 68,
+            "question": "<strong style=\"color:blue;\">souvenir</strong>",
+            "correct": "3",
+            "wrong1": "1",
+            "wrong2": "2",
+            "wrong3": "4"
+        },
+        {
+            "id": 69,
+            "question": "<strong style=\"color:blue;\">around</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 70,
+            "question": "<strong style=\"color:blue;\">lemonade</strong>",
+            "correct": "3",
+            "wrong1": "1",
+            "wrong2": "2",
+            "wrong3": "4"
+        },
+        {
+            "id": 71,
+            "question": "<strong style=\"color:blue;\">example</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 72,
+            "question": "<strong style=\"color:blue;\">museum</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 73,
+            "question": "<strong style=\"color:blue;\">explore</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 74,
+            "question": "<strong style=\"color:blue;\">exciting</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 75,
+            "question": "<strong style=\"color:blue;\">fantastic</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
+        },
+        {
+            "id": 76,
+            "question": "<strong style=\"color:blue;\">variety</strong>",
+            "correct": "2",
+            "wrong1": "1",
+            "wrong2": "3",
+            "wrong3": "4"
         }
-    ]
-}
+                    ]
+                }
             ],
             P3: [
-                {
+{
     "id": "C1",
-    "passage": "Choose the word(s) OPPOSITE in meaning to the underlined word(s) in each of the following questions.",
+    "passage": "Choose the word(s) <strong style=\"color:red;\"> CLOSEST / OPPOSITE </strong> in meaning to the underlined word(s) in each of the following questions.",
     "questions": [
         {
             "id": 1,
-            "question": "CLOSEST <br>All the lessons at my new school are very <span style=\"text-decoration: underline; color: red;\">interesting</span>.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>All the lessons at my new school are very <span style=\"text-decoration: underline; color: red;\">interesting</span>.",
             "correct": "exciting",
             "wrong1": "boring",
             "wrong2": "outgoing",
@@ -2755,7 +2907,7 @@
         },
         {
             "id": 2,
-            "question": "CLOSEST <br>There are 30 children in his class, and it's <span style=\"text-decoration: underline; color: red;\">difficult</span> for the teacher to teach all of them.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>There are 30 children in his class, and it's <span style=\"text-decoration: underline; color: red;\">difficult</span> for the teacher to teach all of them.",
             "correct": "hard",
             "wrong1": "simple",
             "wrong2": "early",
@@ -2763,7 +2915,7 @@
         },
         {
             "id": 3,
-            "question": "CLOSEST <br>Do you like <span style=\"text-decoration: underline; color: red;\">learning</span> English?",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>Do you like <span style=\"text-decoration: underline; color: red;\">learning</span> English?",
             "correct": "studying",
             "wrong1": "singing",
             "wrong2": "writing",
@@ -2771,7 +2923,7 @@
         },
         {
             "id": 4,
-            "question": "CLOSEST <br>Let me <span style=\"text-decoration: underline; color: red;\">put on</span> my dress. Then we can go.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>Let me <span style=\"text-decoration: underline; color: red;\">put on</span> my dress. Then we can go.",
             "correct": "wear",
             "wrong1": "remove",
             "wrong2": "change",
@@ -2779,7 +2931,7 @@
         },
         {
             "id": 5,
-            "question": "CLOSEST <br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school.",
             "correct": "bike",
             "wrong1": "car",
             "wrong2": "motorbike",
@@ -2787,7 +2939,7 @@
         },
         {
             "id": 6,
-            "question": "CLOSEST <br>Mum, I <span style=\"text-decoration: underline; color: red;\">love</span> my old bed room. It's so comfortable.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>Mum, I <span style=\"text-decoration: underline; color: red;\">love</span> my old bed room. It's so comfortable.",
             "correct": "like",
             "wrong1": "hate",
             "wrong2": "dislike",
@@ -2795,7 +2947,7 @@
         },
         {
             "id": 7,
-            "question": "CLOSEST <br>An's bedroom is big but <span style=\"text-decoration: underline; color: red;\">messy</span>.",
+            "question": "<strong style=\"color:red;\"> CLOSEST </strong><br>An's bedroom is big but <span style=\"text-decoration: underline; color: red;\">messy</span>.",
             "correct": "untidy",
             "wrong1": "uncomfortable",
             "wrong2": "comfortable",
@@ -2803,7 +2955,7 @@
         },
         {
             "id": 8,
-            "question": "CLOSEST <br>We are staying in a big room and the window has a <span style=\"text-decoration: underline; color: red;\">strange</span> shape.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>We are staying in a big room and the window has a <span style=\"text-decoration: underline; color: red;\">strange</span> shape.",
             "correct": "unusual",
             "wrong1": "simple",
             "wrong2": "beautiful",
@@ -2811,7 +2963,7 @@
         },
         {
             "id": 9,
-            "question": "CLOSEST <br>There is a <span style=\"text-decoration: underline; color: red;\">crazy</span> house hotel in Da Lat city.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>There is a <span style=\"text-decoration: underline; color: red;\">crazy</span> house hotel in Da Lat city.",
             "correct": "horror",
             "wrong1": "beautiful",
             "wrong2": "comfortable",
@@ -2819,7 +2971,7 @@
         },
         {
             "id": 10,
-            "question": "CLOSEST <br>Her <span style=\"text-decoration: underline; color: red;\">favorite</span> room is her bedroom.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>Her <span style=\"text-decoration: underline; color: red;\">favorite</span> room is her bedroom.",
             "correct": "best-loved",
             "wrong1": "interesting",
             "wrong2": "boring",
@@ -2827,7 +2979,7 @@
         },
         {
             "id": 11,
-            "question": "CLOSEST <br>He always <span style=\"text-decoration: underline; color: red;\">puts on</span> uniform to school.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>He always <span style=\"text-decoration: underline; color: red;\">puts on</span> uniform to school.",
             "correct": "wears",
             "wrong1": "works",
             "wrong2": "does",
@@ -2835,7 +2987,7 @@
         },
         {
             "id": 12,
-            "question": "CLOSEST <br>It is <span style=\"text-decoration: underline; color: red;\">essential</span> that you do your homework before going to school.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>It is <span style=\"text-decoration: underline; color: red;\">essential</span> that you do your homework before going to school.",
             "correct": "necessary",
             "wrong1": "fast",
             "wrong2": "convenient",
@@ -2843,7 +2995,7 @@
         },
         {
             "id": 13,
-            "question": "CLOSEST <br>The music concert performed on TV last night was <span style=\"text-decoration: underline; color: red;\">exciting</span>.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>The music concert performed on TV last night was <span style=\"text-decoration: underline; color: red;\">exciting</span>.",
             "correct": "interesting",
             "wrong1": "important",
             "wrong2": "necessary",
@@ -2851,7 +3003,7 @@
         },
         {
             "id": 14,
-            "question": "CLOSEST <br>She <span style=\"text-decoration: underline; color: red;\">works very hard</span>.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>She <span style=\"text-decoration: underline; color: red;\">works very hard</span>.",
             "correct": "is hard-working",
             "wrong1": "is active",
             "wrong2": "is friendly",
@@ -2859,7 +3011,7 @@
         },
         {
             "id": 15,
-            "question": "CLOSEST <br>The synonym of <span style=\"text-decoration: underline; color: red;\">interesting</span> is ______.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>The synonym of <span style=\"text-decoration: underline; color: red;\">interesting</span> is ______.",
             "correct": "exciting",
             "wrong1": "boring",
             "wrong2": "happy",
@@ -2867,7 +3019,7 @@
         },
         {
             "id": 16,
-            "question": "CLOSEST <br>My new school is <span style=\"text-decoration: underline; color: red;\">nice</span> and modern.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My new school is <span style=\"text-decoration: underline; color: red;\">nice</span> and modern.",
             "correct": "beautiful",
             "wrong1": "old",
             "wrong2": "big",
@@ -2875,7 +3027,7 @@
         },
         {
             "id": 17,
-            "question": "CLOSEST <br>I <span style=\"text-decoration: underline; color: red;\">do</span> my homework after dinner.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>I <span style=\"text-decoration: underline; color: red;\">do</span> my homework after dinner.",
             "correct": "complete",
             "wrong1": "play",
             "wrong2": "read",
@@ -2883,7 +3035,7 @@
         },
         {
             "id": 18,
-            "question": "CLOSEST <br>Lan is very <span style=\"text-decoration: underline; color: red;\">active</span>. She loves playing sports and games.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>Lan is very <span style=\"text-decoration: underline; color: red;\">active</span>. She loves playing sports and games.",
             "correct": "energetic",
             "wrong1": "funny",
             "wrong2": "kind",
@@ -2891,7 +3043,7 @@
         },
         {
             "id": 19,
-            "question": "CLOSEST <br>My friend, Minh, is very <span style=\"text-decoration: underline; color: red;\">friendly</span>. He talks to everyone in the class.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My friend, Minh, is very <span style=\"text-decoration: underline; color: red;\">friendly</span>. He talks to everyone in the class.",
             "correct": "kind and pleasant",
             "wrong1": "smart and funny",
             "wrong2": "shy and quiet",
@@ -2899,7 +3051,7 @@
         },
         {
             "id": 20,
-            "question": "CLOSEST <br>My brother is <span style=\"text-decoration: underline; color: red;\">talkative</span>. He talks all the time!",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My brother is <span style=\"text-decoration: underline; color: red;\">talkative</span>. He talks all the time!",
             "correct": "chatty",
             "wrong1": "shy",
             "wrong2": "creative",
@@ -2907,7 +3059,7 @@
         },
         {
             "id": 21,
-            "question": "CLOSEST <br>The students <span style=\"text-decoration: underline; color: red;\">finish</span> their classes at 5 p.m. every day.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>The students <span style=\"text-decoration: underline; color: red;\">finish</span> their classes at 5 p.m. every day.",
             "correct": "end",
             "wrong1": "start",
             "wrong2": "enjoy",
@@ -2915,7 +3067,7 @@
         },
         {
             "id": 22,
-            "question": "CLOSEST <br>My house is <span style=\"text-decoration: underline; color: red;\">near</span> the supermarket, so it's very convenient.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My house is <span style=\"text-decoration: underline; color: red;\">near</span> the supermarket, so it's very convenient.",
             "correct": "close to",
             "wrong1": "far from",
             "wrong2": "behind",
@@ -2923,7 +3075,7 @@
         },
         {
             "id": 23,
-            "question": "CLOSEST <br>During break time, students often <span style=\"text-decoration: underline; color: red;\">chat</span> with their friends.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>During break time, students often <span style=\"text-decoration: underline; color: red;\">chat</span> with their friends.",
             "correct": "talk",
             "wrong1": "study",
             "wrong2": "eat",
@@ -2931,7 +3083,7 @@
         },
         {
             "id": 24,
-            "question": "CLOSEST <br>My mother is <span style=\"text-decoration: underline; color: red;\">preparing</span> lunch in the kitchen.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My mother is <span style=\"text-decoration: underline; color: red;\">preparing</span> lunch in the kitchen.",
             "correct": "cooking",
             "wrong1": "eating",
             "wrong2": "buying",
@@ -2939,7 +3091,7 @@
         },
         {
             "id": 25,
-            "question": "CLOSEST <br>Our school has a large <span style=\"text-decoration: underline; color: red;\">library</span> with many interesting books.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>Our school has a large <span style=\"text-decoration: underline; color: red;\">library</span> with many interesting books.",
             "correct": "book collection",
             "wrong1": "computer room",
             "wrong2": "swimming pool",
@@ -2947,7 +3099,7 @@
         },
         {
             "id": 26,
-            "question": "CLOSEST <br>My friend has a very <span style=\"text-decoration: underline; color: red;\">helpful</span> brother who always helps us with our homework.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My friend has a very <span style=\"text-decoration: underline; color: red;\">helpful</span> brother who always helps us with our homework.",
             "correct": "supportive",
             "wrong1": "funny",
             "wrong2": "tall",
@@ -2955,7 +3107,7 @@
         },
         {
             "id": 27,
-            "question": "CLOSEST <br>I need to <span style=\"text-decoration: underline; color: red;\">review</span> the lessons before the test tomorrow.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>I need to <span style=\"text-decoration: underline; color: red;\">review</span> the lessons before the test tomorrow.",
             "correct": "go over",
             "wrong1": "forget",
             "wrong2": "write",
@@ -2963,7 +3115,7 @@
         },
         {
             "id": 28,
-            "question": "CLOSEST <br>The living room is very <span style=\"text-decoration: underline; color: red;\">spacious</span>. We can have a party here.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>The living room is very <span style=\"text-decoration: underline; color: red;\">spacious</span>. We can have a party here.",
             "correct": "having a lot of space",
             "wrong1": "beautiful",
             "wrong2": "comfortable",
@@ -2971,7 +3123,7 @@
         },
         {
             "id": 29,
-            "question": "CLOSEST <br>My sister is a <span style=\"text-decoration: underline; color: red;\">careful</span> person. She always checks her work twice.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>My sister is a <span style=\"text-decoration: underline; color: red;\">careful</span> person. She always checks her work twice.",
             "correct": "attentive",
             "wrong1": "creative",
             "wrong2": "friendly",
@@ -2979,7 +3131,7 @@
         },
         {
             "id": 30,
-            "question": "CLOSEST <br>We often <span style=\"text-decoration: underline; color: red;\">gather</span> in the school yard every morning.",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>We often <span style=\"text-decoration: underline; color: red;\">gather</span> in the school yard every morning.",
             "correct": "meet",
             "wrong1": "study",
             "wrong2": "play",
@@ -2987,15 +3139,15 @@
         },
         {
             "id": 31,
-            "question": "CLOSEST <br>Susan lives with her family in a <span style=\"text-decoration: underline; color: red;\">flat</span> in Dong Anh Ward.",
-            "correct": "villa",
-            "wrong1": "still house",
-            "wrong2": "apartment",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>Susan lives with her family in a <span style=\"text-decoration: underline; color: red;\">flat</span> in Dong Anh Ward.",
+            "correct": "apartment",
+            "wrong1": "villa",
+            "wrong2": "still house",
             "wrong3": "house"
         },
         {
             "id": 32,
-            "question": "CLOSEST <br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school",
+            "question": "<strong style=\"color: red;\"> CLOSEST </strong><br>She often rides her <span style=\"text-decoration: underline; color: red;\">bicycle</span> to school",
             "correct": "bike",
             "wrong1": "car",
             "wrong2": "motorbike",
@@ -3003,7 +3155,7 @@
         },
         {
             "id": 33,
-            "question": "OPPOSITE <br>Everyday, he comes to school very early to <span style=\"text-decoration: underline; color: red;\">open</span> all the windows and clean the blackboard.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE</strong><br>Everyday, he comes to school very early to <span style=\"text-decoration: underline; color: red;\">open</span> all the windows and clean the blackboard.",
             "correct": "close",
             "wrong1": "clean",
             "wrong2": "break",
@@ -3011,7 +3163,7 @@
         },
         {
             "id": 34,
-            "question": "OPPOSITE <br>Jim went for a walk and found a <span style=\"text-decoration: underline; color: red;\">big</span> box between some rocks.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Jim went for a walk and found a <span style=\"text-decoration: underline; color: red;\">big</span> box between some rocks.",
             "correct": "small",
             "wrong1": "huge",
             "wrong2": "light",
@@ -3019,7 +3171,7 @@
         },
         {
             "id": 35,
-            "question": "OPPOSITE <br>It has big buildings and <span style=\"text-decoration: underline; color: red;\">modern</span> equipment.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>It has big buildings and <span style=\"text-decoration: underline; color: red;\">modern</span> equipment.",
             "correct": "old",
             "wrong1": "new",
             "wrong2": "good",
@@ -3027,7 +3179,7 @@
         },
         {
             "id": 36,
-            "question": "OPPOSITE <br>How is your <span style=\"text-decoration: underline; color: red;\">old</span> school?",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>How is your <span style=\"text-decoration: underline; color: red;\">old</span> school?",
             "correct": "new",
             "wrong1": "small",
             "wrong2": "big",
@@ -3035,7 +3187,7 @@
         },
         {
             "id": 37,
-            "question": "OPPOSITE <br>Hoa goes to the <span style=\"text-decoration: underline; color: red;\">same</span> school as me.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Hoa goes to the <span style=\"text-decoration: underline; color: red;\">same</span> school as me.",
             "correct": "different",
             "wrong1": "like",
             "wrong2": "familiar",
@@ -3043,7 +3195,7 @@
         },
         {
             "id": 38,
-            "question": "OPPOSITE <br>The cat is <span style=\"text-decoration: underline; color: red;\">in front of</span> the chair.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The cat is <span style=\"text-decoration: underline; color: red;\">in front of</span> the chair.",
             "correct": "behind",
             "wrong1": "next to",
             "wrong2": "on",
@@ -3051,7 +3203,7 @@
         },
         {
             "id": 39,
-            "question": "OPPOSITE <br>Mai <span style=\"text-decoration: underline; color: red;\">dislikes</span> her room because it's small.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Mai <span style=\"text-decoration: underline; color: red;\">dislikes</span> her room because it's small.",
             "correct": "loves",
             "wrong1": "hates",
             "wrong2": "bored",
@@ -3059,7 +3211,7 @@
         },
         {
             "id": 40,
-            "question": "OPPOSITE <br>There is a cap <span style=\"text-decoration: underline; color: red;\">under</span> the pillow.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>There is a cap <span style=\"text-decoration: underline; color: red;\">under</span> the pillow.",
             "correct": "on",
             "wrong1": "behind",
             "wrong2": "to the left",
@@ -3067,7 +3219,7 @@
         },
         {
             "id": 41,
-            "question": "OPPOSITE <br>The room is <span style=\"text-decoration: underline; color: red;\">cool</span> in the summer because there is a ceiling fan.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The room is <span style=\"text-decoration: underline; color: red;\">cool</span> in the summer because there is a ceiling fan.",
             "correct": "hot",
             "wrong1": "comfortable",
             "wrong2": "tidy",
@@ -3075,7 +3227,7 @@
         },
         {
             "id": 42,
-            "question": "OPPOSITE <br>There is a <span style=\"text-decoration: underline; color: red;\">modern</span> fridge in the kitchen.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>There is a <span style=\"text-decoration: underline; color: red;\">modern</span> fridge in the kitchen.",
             "correct": "old",
             "wrong1": "new",
             "wrong2": "big",
@@ -3083,7 +3235,7 @@
         },
         {
             "id": 43,
-            "question": "OPPOSITE <br>Nam usually gets bad marks because she is <span style=\"text-decoration: underline; color: red;\">lazy</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Nam usually gets bad marks because she is <span style=\"text-decoration: underline; color: red;\">lazy</span>.",
             "correct": "hard-working",
             "wrong1": "quiet",
             "wrong2": "confident",
@@ -3091,7 +3243,7 @@
         },
         {
             "id": 44,
-            "question": "OPPOSITE <br>Ba plays football <span style=\"text-decoration: underline; color: red;\">well</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Ba plays football <span style=\"text-decoration: underline; color: red;\">well</span>.",
             "correct": "badly",
             "wrong1": "beautifully",
             "wrong2": "bad",
@@ -3099,7 +3251,7 @@
         },
         {
             "id": 45,
-            "question": "OPPOSITE <br>Nga is a <span style=\"text-decoration: underline; color: red;\">confident</span> girl. She likes to meet new people.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Nga is a <span style=\"text-decoration: underline; color: red;\">confident</span> girl. She likes to meet new people.",
             "correct": "shy",
             "wrong1": "creative",
             "wrong2": "friendly",
@@ -3107,7 +3259,7 @@
         },
         {
             "id": 46,
-            "question": "OPPOSITE <br>My friend thinks English is very <span style=\"text-decoration: underline; color: red;\">difficult</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My friend thinks English is very <span style=\"text-decoration: underline; color: red;\">difficult</span>.",
             "correct": "easy",
             "wrong1": "good",
             "wrong2": "bad",
@@ -3115,7 +3267,7 @@
         },
         {
             "id": 47,
-            "question": "OPPOSITE <br>John studies <span style=\"text-decoration: underline; color: red;\">excellent</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>John studies <span style=\"text-decoration: underline; color: red;\">excellent</span>.",
             "correct": "poor",
             "wrong1": "good",
             "wrong2": "fair",
@@ -3123,7 +3275,7 @@
         },
         {
             "id": 48,
-            "question": "OPPOSITE <br>My school is very <span style=\"text-decoration: underline; color: red;\">noisy</span> during break time.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My school is very <span style=\"text-decoration: underline; color: red;\">noisy</span> during break time.",
             "correct": "quiet",
             "wrong1": "loud",
             "wrong2": "busy",
@@ -3131,7 +3283,7 @@
         },
         {
             "id": 49,
-            "question": "OPPOSITE <br>I always <span style=\"text-decoration: underline; color: red;\">turn on</span> the lights when I study in the evening.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>I always <span style=\"text-decoration: underline; color: red;\">turn on</span> the lights when I study in the evening.",
             "correct": "turn off",
             "wrong1": "turn up",
             "wrong2": "look at",
@@ -3139,7 +3291,7 @@
         },
         {
             "id": 50,
-            "question": "OPPOSITE <br>My bedroom is very <span style=\"text-decoration: underline; color: red;\">tidy</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My bedroom is very <span style=\"text-decoration: underline; color: red;\">tidy</span>.",
             "correct": "messy",
             "wrong1": "clean",
             "wrong2": "big",
@@ -3147,7 +3299,7 @@
         },
         {
             "id": 51,
-            "question": "OPPOSITE <br>My best friend has a new bicycle. It's very <span style=\"text-decoration: underline; color: red;\">old</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My best friend has a new bicycle. It's very <span style=\"text-decoration: underline; color: red;\">old</span>.",
             "correct": "new",
             "wrong1": "bad",
             "wrong2": "ugly",
@@ -3155,7 +3307,7 @@
         },
         {
             "id": 52,
-            "question": "OPPOSITE <br>The lesson today was <span style=\"text-decoration: underline; color: red;\">boring</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The lesson today was <span style=\"text-decoration: underline; color: red;\">boring</span>.",
             "correct": "interesting",
             "wrong1": "difficult",
             "wrong2": "easy",
@@ -3163,7 +3315,7 @@
         },
         {
             "id": 53,
-            "question": "OPPOSITE <br>My brother is very <span style=\"text-decoration: underline; color: red;\">tall</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My brother is very <span style=\"text-decoration: underline; color: red;\">tall</span>.",
             "correct": "short",
             "wrong1": "strong",
             "wrong2": "thin",
@@ -3171,7 +3323,7 @@
         },
         {
             "id": 54,
-            "question": "OPPOSITE <br>The books are <span style=\"text-decoration: underline; color: red;\">inside</span> the school bag.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The books are <span style=\"text-decoration: underline; color: red;\">inside</span> the school bag.",
             "correct": "outside",
             "wrong1": "on",
             "wrong2": "under",
@@ -3179,7 +3331,7 @@
         },
         {
             "id": 55,
-            "question": "OPPOSITE <br>This book is very <span style=\"text-decoration: underline; color: red;\">expensive</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>This book is very <span style=\"text-decoration: underline; color: red;\">expensive</span>.",
             "correct": "cheap",
             "wrong1": "thick",
             "wrong2": "thin",
@@ -3187,7 +3339,7 @@
         },
         {
             "id": 56,
-            "question": "OPPOSITE <br>Our classroom is very <span style=\"text-decoration: underline; color: red;\">big</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Our classroom is very <span style=\"text-decoration: underline; color: red;\">big</span>.",
             "correct": "small",
             "wrong1": "bright",
             "wrong2": "clean",
@@ -3195,7 +3347,7 @@
         },
         {
             "id": 57,
-            "question": "OPPOSITE <br>My friend never <span style=\"text-decoration: underline; color: red;\">forgets</span> to do his homework.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My friend never <span style=\"text-decoration: underline; color: red;\">forgets</span> to do his homework.",
             "correct": "remembers",
             "wrong1": "likes",
             "wrong2": "hates",
@@ -3203,7 +3355,7 @@
         },
         {
             "id": 58,
-            "question": "OPPOSITE <br>The students are <span style=\"text-decoration: underline; color: red;\">sad</span> because they have a holiday.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The students are <span style=\"text-decoration: underline; color: red;\">sad</span> because they have a holiday.",
             "correct": "happy",
             "wrong1": "bored",
             "wrong2": "angry",
@@ -3211,7 +3363,7 @@
         },
         {
             "id": 59,
-            "question": "OPPOSITE <br>Our school yard is very <span style=\"text-decoration: underline; color: red;\">clean</span>.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Our school yard is very <span style=\"text-decoration: underline; color: red;\">clean</span>.",
             "correct": "dirty",
             "wrong1": "large",
             "wrong2": "beautiful",
@@ -3219,7 +3371,7 @@
         },
         {
             "id": 60,
-            "question": "OPPOSITE <br>The computer is <span style=\"text-decoration: underline; color: red;\">in front of</span> the printer.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The computer is <span style=\"text-decoration: underline; color: red;\">in front of</span> the printer.",
             "correct": "behind",
             "wrong1": "next to",
             "wrong2": "near",
@@ -3227,7 +3379,7 @@
         },
         {
             "id": 61,
-            "question": "OPPOSITE <br>My sister is <span style=\"text-decoration: underline; color: red;\">weak</span> at playing sports.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>My sister is <span style=\"text-decoration: underline; color: red;\">weak</span> at playing sports.",
             "correct": "strong",
             "wrong1": "good",
             "wrong2": "bad",
@@ -3235,7 +3387,7 @@
         },
         {
             "id": 62,
-            "question": "OPPOSITE <br>Our classes <span style=\"text-decoration: underline; color: red;\">start</span> at 7 a.m. every day.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Our classes <span style=\"text-decoration: underline; color: red;\">start</span> at 7 a.m. every day.",
             "correct": "finish",
             "wrong1": "begin",
             "wrong2": "end",
@@ -3243,7 +3395,7 @@
         },
         {
             "id": 63,
-            "question": "OPPOSITE <br>Ha Anh always gets up early, so she is usually <span style=\"text-decoration: underline; color: red;\">early</span> for school.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>Ha Anh always gets up early, so she is usually <span style=\"text-decoration: underline; color: red;\">early</span> for school.",
             "correct": "late",
             "wrong1": "on time",
             "wrong2": "in time",
@@ -3251,20 +3403,19 @@
         },
         {
             "id": 64,
-            "question": "OPPOSITE <br>The homeroom teacher can <span style=\"text-decoration: underline; color: red;\">remember</span> all her students' names easily.",
+            "question": "<strong style=\"color: red;\"> OPPOSITE </strong><br>The homeroom teacher can <span style=\"text-decoration: underline; color: red;\">remember</span> all her students' names easily.",
             "correct": "forget",
             "wrong1": "learn",
             "wrong2": "collect",
             "wrong3": "share"
         }
-    ]
-}
-
+                    ]
+                }
             ],
             P4: [
                 {
     "id": "C1",
-    "passage": "Choose the underlined part that needs correction in each of the following questions.",
+    "passage": "Choose the underlined part that<span style=\"text-decoration: underline; color: red;\"> needs correction </span> in each of the following questions.",
     "questions": [
         {
             "id": 1,
@@ -3896,14 +4047,13 @@
             "wrong1": "keys",
             "wrong2": "in"
         }
-    ]
-}
-
+                    ]
+                }
             ],
             P5: [
                 {
                     "id": "C1",
-                    "passage": " Choose the best answer to complete each of the following sentences.",
+                    "passage": " Choose the<strong style=\"color:red;\"> best answer </strong> to complete each of the following sentences.",
                     "questions": [
   {
     "id": 1,
@@ -4011,7 +4161,7 @@
   },
   {
     "id": 14,
-    "question": "______ go to the zoo - That's a good idea!",
+    "question": "______ go to the zoo? - That's a good idea!",
     "correct": "Shall we",
     "wrong1": "What about",
     "wrong2": "let's",
@@ -5297,7 +5447,8 @@
     "wrong2": "are, having",
     "wrong3": "are, studying"
   },
-    {
+  
+  {
     "id": 175,
     "question": "I ______ an email to my client right now.",
     "correct": "am writing",
@@ -5305,12 +5456,11 @@
     "wrong2": "am doing",
     "wrong3": "am having"
   }
-]
-   }
+                    ]
+                }
             ],
             P6: [
-                
-{
+                {
     "id": "C1",
     "passage": "Read the following passage and choose the best answer for each blank.<br>Environmental pollution is one of the most serious problems (1) _____ mankind today. Air, water, and soil are necessary (2) _____ the survival of all living things. However, polluted air can cause illness, and even death. Polluted water (3) _____ fish and other marine life. We should do something to protect our environment. First, we should not throw trash (4) _____ the streets. Second, we should use public transportation instead (5) _____ motorbikes or cars.",
     "questions": [
@@ -5906,12 +6056,11 @@
 "wrong2": "that",
 "wrong3": "those"
 }
-]
-}
+                    ]
+                }
             ],
             P7: [
-                
-{
+                {
     "id": "C1",
     "passage": "Read the following passage and answer the questions.<br>Global warming is one of the most serious problems facing the world today. It is caused by the increase of greenhouse gases in the atmosphere, mainly carbon dioxide, which traps heat and causes the Earth's temperature to rise. The main sources of carbon dioxide are the burning of fossil fuels such as coal, oil, and natural gas for energy, deforestation, and industrial processes. The effects of global warming include rising sea levels, more extreme weather events such as hurricanes and droughts, and the loss of biodiversity. To combat global warming, we need to reduce our carbon footprint by using renewable energy sources, planting more trees, and changing our lifestyle to be more environmentally friendly.",
     "questions": [
@@ -7715,11 +7864,11 @@
 "wrong2": "Write a letter to her friends.",
 "wrong3": "Send her some money."
 }
-]
-}
+                    ]
+                }
             ],
             P8: [
-{
+                {
     "id": "C1",
     "passage": "Arrange the following sentences in a logical order.",
     "questions": [
@@ -7843,9 +7992,8 @@
             "wrong2": "d - b - a - c",
             "wrong3": "a - b - c - d"
         }
-    ]
-}
-
+                    ]
+                }
             ],
             P9: [
                 {
@@ -8149,189 +8297,185 @@
     "wrong2": "He is tall.",
     "wrong3": "He has a black dog."
 }
-
-]
-}
-
+                    ]
+                }
             ],
             P10: [
-{
+                {
     "id": "C1",
-    "passage": "SIGNS – MESSAGES – NOTES",
+    "passage": "SIGNS - MESSAGES - NOTES",
     "questions": [
         {
-      "id": 1,
-      "question": "<span style=\"color: blue;\">EXIT</span>",
-      "correct": "This is the way out.",
-      "wrong1": "This is the entrance.",
-      "wrong2": "This is a restroom.",
-      "wrong3": "This is an elevator."
-    },
-    {
-      "id": 2,
-      "question": "<span style=\"color: green;\">OPEN 24 HOURS</span>",
-      "correct": "This place is always open.",
-      "wrong1": "This place is closed.",
-      "wrong2": "This place opens at night only.",
-      "wrong3": "This place opens for 12 hours."
-    },
-    {
-      "id": 3,
-      "question": "<span style=\"color: red;\">PUSH</span>",
-      "correct": "You should push the door to open.",
-      "wrong1": "You should pull the door to open.",
-      "wrong2": "The door is locked.",
-      "wrong3": "The door is broken."
-    },
-    {
-      "id": 4,
-      "question": "<span style=\"color: orange;\">CAUTION: WET FLOOR</span>",
-      "correct": "Be careful because the floor has water on it.",
-      "wrong1": "The floor is clean and dry.",
-      "wrong2": "The floor is being repaired.",
-      "wrong3": "The floor is very hot."
-    },
-    {
-      "id": 5,
-      "question": "<span style=\"color: purple;\">SILENCE PLEASE</span>",
-      "correct": "Please be quiet here.",
-      "wrong1": "Please speak loudly.",
-      "wrong2": "Please sing a song.",
-      "wrong3": "Please make some noise."
-    },
-{
-      "id": 6,
-      "question": "<span style=\"color: brown;\">ENTRANCE</span>",
-      "correct": "This is where you go in.",
-      "wrong1": "This is where you go out.",
-      "wrong2": "This is a parking area.",
-      "wrong3": "This is a waiting room."
-    },
-    {
-      "id": 7,
-      "question": "<span style=\"color: darkblue;\">PULL</span>",
-      "correct": "You should pull the door toward you.",
-      "wrong1": "You should push the door away.",
-      "wrong2": "You should knock first.",
-      "wrong3": "You should slide the door."
-    },
-    {
-      "id": 8,
-      "question": "<span style=\"color: darkred;\">CLOSED</span>",
-      "correct": "This place is not open for business.",
-      "wrong1": "This place is open now.",
-      "wrong2": "This place opens soon.",
-      "wrong3": "This place is very busy."
-    },
-    {
-      "id": 9,
-      "question": "<span style=\"color: teal;\">RESTROOM</span>",
-      "correct": "This is the toilet area.",
-      "wrong1": "This is the eating area.",
-      "wrong2": "This is the sleeping room.",
-      "wrong3": "This is the office."
-    },
-    {
-      "id": 10,
-      "question": "<span style=\"color: maroon;\">NO PARKING</span>",
-      "correct": "You cannot leave your car here.",
-      "wrong1": "You can park your car here.",
-      "wrong2": "You should park carefully.",
-      "wrong3": "You need to pay for parking."
-    },
-    {
-      "id": 11,
-      "question": "<span style=\"color: navy;\">STAIRS</span>",
-      "correct": "You can walk up or down here.",
-      "wrong1": "You can take an elevator here.",
-      "wrong2": "You can slide down here.",
-      "wrong3": "You can sit and rest here."
-    },
-    {
-      "id": 12,
-      "question": "<span style=\"color: darkgreen;\">ELEVATOR</span>",
-      "correct": "You can use this to go up or down floors.",
-      "wrong1": "You can walk up steps here.",
-      "wrong2": "You can wash your hands here.",
-      "wrong3": "You can buy tickets here."
-    },
-    {
-      "id": 13,
-      "question": "<span style=\"color: purple;\">INFORMATION</span>",
-      "correct": "You can get help or directions here.",
-      "wrong1": "You can buy food here.",
-      "wrong2": "You can watch movies here.",
-      "wrong3": "You can exercise here."
-    },
-    {
-      "id": 14,
-      "question": "<span style=\"color: orange;\">EMERGENCY EXIT</span>",
-      "correct": "Use this door only in dangerous situations.",
-      "wrong1": "Use this door for normal entering.",
-      "wrong2": "Use this door for delivery.",
-      "wrong3": "Use this door for staff only."
-    },
-    {
-      "id": 15,
-      "question": "<span style=\"color: red;\">FIRE EXTINGUISHER</span>",
-      "correct": "Use this to put out small fires.",
-      "wrong1": "Use this to drink water.",
-      "wrong2": "Use this to call for help.",
-      "wrong3": "Use this to clean the floor."
-    },
-    {
-      "id": 16,
-      "question": "<span style=\"color: blue;\">KEEP RIGHT</span>",
-      "correct": "Stay on the right side when moving.",
-      "wrong1": "Stay on the left side when moving.",
-      "wrong2": "Stop and wait here.",
-      "wrong3": "Turn around and go back."
-    },
-    {
-      "id": 17,
-      "question": "<span style=\"color: green;\">CAUTION: HOT SURFACE</span>",
-      "correct": "Be careful because this thing has high temperature.",
-      "wrong1": "Be careful because this thing is very cold.",
-      "wrong2": "Be careful because this thing is sharp.",
-      "wrong3": "Be careful because this thing is fragile."
-    },
-    {
-      "id": 18,
-      "question": "<span style=\"color: darkorange;\">NO FOOD OR DRINK</span>",
-      "correct": "You cannot eat or drink here.",
-      "wrong1": "You can eat and drink here.",
-      "wrong2": "You can buy food here.",
-      "wrong3": "You can cook food here."
-    },
-    {
-      "id": 19,
-      "question": "<span style=\"color: darkcyan;\">WAITING AREA</span>",
-      "correct": "You can sit here until your turn comes.",
-      "wrong1": "You can play games here.",
-      "wrong2": "You can work here.",
-      "wrong3": "You can sleep here."
-    },
-    {
-      "id": 20,
-      "question": "<span style=\"color: crimson;\">DANGER: HIGH VOLTAGE</span>",
-      "correct": "This area has strong electricity that can hurt you.",
-      "wrong1": "This area has loud sounds.",
-      "wrong2": "This area has bright lights.",
-      "wrong3": "This area has bad smells."
-    }
-
-]
-}
-
+            "id": 1,
+            "question": "<strong style=\"color: blue;\">EXIT</strong>",
+            "correct": "This is the way out.",
+            "wrong1": "This is the entrance.",
+            "wrong2": "This is a restroom.",
+            "wrong3": "This is an elevator."
+        },
+        {
+            "id": 2,
+            "question": "<strong style=\"color: green;\">OPEN 24 HOURS</strong>",
+            "correct": "This place is always open.",
+            "wrong1": "This place is closed.",
+            "wrong2": "This place opens at night only.",
+            "wrong3": "This place opens for 12 hours."
+        },
+        {
+            "id": 3,
+            "question": "<strong style=\"color: red;\">PUSH</strong>",
+            "correct": "You should push the door to open.",
+            "wrong1": "You should pull the door to open.",
+            "wrong2": "The door is locked.",
+            "wrong3": "The door is broken."
+        },
+        {
+            "id": 4,
+            "question": "<strong style=\"color: orange;\">CAUTION: WET FLOOR</strong>",
+            "correct": "Be careful because the floor has water on it.",
+            "wrong1": "The floor is clean and dry.",
+            "wrong2": "The floor is being repaired.",
+            "wrong3": "The floor is very hot."
+        },
+        {
+            "id": 5,
+            "question": "<strong style=\"color: purple;\">SILENCE PLEASE</strong>",
+            "correct": "Please be quiet here.",
+            "wrong1": "Please speak loudly.",
+            "wrong2": "Please sing a song.",
+            "wrong3": "Please make some noise."
+        },
+        {
+            "id": 6,
+            "question": "<strong style=\"color: brown;\">ENTRANCE</strong>",
+            "correct": "This is where you go in.",
+            "wrong1": "This is where you go out.",
+            "wrong2": "This is a parking area.",
+            "wrong3": "This is a waiting room."
+        },
+        {
+            "id": 7,
+            "question": "<strong style=\"color: darkblue;\">PULL</strong>",
+            "correct": "You should pull the door toward you.",
+            "wrong1": "You should push the door away.",
+            "wrong2": "You should knock first.",
+            "wrong3": "You should slide the door."
+        },
+        {
+            "id": 8,
+            "question": "<strong style=\"color: darkred;\">CLOSED</strong>",
+            "correct": "This place is not open for business.",
+            "wrong1": "This place is open now.",
+            "wrong2": "This place opens soon.",
+            "wrong3": "This place is very busy."
+        },
+        {
+            "id": 9,
+            "question": "<strong style=\"color: teal;\">RESTROOM</strong>",
+            "correct": "This is the toilet area.",
+            "wrong1": "This is the eating area.",
+            "wrong2": "This is the sleeping room.",
+            "wrong3": "This is the office."
+        },
+        {
+            "id": 10,
+            "question": "<strong style=\"color: maroon;\">NO PARKING</strong>",
+            "correct": "You cannot leave your car here.",
+            "wrong1": "You can park your car here.",
+            "wrong2": "You should park carefully.",
+            "wrong3": "You need to pay for parking."
+        },
+        {
+            "id": 11,
+            "question": "<strong style=\"color: navy;\">STAIRS</strong>",
+            "correct": "You can walk up or down here.",
+            "wrong1": "You can take an elevator here.",
+            "wrong2": "You can slide down here.",
+            "wrong3": "You can sit and rest here."
+        },
+        {
+            "id": 12,
+            "question": "<strong style=\"color: darkgreen;\">ELEVATOR</strong>",
+            "correct": "You can use this to go up or down floors.",
+            "wrong1": "You can walk up steps here.",
+            "wrong2": "You can wash your hands here.",
+            "wrong3": "You can buy tickets here."
+        },
+        {
+            "id": 13,
+            "question": "<strong style=\"color: purple;\">INFORMATION</strong>",
+            "correct": "You can get help or directions here.",
+            "wrong1": "You can buy food here.",
+            "wrong2": "You can watch movies here.",
+            "wrong3": "You can exercise here."
+        },
+        {
+            "id": 14,
+            "question": "<strong style=\"color: orange;\">EMERGENCY EXIT</strong>",
+            "correct": "Use this door only in dangerous situations.",
+            "wrong1": "Use this door for normal entering.",
+            "wrong2": "Use this door for delivery.",
+            "wrong3": "Use this door for staff only."
+        },
+        {
+            "id": 15,
+            "question": "<strong style=\"color: red;\">FIRE EXTINGUISHER</strong>",
+            "correct": "Use this to put out small fires.",
+            "wrong1": "Use this to drink water.",
+            "wrong2": "Use this to call for help.",
+            "wrong3": "Use this to clean the floor."
+        },
+        {
+            "id": 16,
+            "question": "<strong style=\"color: blue;\">KEEP RIGHT</strong>",
+            "correct": "Stay on the right side when moving.",
+            "wrong1": "Stay on the left side when moving.",
+            "wrong2": "Stop and wait here.",
+            "wrong3": "Turn around and go back."
+        },
+        {
+            "id": 17,
+            "question": "<strong style=\"color: green;\">CAUTION: HOT SURFACE</strong>",
+            "correct": "Be careful because this thing has high temperature.",
+            "wrong1": "Be careful because this thing is very cold.",
+            "wrong2": "Be careful because this thing is sharp.",
+            "wrong3": "Be careful because this thing is fragile."
+        },
+        {
+            "id": 18,
+            "question": "<strong style=\"color: darkorange;\">NO FOOD OR DRINK</strong>",
+            "correct": "You cannot eat or drink here.",
+            "wrong1": "You can eat and drink here.",
+            "wrong2": "You can buy food here.",
+            "wrong3": "You can cook food here."
+        },
+        {
+            "id": 19,
+            "question": "<strong style=\"color: darkcyan;\">WAITING AREA</strong>",
+            "correct": "You can sit here until your turn comes.",
+            "wrong1": "You can play games here.",
+            "wrong2": "You can work here.",
+            "wrong3": "You can sleep here."
+        },
+        {
+            "id": 20,
+            "question": "<strong style=\"color: crimson;\">DANGER: HIGH VOLTAGE</strong>",
+            "correct": "This area has strong electricity that can hurt you.",
+            "wrong1": "This area has loud sounds.",
+            "wrong2": "This area has bright lights.",
+            "wrong3": "This area has bad smells."
+        }
+                    ]
+                }
             ],
             P11: [
-{
+                {
     "id": "C1",
-    "passage": "Rewrite the following sentences without changing their meaning.",
+    "passage": "Rewrite the following sentences without changing their meaning.<br>=>___Viết lại câu với nghĩa không đổi. ",
     "questions": [
         {
       "id": 1,
-      "question": "My house has two bedrooms.<br>=> _____________________________ .",
+      "question": "My house has two bedrooms.<br>=> _________________________________________ .",
       "correct": "There are two bedrooms in my house.",
       "wrong1": "These are two bedrooms in my house.",
       "wrong2": "Those are two bedrooms in my house.",
@@ -8569,14 +8713,11 @@
   "wrong2": "school by bike every day",
   "wrong3": "to school with bike every day"
 }
-
-]
-}
-
-
+                    ]
+                }
             ],
             P12: [
-{
+                {
     "id": "C1",
     "passage": "Rearrange the words to make complete sentences.",
     "questions": [
@@ -8828,10 +8969,8 @@
             "wrong2": "Our uniforms we are wearing at present.",
             "wrong3": "Wearing our uniforms we are at present."
         }
-
-    ]
-}
-
+                    ]
+                }
             ]
         };
 
@@ -12392,7 +12531,7 @@
                     questions: [
                         {
             "id": 1,
-            "question": "Arrange the following sentences in a logical order.<br>a. Finally, they visited the museum.<br>b. First, they went to the beach.<br>c. Last Sunday, Tom and his friends went on a trip.<br>d. Then, they had lunch at a restaurant.",
+            "question": "<br>a. Finally, they visited the museum.<br>b. First, they went to the beach.<br>c. Last Sunday, Tom and his friends went on a trip.<br>d. Then, they had lunch at a restaurant.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12400,7 +12539,7 @@
         },
         {
             "id": 2,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, she went to bed.<br>b. First, she did her homework.<br>c. Yesterday evening, Lan stayed at home.<br>d. Then, she watched TV for an hour.",
+            "question": "<br>a. After that, she went to bed.<br>b. First, she did her homework.<br>c. Yesterday evening, Lan stayed at home.<br>d. Then, she watched TV for an hour.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12408,7 +12547,7 @@
         },
         {
             "id": 3,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, add the vegetables and cook for 5 minutes.<br>b. Finally, season with salt and pepper and serve.<br>c. First, heat the oil in a pan.<br>d. Then, add the meat and fry until brown.",
+            "question": "<br>a. Next, add the vegetables and cook for 5 minutes.<br>b. Finally, season with salt and pepper and serve.<br>c. First, heat the oil in a pan.<br>d. Then, add the meat and fry until brown.",
             "correct": "c - d - a - b",
             "wrong1": "d - c - a - b",
             "wrong2": "c - a - d - b",
@@ -12416,7 +12555,7 @@
         },
         {
             "id": 4,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, they went to the cinema.<br>b. First, they had dinner at a restaurant.<br>c. Last Saturday, Mai and her boyfriend went out.<br>d. Finally, they said goodbye and went home.",
+            "question": "<br>a. After that, they went to the cinema.<br>b. First, they had dinner at a restaurant.<br>c. Last Saturday, Mai and her boyfriend went out.<br>d. Finally, they said goodbye and went home.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12424,7 +12563,7 @@
         },
         {
             "id": 5,
-            "question": "Arrange the following sentences in a logical order.<br>a. Finally, they went to bed early.<br>b. Next, they played games in the garden.<br>c. Yesterday, the children had a lot of fun.<br>d. First, they went to the park.",
+            "question": "<br>a. Finally, they went to bed early.<br>b. Next, they played games in the garden.<br>c. Yesterday, the children had a lot of fun.<br>d. First, they went to the park.",
             "correct": "c - d - b - a",
             "wrong1": "d - c - b - a",
             "wrong2": "c - b - d - a",
@@ -12432,7 +12571,7 @@
         },
         {
             "id": 6,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, she put on her uniform.<br>b. Finally, she went to school.<br>c. First, Mai woke up at 6 a.m.<br>d. Next, she had breakfast.",
+            "question": "<br>a. Then, she put on her uniform.<br>b. Finally, she went to school.<br>c. First, Mai woke up at 6 a.m.<br>d. Next, she had breakfast.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -12440,7 +12579,7 @@
         },
         {
             "id": 7,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, they watched a movie.<br>b. First, they bought some popcorn.<br>c. Last night, my friends and I went to the cinema.<br>d. Finally, they went home.",
+            "question": "<br>a. After that, they watched a movie.<br>b. First, they bought some popcorn.<br>c. Last night, my friends and I went to the cinema.<br>d. Finally, they went home.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12448,7 +12587,7 @@
         },
         {
             "id": 8,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, mix the flour and eggs.<br>b. Finally, bake for 30 minutes.<br>c. First, preheat the oven to 180°C.<br>d. Then, add sugar and milk.",
+            "question": "<br>a. Next, mix the flour and eggs.<br>b. Finally, bake for 30 minutes.<br>c. First, preheat the oven to 180°C.<br>d. Then, add sugar and milk.",
             "correct": "c - a - d - b",
             "wrong1": "a - c - d - b",
             "wrong2": "c - d - a - b",
@@ -12456,7 +12595,7 @@
         },
         {
             "id": 9,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, she watered the plants.<br>b. First, she cleaned the living room.<br>c. Yesterday morning, my mother did housework.<br>d. Finally, she cooked lunch.",
+            "question": "<br>a. Then, she watered the plants.<br>b. First, she cleaned the living room.<br>c. Yesterday morning, my mother did housework.<br>d. Finally, she cooked lunch.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12464,7 +12603,7 @@
         },
         {
             "id": 10,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he took a shower.<br>b. First, he went for a run.<br>c. Every morning, David exercises.<br>d. Then, he had breakfast.",
+            "question": "<br>a. After that, he took a shower.<br>b. First, he went for a run.<br>c. Every morning, David exercises.<br>d. Then, he had breakfast.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12472,7 +12611,7 @@
         },
         {
             "id": 11,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, write the main content.<br>b. Finally, check for spelling errors.<br>c. First, create an outline.<br>d. Then, write the introduction.",
+            "question": "<br>a. Next, write the main content.<br>b. Finally, check for spelling errors.<br>c. First, create an outline.<br>d. Then, write the introduction.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "d - c - a - b",
@@ -12480,7 +12619,7 @@
         },
         {
             "id": 12,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they visited the Eiffel Tower.<br>b. First, they arrived in Paris.<br>c. Last summer, my parents went to France.<br>d. Finally, they flew back home.",
+            "question": "<br>a. Then, they visited the Eiffel Tower.<br>b. First, they arrived in Paris.<br>c. Last summer, my parents went to France.<br>d. Finally, they flew back home.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12488,7 +12627,7 @@
         },
         {
             "id": 13,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he brushed his teeth.<br>b. First, he woke up.<br>c. Every day, Peter follows a routine.<br>d. Then, he got dressed.",
+            "question": "<br>a. After that, he brushed his teeth.<br>b. First, he woke up.<br>c. Every day, Peter follows a routine.<br>d. Then, he got dressed.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12496,7 +12635,7 @@
         },
         {
             "id": 14,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, she put the letter in an envelope.<br>b. Finally, she mailed it at the post office.<br>c. First, Lisa wrote a letter to her friend.<br>d. Then, she addressed the envelope.",
+            "question": "<br>a. Next, she put the letter in an envelope.<br>b. Finally, she mailed it at the post office.<br>c. First, Lisa wrote a letter to her friend.<br>d. Then, she addressed the envelope.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -12504,7 +12643,7 @@
         },
         {
             "id": 15,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they decorated the Christmas tree.<br>b. First, they bought a Christmas tree.<br>c. Last December, my family prepared for Christmas.<br>d. Finally, they exchanged gifts.",
+            "question": "<br>a. Then, they decorated the Christmas tree.<br>b. First, they bought a Christmas tree.<br>c. Last December, my family prepared for Christmas.<br>d. Finally, they exchanged gifts.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12512,7 +12651,7 @@
         },
         {
             "id": 16,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he did his homework.<br>b. First, he came home from school.<br>c. Every afternoon, John follows a schedule.<br>d. Then, he played video games.",
+            "question": "<br>a. After that, he did his homework.<br>b. First, he came home from school.<br>c. Every afternoon, John follows a schedule.<br>d. Then, he played video games.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12520,7 +12659,7 @@
         },
         {
             "id": 17,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, she added some salt.<br>b. Finally, she served the soup.<br>c. First, my grandmother chopped the vegetables.<br>d. Then, she boiled them in water.",
+            "question": "<br>a. Next, she added some salt.<br>b. Finally, she served the soup.<br>c. First, my grandmother chopped the vegetables.<br>d. Then, she boiled them in water.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -12528,7 +12667,7 @@
         },
         {
             "id": 18,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they set up the tents.<br>b. First, they found a good camping spot.<br>c. Last weekend, the scouts went camping.<br>d. Finally, they made a campfire.",
+            "question": "<br>a. Then, they set up the tents.<br>b. First, they found a good camping spot.<br>c. Last weekend, the scouts went camping.<br>d. Finally, they made a campfire.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12536,7 +12675,7 @@
         },
         {
             "id": 19,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he shaved.<br>b. First, he washed his face.<br>c. Every morning, my father gets ready for work.<br>d. Then, he put on his suit.",
+            "question": "<br>a. After that, he shaved.<br>b. First, he washed his face.<br>c. Every morning, my father gets ready for work.<br>d. Then, he put on his suit.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12544,7 +12683,7 @@
         },
         {
             "id": 20,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, they rode the roller coaster.<br>b. Finally, they bought souvenirs.<br>c. First, they entered the amusement park.<br>d. Then, they ate cotton candy.",
+            "question": "<br>a. Next, they rode the roller coaster.<br>b. Finally, they bought souvenirs.<br>c. First, they entered the amusement park.<br>d. Then, they ate cotton candy.",
             "correct": "c - a - d - b",
             "wrong1": "c - d - a - b",
             "wrong2": "a - c - d - b",
@@ -12552,7 +12691,7 @@
         },
         {
             "id": 21,
-            "question": "Arrange the following sentences in a logical order.<br>a. Finally, she went to school.<br>b. First, she brushed her teeth.<br>c. Every morning, Anna gets ready for school.<br>d. Then, she put on her uniform.",
+            "question": "<br>a. Finally, she went to school.<br>b. First, she brushed her teeth.<br>c. Every morning, Anna gets ready for school.<br>d. Then, she put on her uniform.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12560,7 +12699,7 @@
         },
         {
             "id": 22,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he went to work.<br>b. First, he drank coffee.<br>c. Every day, Mr. Smith reads the newspaper.<br>d. Then, he read the news.",
+            "question": "<br>a. After that, he went to work.<br>b. First, he drank coffee.<br>c. Every day, Mr. Smith reads the newspaper.<br>d. Then, he read the news.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12568,7 +12707,7 @@
         },
         {
             "id": 23,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, pour the batter into a pan.<br>b. Finally, enjoy your pancakes.<br>c. First, mix flour and milk.<br>d. Then, add eggs and sugar.",
+            "question": "<br>a. Next, pour the batter into a pan.<br>b. Finally, enjoy your pancakes.<br>c. First, mix flour and milk.<br>d. Then, add eggs and sugar.",
             "correct": "c - d - a - b",
             "wrong1": "d - c - a - b",
             "wrong2": "c - a - d - b",
@@ -12576,7 +12715,7 @@
         },
         {
             "id": 24,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, they played soccer.<br>b. First, they met at the park.<br>c. Yesterday, the boys played together.<br>d. Finally, they went home for dinner.",
+            "question": "<br>a. After that, they played soccer.<br>b. First, they met at the park.<br>c. Yesterday, the boys played together.<br>d. Finally, they went home for dinner.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12584,7 +12723,7 @@
         },
         {
             "id": 25,
-            "question": "Arrange the following sentences in a logical order.<br>a. Finally, they watched the sunset.<br>b. Next, they climbed the hill.<br>c. Last weekend, we went hiking.<br>d. First, we packed our bags.",
+            "question": "<br>a. Finally, they watched the sunset.<br>b. Next, they climbed the hill.<br>c. Last weekend, we went hiking.<br>d. First, we packed our bags.",
             "correct": "c - d - b - a",
             "wrong1": "d - c - b - a",
             "wrong2": "c - b - d - a",
@@ -12592,7 +12731,7 @@
         },
         {
             "id": 26,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, she washed the vegetables.<br>b. Finally, she served dinner.<br>c. First, my mother went to the market.<br>d. Next, she cooked the food.",
+            "question": "<br>a. Then, she washed the vegetables.<br>b. Finally, she served dinner.<br>c. First, my mother went to the market.<br>d. Next, she cooked the food.",
             "correct": "c - a - d - b",
             "wrong1": "c - d - a - b",
             "wrong2": "a - c - d - b",
@@ -12600,7 +12739,7 @@
         },
         {
             "id": 27,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, they sang happy birthday.<br>b. First, they lit the candles.<br>c. At the party, we celebrated Maria's birthday.<br>d. Finally, we ate the cake.",
+            "question": "<br>a. After that, they sang happy birthday.<br>b. First, they lit the candles.<br>c. At the party, we celebrated Maria's birthday.<br>d. Finally, we ate the cake.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12608,7 +12747,7 @@
         },
         {
             "id": 28,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, stir the mixture well.<br>b. Finally, pour into a glass.<br>c. First, take some orange juice.<br>d. Then, add ice cubes.",
+            "question": "<br>a. Next, stir the mixture well.<br>b. Finally, pour into a glass.<br>c. First, take some orange juice.<br>d. Then, add ice cubes.",
             "correct": "c - d - a - b",
             "wrong1": "a - c - d - b",
             "wrong2": "c - a - d - b",
@@ -12616,7 +12755,7 @@
         },
         {
             "id": 29,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, she folded the clothes.<br>b. First, she washed the clothes.<br>c. This morning, my sister did laundry.<br>d. Finally, she put them in the closet.",
+            "question": "<br>a. Then, she folded the clothes.<br>b. First, she washed the clothes.<br>c. This morning, my sister did laundry.<br>d. Finally, she put them in the closet.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12624,7 +12763,7 @@
         },
         {
             "id": 30,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he rode his bicycle.<br>b. First, he finished his homework.<br>c. Every evening, Ben plays outside.<br>d. Then, he put on his shoes.",
+            "question": "<br>a. After that, he rode his bicycle.<br>b. First, he finished his homework.<br>c. Every evening, Ben plays outside.<br>d. Then, he put on his shoes.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12632,7 +12771,7 @@
         },
         {
             "id": 31,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, draw the details.<br>b. Finally, color the picture.<br>c. First, make a sketch.<br>d. Then, outline the shapes.",
+            "question": "<br>a. Next, draw the details.<br>b. Finally, color the picture.<br>c. First, make a sketch.<br>d. Then, outline the shapes.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "d - c - a - b",
@@ -12640,7 +12779,7 @@
         },
         {
             "id": 32,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they swam in the sea.<br>b. First, they arrived at the beach.<br>c. Last summer, we went to the coast.<br>d. Finally, we built sandcastles.",
+            "question": "<br>a. Then, they swam in the sea.<br>b. First, they arrived at the beach.<br>c. Last summer, we went to the coast.<br>d. Finally, we built sandcastles.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12648,7 +12787,7 @@
         },
         {
             "id": 33,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he combed his hair.<br>b. First, he took a bath.<br>c. Every morning, Alex gets ready.<br>d. Then, he wore his clothes.",
+            "question": "<br>a. After that, he combed his hair.<br>b. First, he took a bath.<br>c. Every morning, Alex gets ready.<br>d. Then, he wore his clothes.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12656,7 +12795,7 @@
         },
         {
             "id": 34,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, she sealed the envelope.<br>b. Finally, she posted the letter.<br>c. First, Emma wrote a postcard.<br>d. Then, she wrote the address.",
+            "question": "<br>a. Next, she sealed the envelope.<br>b. Finally, she posted the letter.<br>c. First, Emma wrote a postcard.<br>d. Then, she wrote the address.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -12664,7 +12803,7 @@
         },
         {
             "id": 35,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they hung decorations.<br>b. First, they cleaned the house.<br>c. Last month, we prepared for the party.<br>d. Finally, we welcomed the guests.",
+            "question": "<br>a. Then, they hung decorations.<br>b. First, they cleaned the house.<br>c. Last month, we prepared for the party.<br>d. Finally, we welcomed the guests.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12672,7 +12811,7 @@
         },
         {
             "id": 36,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, he practiced piano.<br>b. First, he returned from school.<br>c. Every day, Leo has activities.<br>d. Then, he had a snack.",
+            "question": "<br>a. After that, he practiced piano.<br>b. First, he returned from school.<br>c. Every day, Leo has activities.<br>d. Then, he had a snack.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12680,7 +12819,7 @@
         },
         {
             "id": 37,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, add tomatoes and onions.<br>b. Finally, serve the salad.<br>c. First, wash the lettuce.<br>d. Then, cut the vegetables.",
+            "question": "<br>a. Next, add tomatoes and onions.<br>b. Finally, serve the salad.<br>c. First, wash the lettuce.<br>d. Then, cut the vegetables.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -12688,7 +12827,7 @@
         },
         {
             "id": 38,
-            "question": "Arrange the following sentences in a logical order.<br>a. Then, they collected firewood.<br>b. First, they found a campsite.<br>c. On our trip, we camped in the forest.<br>d. Finally, they cooked dinner.",
+            "question": "<br>a. Then, they collected firewood.<br>b. First, they found a campsite.<br>c. On our trip, we camped in the forest.<br>d. Finally, they cooked dinner.",
             "correct": "c - b - a - d",
             "wrong1": "b - c - a - d",
             "wrong2": "c - a - b - d",
@@ -12696,7 +12835,7 @@
         },
         {
             "id": 39,
-            "question": "Arrange the following sentences in a logical order.<br>a. After that, she applied makeup.<br>b. First, she washed her face.<br>c. Every evening, Lisa gets ready for bed.<br>d. Then, she wore pajamas.",
+            "question": "<br>a. After that, she applied makeup.<br>b. First, she washed her face.<br>c. Every evening, Lisa gets ready for bed.<br>d. Then, she wore pajamas.",
             "correct": "c - b - d - a",
             "wrong1": "b - c - d - a",
             "wrong2": "c - d - b - a",
@@ -12704,7 +12843,7 @@
         },
         {
             "id": 40,
-            "question": "Arrange the following sentences in a logical order.<br>a. Next, they saw the animals.<br>b. Finally, they watched the dolphin show.<br>c. First, the family entered the zoo.<br>d. Then, they bought tickets.",
+            "question": "<br>a. Next, they saw the animals.<br>b. Finally, they watched the dolphin show.<br>c. First, the family entered the zoo.<br>d. Then, they bought tickets.",
             "correct": "c - d - a - b",
             "wrong1": "c - a - d - b",
             "wrong2": "a - c - d - b",
@@ -13820,7 +13959,6 @@
 
 
 
-
         // Định nghĩa tất cả các kho đề
         const questionBank = {
             L4GK1: L4GK1,
@@ -13933,9 +14071,6 @@
 
         // Xử lý sự kiện khi trang tải xong
         document.addEventListener('DOMContentLoaded', function() {
-            // Hiển thị màn hình chính
-            showScreen('main');
-            
             // Thêm sự kiện cho nút bắt đầu
             document.getElementById('startButton').addEventListener('click', startExam);
             
@@ -14839,7 +14974,7 @@
             const chartContainer = document.getElementById('resultChart');
             chartContainer.innerHTML = '';
             
-            // Tạo phần tử cho mỗi phần
+            // Tạo phần tử cho mỗi phần - sắp xếp theo lưới 4x3
             for (let part = 1; part <= 12; part++) {
                 const partKey = `P${part}`;
                 const partResult = partResults[partKey] || { correct: 0, total: 0, percentage: 0 };
