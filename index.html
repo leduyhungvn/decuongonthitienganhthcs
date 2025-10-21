@@ -460,6 +460,43 @@
         .contact-link:hover {
             text-decoration: underline;
         }
+
+        /* CSS mới cho hiển thị đáp án trong báo cáo */
+        .report-answer-option {
+            padding: 6px 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .report-answer-option.correct {
+            background-color: #f6ffed;
+            border: 1px solid #b7eb8f;
+        }
+
+        .report-answer-option.incorrect {
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+        }
+
+        .report-answer-option.normal {
+            background-color: #f9f9f9;
+            border: 1px solid #e8e8e8;
+        }
+
+        .report-answer-marker {
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .report-answer-marker.correct {
+            color: #52c41a;
+        }
+
+        .report-answer-marker.incorrect {
+            color: #f5222d;
+        }
     </style>
 </head>
 <body>
@@ -497,6 +534,32 @@
                     <option value="CK1">CUỐI HỌC KÌ 1</option>
                     <option value="GK2">GIỮA HỌC KÌ 2</option>
                     <option value="CK2">CUỐI HỌC KÌ 2</option>
+                </select>
+            </div>
+            
+            <!-- Thêm dropdown chọn bộ bài tập -->
+            <div class="form-group">
+                <label for="exerciseSetSelect">Chọn bộ bài tập:</label>
+                <select id="exerciseSetSelect">
+                    <!-- Các lựa chọn ban đầu -->
+                    <option value="FULL">TỔNG HỢP</option>
+                    <option value="PRONUNCIATION_VOCABULARY_GRAMMAR">PHÁT ÂM, TRỌNG ÂM, TỪ VỰNG VÀ NGỮ PHÁP</option>
+                    <option value="ERROR_READING_COMMUNICATION_REWRITE">TÌM LỖI SAI, ĐỌC HIỂU, GIAO TIẾP VÀ VIẾT LẠI CÂU</option>
+                    <option value="FILL_ARRANGE_SIGNS_WORDS">ĐIỀN KHUYẾT, SẮP XẾP CÁC CÂU, BIỂN BÁO VÀ SẮP XẾP CÁC TỪ</option>
+                    
+                    <!-- Các lựa chọn mới -->
+                    <option value="P1">Phần 1 – PHÁT ÂM</option>
+                    <option value="P2">Phần 2 – TRỌNG ÂM</option>
+                    <option value="P3">Phần 3 – ĐỒNG NGHĨA NGƯỢC NGHĨA</option>
+                    <option value="P4">Phần 4 – TÌM LỖI SAI</option>
+                    <option value="P5">Phần 5 – TỪ VỰNG NGỮ PHÁP</option>
+                    <option value="P6">Phần 6 – ĐIỀM KHUYẾT</option>
+                    <option value="P7">Phần 7 – ĐỌC HIỂU</option>
+                    <option value="P8">Phần 8 – SẮP XẾP CÁC CÂU</option>
+                    <option value="P9">Phần 9 – GIAO TIẾP</option>
+                    <option value="P10">Phần 10 – BIẾN BÁO TIN TỨC</option>
+                    <option value="P11">Phần 11 – VIẾT LẠI CÂU CÓ NGHĨA KHÔNG ĐỔI</option>
+                    <option value="P12">Phần 12 – SẮP XẾP CÁC TỪ THÀNH CÂU</option>
                 </select>
             </div>
             
@@ -570,7 +633,7 @@
             <div class="report-header">
                 <h1 class="main-title">ĐỀ CƯƠNG ÔN THI TIẾNG ANH</h1>
                 <h2 class="sub-title" id="reportSubtitle">LỚP 4 – GIỮA HỌC KÌ 1</h2>
-                <h2 class="result-title">KẾT QUẢ</h2>
+                <h2 class="result-title" id="resultTitle">KẾT QUẢ</h2>
             </div>
             
             <div class="student-info">
@@ -579,7 +642,6 @@
                 <p><strong>Thời điểm kết thúc:</strong> <span id="endTime">...</span></p>
                 <p><strong>Tổng thời gian làm bài:</strong> <span id="totalTime">...</span></p>
                 <p><strong>Số câu làm đúng:</strong> <span id="correctCount">...</span></p>
-                <!-- Đã sửa phần này -->
                 <p class="correct-rate"><strong>Tỷ lệ đúng: <span id="correctRate">...</span></strong></p>
                 <p id="cheatingWarning" style="color: #f5222d; font-weight: bold; display: none;">⚠️ Đã phát hiện hành vi gian lận!</p>
             </div>
@@ -648,6 +710,147 @@
                         { 
                             id: 3, 
                             question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 4, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+
+                        { 
+                            id: 5, 
+                            question: "underlined", 
+                            correct: "compet<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "arriv<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "wav<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "studi<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        // Thêm câu hỏi để đủ 20 câu
+                        { 
+                            id: 6, 
+                            question: "underlined", 
+                            correct: "bak<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "agre<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "underlin<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "smil<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 8, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 9, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+
+                        { 
+                            id: 10, 
+                            question: "underlined", 
+                            correct: "compet<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "arriv<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "wav<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "studi<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        { 
+                            id: 11, 
+                            question: "underlined", 
+                            correct: "bak<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "agre<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "underlin<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "smil<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        { 
+                            id: 12, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 13, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 14, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+
+                        { 
+                            id: 15, 
+                            question: "underlined", 
+                            correct: "compet<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "arriv<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "wav<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "studi<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        { 
+                            id: 16, 
+                            question: "underlined", 
+                            correct: "bak<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "agre<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "underlin<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "smil<span style=\"text-decoration: underline; color: red;\">es</span>" 
+                        },
+                        { 
+                            id: 17, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 18, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+                        { 
+                            id: 19, 
+                            question: "underlined", 
+                            correct: "celebrat<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong1: "appli<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong2: "worri<span style=\"text-decoration: underline; color: red;\">es</span>", 
+                            wrong3: "solv<span style=\"text-decoration: underline; color: red;\">es</span>"  
+                        },
+
+                        { 
+                            id: 20, 
+                            question: "underlined", 
                             correct: "compet<span style=\"text-decoration: underline; color: red;\">es</span>", 
                             wrong1: "arriv<span style=\"text-decoration: underline; color: red;\">es</span>", 
                             wrong2: "wav<span style=\"text-decoration: underline; color: red;\">es</span>", 
@@ -687,6 +890,135 @@
                         },
                         { 
                             id: 4, 
+                            question: "stress", 
+                            correct: "busy", 
+                            wrong1: "about", 
+                            wrong2: "advice", 
+                            wrong3: "computer" 
+                        },
+                        // Thêm câu hỏi để đủ 20 câu
+                        { 
+                            id: 5, 
+                            question: "stress", 
+                            correct: "about", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 6, 
+                            question: "stress", 
+                            correct: "advice", 
+                            wrong1: "people", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "stress", 
+                            correct: "computer", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 8, 
+                            question: "stress", 
+                            correct: "busy", 
+                            wrong1: "about", 
+                            wrong2: "advice", 
+                            wrong3: "computer" 
+                        },
+                        { 
+                            id: 9, 
+                            question: "stress", 
+                            correct: "about", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 10, 
+                            question: "stress", 
+                            correct: "advice", 
+                            wrong1: "people", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 11, 
+                            question: "stress", 
+                            correct: "computer", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 12, 
+                            question: "stress", 
+                            correct: "busy", 
+                            wrong1: "about", 
+                            wrong2: "advice", 
+                            wrong3: "computer" 
+                        },
+                        { 
+                            id: 13, 
+                            question: "stress", 
+                            correct: "about", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 14, 
+                            question: "stress", 
+                            correct: "advice", 
+                            wrong1: "people", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 15, 
+                            question: "stress", 
+                            correct: "computer", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 16, 
+                            question: "stress", 
+                            correct: "busy", 
+                            wrong1: "about", 
+                            wrong2: "advice", 
+                            wrong3: "computer" 
+                        },
+                        { 
+                            id: 17, 
+                            question: "stress", 
+                            correct: "about", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 18, 
+                            question: "stress", 
+                            correct: "advice", 
+                            wrong1: "people", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 19, 
+                            question: "stress", 
+                            correct: "computer", 
+                            wrong1: "busy", 
+                            wrong2: "apple", 
+                            wrong3: "hurry" 
+                        },
+                        { 
+                            id: 20, 
                             question: "stress", 
                             correct: "busy", 
                             wrong1: "about", 
@@ -780,6 +1112,47 @@
                             wrong1: "morning", 
                             wrong2: "afternoon", 
                             wrong3: "evening" 
+                        },
+                        // Thêm câu hỏi để đủ 15 câu
+                        { 
+                            id: 11, 
+                            question: "The opposite of 'light' is:", 
+                            correct: "heavy", 
+                            wrong1: "bright", 
+                            wrong2: "clear", 
+                            wrong3: "pale" 
+                        },
+                        { 
+                            id: 12, 
+                            question: "The opposite of 'dry' is:", 
+                            correct: "wet", 
+                            wrong1: "damp", 
+                            wrong2: "moist", 
+                            wrong3: "humid" 
+                        },
+                        { 
+                            id: 13, 
+                            question: "The opposite of 'rich' is:", 
+                            correct: "poor", 
+                            wrong1: "wealthy", 
+                            wrong2: "affluent", 
+                            wrong3: "prosperous" 
+                        },
+                        { 
+                            id: 14, 
+                            question: "The opposite of 'full' is:", 
+                            correct: "empty", 
+                            wrong1: "filled", 
+                            wrong2: "packed", 
+                            wrong3: "loaded" 
+                        },
+                        { 
+                            id: 15, 
+                            question: "The opposite of 'open' is:", 
+                            correct: "closed", 
+                            wrong1: "ajar", 
+                            wrong2: "unlocked", 
+                            wrong3: "accessible" 
                         }
                     ]
                 }
@@ -823,11 +1196,53 @@
                         },
                         { 
                             id: 5, 
+                            question: "He <span style=\"text-decoration: underline; color: red;\">can swims</span> very well.", 
+                            correct: "A. can swims", 
+                            wrong1: "B. He", 
+                            wrong2: "C. very", 
+                            wrong3: "D. well" 
+                        },
+                        { 
+                            id: 6, 
+                            question: "He <span style=\"text-decoration: underline; color: red;\">can swims</span> very well.", 
+                            correct: "A. can swims", 
+                            wrong1: "B. He", 
+                            wrong2: "C. very", 
+                            wrong3: "D. well" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "He <span style=\"text-decoration: underline; color: red;\">can swims</span> very well.", 
+                            correct: "A. can swims", 
+                            wrong1: "B. He", 
+                            wrong2: "C. very", 
+                            wrong3: "D. well" 
+                        },
+
+                        { 
+                            id: 8, 
                             question: "We <span style=\"text-decoration: underline; color: red;\">don't have</span> some money.", 
                             correct: "A. don't have", 
                             wrong1: "B. We", 
                             wrong2: "C. some", 
                             wrong3: "D. money" 
+                        },
+                        // Thêm câu hỏi để đủ 10 câu
+                        { 
+                            id: 9, 
+                            question: "She <span style=\"text-decoration: underline; color: red;\">go</span> to school every day.", 
+                            correct: "A. go", 
+                            wrong1: "B. to", 
+                            wrong2: "C. school", 
+                            wrong3: "D. day" 
+                        },
+                        { 
+                            id: 10, 
+                            question: "They are <span style=\"text-decoration: underline; color: red;\">play</span> football now.", 
+                            correct: "A. are play", 
+                            wrong1: "B. They", 
+                            wrong2: "C. football", 
+                            wrong3: "D. now" 
                         }
                     ]
                 }
@@ -951,11 +1366,53 @@
                         },
                         { 
                             id: 15, 
+                            question: "She suggested _____ to the cinema.", 
+                            correct: "going", 
+                            wrong1: "go", 
+                            wrong2: "to go", 
+                            wrong3: "went" 
+                        },
+                        { 
+                            id: 16, 
+                            question: "She suggested _____ to the cinema.", 
+                            correct: "going", 
+                            wrong1: "go", 
+                            wrong2: "to go", 
+                            wrong3: "went" 
+                        },
+
+                        { 
+                            id: 17, 
                             question: "I _____ my keys. I can't find them anywhere.", 
                             correct: "have lost", 
                             wrong1: "lose", 
                             wrong2: "lost", 
                             wrong3: "am losing" 
+                        },
+                        // Thêm câu hỏi để đủ 20 câu
+                        { 
+                            id: 18, 
+                            question: "She _____ to school every day.", 
+                            correct: "goes", 
+                            wrong1: "go", 
+                            wrong2: "going", 
+                            wrong3: "went" 
+                        },
+                        { 
+                            id: 19, 
+                            question: "They _____ football now.", 
+                            correct: "are playing", 
+                            wrong1: "play", 
+                            wrong2: "plays", 
+                            wrong3: "played" 
+                        },
+                        { 
+                            id: 20, 
+                            question: "I _____ English for 5 years.", 
+                            correct: "have studied", 
+                            wrong1: "study", 
+                            wrong2: "studies", 
+                            wrong3: "am studying" 
                         }
                     ]
                 }
@@ -1236,46 +1693,6 @@
                             wrong1: "His favorite subject is Math.", 
                             wrong2: "His favorite subject is English.", 
                             wrong3: "His favorite subject is Music." 
-                        },
-                        { 
-                            id: 6, 
-                            question: "What subjects does Linda like?", 
-                            correct: "She likes Music and Art.", 
-                            wrong1: "She likes Math and English.", 
-                            wrong2: "She likes Science and Music.", 
-                            wrong3: "She likes English and Art." 
-                        },
-                        { 
-                            id: 7, 
-                            question: "How old is Linda?", 
-                            correct: "She is eight years old.", 
-                            wrong1: "She is ten years old.", 
-                            wrong2: "She is twelve years old.", 
-                            wrong3: "She is nine years old." 
-                        },
-                        { 
-                            id: 8, 
-                            question: "Do Tom and Linda go to the same school?", 
-                            correct: "Yes, they do.", 
-                            wrong1: "No, they don't.", 
-                            wrong2: "Yes, they are.", 
-                            wrong3: "No, they aren't." 
-                        },
-                        { 
-                            id: 9, 
-                            question: "Is their school far from their house?", 
-                            correct: "No, it isn't.", 
-                            wrong1: "Yes, it is.", 
-                            wrong2: "Yes, they are.", 
-                            wrong3: "No, they aren't." 
-                        },
-                        { 
-                            id: 10, 
-                            question: "What subjects does Tom like?", 
-                            correct: "He likes Math and English.", 
-                            wrong1: "He likes Music and Art.", 
-                            wrong2: "He likes Science and Music.", 
-                            wrong3: "He likes English and Art." 
                         }
                     ]
                 },
@@ -1322,304 +1739,6 @@
                             wrong1: "It was cold.", 
                             wrong2: "It was hot.", 
                             wrong3: "It was rainy." 
-                        },
-                        { 
-                            id: 6, 
-                            question: "Which places did they visit?", 
-                            correct: "My Khe Beach, Ngu Hanh Son, and Hoi An Ancient Town.", 
-                            wrong1: "My Khe Beach, Ngu Hanh Son, and Da Nang Museum.", 
-                            wrong2: "My Khe Beach, Hoi An Ancient Town, and Da Nang Cathedral.", 
-                            wrong3: "Ngu Hanh Son, Hoi An Ancient Town, and Da Nang Museum." 
-                        },
-                        { 
-                            id: 7, 
-                            question: "What food did the writer like very much?", 
-                            correct: "Seafood.", 
-                            wrong1: "Fast food.", 
-                            wrong2: "Vegetables.", 
-                            wrong3: "Fruit." 
-                        },
-                        { 
-                            id: 8, 
-                            question: "What did the writer buy for his/her friends?", 
-                            correct: "Some souvenirs.", 
-                            wrong1: "Some books.", 
-                            wrong2: "Some clothes.", 
-                            wrong3: "Some food." 
-                        },
-                        { 
-                            id: 9, 
-                            question: "Did the writer have a wonderful time in Da Nang?", 
-                            correct: "Yes, he/she did.", 
-                            wrong1: "No, he/she didn't.", 
-                            wrong2: "Yes, he/she does.", 
-                            wrong3: "No, he/she doesn't." 
-                        },
-                        { 
-                            id: 10, 
-                            question: "What did they do in Da Nang?", 
-                            correct: "They visited many interesting places and ate a lot of delicious food.", 
-                            wrong1: "They only visited many interesting places.", 
-                            wrong2: "They only ate a lot of delicious food.", 
-                            wrong3: "They only bought some souvenirs." 
-                        }
-                    ]
-                },
-                {
-                    id: "C3",
-                    passage: "Read the following passage and answer the questions.<br><br>My school is not very big, but it is beautiful. There are twenty classrooms in my school. Each classroom has thirty students. There is a library in my school. There are many books in the library. There is also a computer room with twenty computers. The students can use the computers in their free time. There is a big playground behind the school. The students play sports there after school. I love my school very much.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "What does the writer think about his/her school?", 
-                            correct: "It is beautiful.", 
-                            wrong1: "It is very big.", 
-                            wrong2: "It is new.", 
-                            wrong3: "It is old." 
-                        },
-                        { 
-                            id: 2, 
-                            question: "How many classrooms are there in the school?", 
-                            correct: "There are twenty classrooms.", 
-                            wrong1: "There are ten classrooms.", 
-                            wrong2: "There are thirty classrooms.", 
-                            wrong3: "There are forty classrooms." 
-                        },
-                        { 
-                            id: 3, 
-                            question: "How many students are there in each classroom?", 
-                            correct: "There are thirty students.", 
-                            wrong1: "There are twenty students.", 
-                            wrong2: "There are forty students.", 
-                            wrong3: "There are fifty students." 
-                        },
-                        { 
-                            id: 4, 
-                            question: "Is there a library in the school?", 
-                            correct: "Yes, there is.", 
-                            wrong1: "No, there isn't.", 
-                            wrong2: "Yes, there are.", 
-                            wrong3: "No, there aren't." 
-                        },
-                        { 
-                            id: 5, 
-                            question: "What is there in the library?", 
-                            correct: "There are many books.", 
-                            wrong1: "There are many computers.", 
-                            wrong2: "There are many desks.", 
-                            wrong3: "There are many chairs." 
-                        },
-                        { 
-                            id: 6, 
-                            question: "How many computers are there in the computer room?", 
-                            correct: "There are twenty computers.", 
-                            wrong1: "There are ten computers.", 
-                            wrong2: "There are thirty computers.", 
-                            wrong3: "There are forty computers." 
-                        },
-                        { 
-                            id: 7, 
-                            question: "When can the students use the computers?", 
-                            correct: "In their free time.", 
-                            wrong1: "In class time.", 
-                            wrong2: "After school.", 
-                            wrong3: "Before school." 
-                        },
-                        { 
-                            id: 8, 
-                            question: "Where is the playground?", 
-                            correct: "It is behind the school.", 
-                            wrong1: "It is in front of the school.", 
-                            wrong2: "It is next to the school.", 
-                            wrong3: "It is near the school." 
-                        },
-                        { 
-                            id: 9, 
-                            question: "What do the students do on the playground?", 
-                            correct: "They play sports.", 
-                            wrong1: "They read books.", 
-                            wrong2: "They use computers.", 
-                            wrong3: "They study." 
-                        },
-                        { 
-                            id: 10, 
-                            question: "When do the students play sports?", 
-                            correct: "After school.", 
-                            wrong1: "Before school.", 
-                            wrong2: "In class time.", 
-                            wrong3: "In their free time." 
-                        }
-                    ]
-                },
-                {
-                    id: "C4",
-                    passage: "Read the following passage and answer the questions.<br><br>Yesterday was Sunday. The weather was fine. In the morning, I got up early. I did morning exercise and had breakfast with my family. After breakfast, I helped my mother clean the house. In the afternoon, I went to the bookstore with my friend, Linda. We bought some English books. Then, we went to the park. We flew kites and took some photos. In the evening, I had dinner with my family. After dinner, I watched TV and did my homework. I went to bed at 10 p.m.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "What day was yesterday?", 
-                            correct: "It was Sunday.", 
-                            wrong1: "It was Monday.", 
-                            wrong2: "It was Saturday.", 
-                            wrong3: "It was Friday." 
-                        },
-                        { 
-                            id: 2, 
-                            question: "What was the weather like?", 
-                            correct: "It was fine.", 
-                            wrong1: "It was rainy.", 
-                            wrong2: "It was cold.", 
-                            wrong3: "It was hot." 
-                        },
-                        { 
-                            id: 3, 
-                            question: "What did the writer do in the morning?", 
-                            correct: "He/She did morning exercise and had breakfast with his/her family.", 
-                            wrong1: "He/She went to school.", 
-                            wrong2: "He/She went to the bookstore.", 
-                            wrong3: "He/She went to the park." 
-                        },
-                        { 
-                            id: 4, 
-                            question: "Who did the writer have breakfast with?", 
-                            correct: "His/Her family.", 
-                            wrong1: "His/Her friend.", 
-                            wrong2: "His/Her teacher.", 
-                            wrong3: "Alone." 
-                        },
-                        { 
-                            id: 5, 
-                            question: "What did the writer do after breakfast?", 
-                            correct: "He/She helped his/her mother clean the house.", 
-                            wrong1: "He/She went to the bookstore.", 
-                            wrong2: "He/She went to the park.", 
-                            wrong3: "He/She did his/her homework." 
-                        },
-                        { 
-                            id: 6, 
-                            question: "Who did the writer go to the bookstore with?", 
-                            correct: "His/Her friend, Linda.", 
-                            wrong1: "His/Her family.", 
-                            wrong2: "His/Her teacher.", 
-                            wrong3: "Alone." 
-                        },
-                        { 
-                            id: 7, 
-                            question: "What did they buy at the bookstore?", 
-                            correct: "Some English books.", 
-                            wrong1: "Some story books.", 
-                            wrong2: "Some comic books.", 
-                            wrong3: "Some notebooks." 
-                        },
-                        { 
-                            id: 8, 
-                            question: "Where did they go after the bookstore?", 
-                            correct: "They went to the park.", 
-                            wrong1: "They went home.", 
-                            wrong2: "They went to school.", 
-                            wrong3: "They went to the cinema." 
-                        },
-                        { 
-                            id: 9, 
-                            question: "What did they do in the park?", 
-                            correct: "They flew kites and took some photos.", 
-                            wrong1: "They played football.", 
-                            wrong2: "They read books.", 
-                            wrong3: "They had a picnic." 
-                        },
-                        { 
-                            id: 10, 
-                            question: "When did the writer go to bed?", 
-                            correct: "At 10 p.m.", 
-                            wrong1: "At 9 p.m.", 
-                            wrong2: "At 11 p.m.", 
-                            wrong3: "At 8 p.m." 
-                        }
-                    ]
-                },
-                {
-                    id: "C5",
-                    passage: "Read the following passage and answer the questions.<br><br>My best friend is Mai. She is twelve years old. She lives in a big house with her family. Her father is a doctor and her mother is a teacher. She has a younger brother. His name is Nam. He is eight years old. Mai and I are in the same class. We are good students. We always help each other in studying. After school, we often do homework together. Sometimes, we go to the library or play sports. I like Mai very much because she is kind and friendly.",
-                    questions: [
-                        { 
-                            id: 1, 
-                            question: "How old is Mai?", 
-                            correct: "She is twelve years old.", 
-                            wrong1: "She is eleven years old.", 
-                            wrong2: "She is thirteen years old.", 
-                            wrong3: "She is ten years old." 
-                        },
-                        { 
-                            id: 2, 
-                            question: "Where does Mai live?", 
-                            correct: "She lives in a big house.", 
-                            wrong1: "She lives in a small house.", 
-                            wrong2: "She lives in an apartment.", 
-                            wrong3: "She lives in a flat." 
-                        },
-                        { 
-                            id: 3, 
-                            question: "What does Mai's father do?", 
-                            correct: "He is a doctor.", 
-                            wrong1: "He is a teacher.", 
-                            wrong2: "He is an engineer.", 
-                            wrong3: "He is a worker." 
-                        },
-                        { 
-                            id: 4, 
-                            question: "What does Mai's mother do?", 
-                            correct: "She is a teacher.", 
-                            wrong1: "She is a doctor.", 
-                            wrong2: "She is a nurse.", 
-                            wrong3: "She is a housewife." 
-                        },
-                        { 
-                            id: 5, 
-                            question: "How many people are there in Mai's family?", 
-                            correct: "There are four people in her family.", 
-                            wrong1: "There are three people in her family.", 
-                            wrong2: "There are five people in her family.", 
-                            wrong3: "There are two people in her family." 
-                        },
-                        { 
-                            id: 6, 
-                            question: "What is Mai's brother's name?", 
-                            correct: "His name is Nam.", 
-                            wrong1: "His name is Minh.", 
-                            wrong2: "His name is Long.", 
-                            wrong3: "His name is Tuan." 
-                        },
-                        { 
-                            id: 7, 
-                            question: "How old is Mai's brother?", 
-                            correct: "He is eight years old.", 
-                            wrong1: "He is seven years old.", 
-                            wrong2: "He is nine years old.", 
-                            wrong3: "He is ten years old." 
-                        },
-                        { 
-                            id: 8, 
-                            question: "Are Mai and the writer in the same class?", 
-                            correct: "Yes, they are.", 
-                            wrong1: "No, they aren't.", 
-                            wrong2: "Yes, they do.", 
-                            wrong3: "No, they don't." 
-                        },
-                        { 
-                            id: 9, 
-                            question: "What do they often do after school?", 
-                            correct: "They often do homework together.", 
-                            wrong1: "They often go home.", 
-                            wrong2: "They often play games.", 
-                            wrong3: "They often watch TV." 
-                        },
-                        { 
-                            id: 10, 
-                            question: "Why does the writer like Mai?", 
-                            correct: "Because she is kind and friendly.", 
-                            wrong1: "Because she is beautiful.", 
-                            wrong2: "Because she is rich.", 
-                            wrong3: "Because she is clever." 
                         }
                     ]
                 }
@@ -1663,6 +1782,47 @@
                         },
                         { 
                             id: 5, 
+                            question: "a. Finally, they went to bed early.<br>b. Next, they played games in the garden.<br>c. Yesterday, the children had a lot of fun.<br>d. First, they went to the park.", 
+                            correct: "c - d - b - a", 
+                            wrong1: "d - c - b - a", 
+                            wrong2: "c - b - d - a", 
+                            wrong3: "d - b - c - a" 
+                        },
+                        // Thêm câu hỏi để đủ 10 câu
+                        { 
+                            id: 6, 
+                            question: "a. Finally, they visited the museum.<br>b. First, they went to the beach.<br>c. Last Sunday, Tom and his friends went on a trip.<br>d. Then, they had lunch at a restaurant.", 
+                            correct: "c - b - d - a", 
+                            wrong1: "b - c - d - a", 
+                            wrong2: "c - d - b - a", 
+                            wrong3: "b - d - c - a" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "a. After that, she went to bed.<br>b. First, she did her homework.<br>c. Yesterday evening, Lan stayed at home.<br>d. Then, she watched TV for an hour.", 
+                            correct: "c - b - d - a", 
+                            wrong1: "b - c - d - a", 
+                            wrong2: "c - d - b - a", 
+                            wrong3: "b - d - c - a" 
+                        },
+                        { 
+                            id: 8, 
+                            question: "a. Next, add the vegetables and cook for 5 minutes.<br>b. Finally, season with salt and pepper and serve.<br>c. First, heat the oil in a pan.<br>d. Then, add the meat and fry until brown.", 
+                            correct: "c - d - a - b", 
+                            wrong1: "d - c - a - b", 
+                            wrong2: "c - a - d - b", 
+                            wrong3: "a - c - d - b" 
+                        },
+                        { 
+                            id: 9, 
+                            question: "a. After that, they went to the cinema.<br>b. First, they had dinner at a restaurant.<br>c. Last Saturday, Mai and her boyfriend went out.<br>d. Finally, they said goodbye and went home.", 
+                            correct: "c - b - a - d", 
+                            wrong1: "b - c - a - d", 
+                            wrong2: "c - a - b - d", 
+                            wrong3: "b - a - c - d" 
+                        },
+                        { 
+                            id: 10, 
                             question: "a. Finally, they went to bed early.<br>b. Next, they played games in the garden.<br>c. Yesterday, the children had a lot of fun.<br>d. First, they went to the park.", 
                             correct: "c - d - b - a", 
                             wrong1: "d - c - b - a", 
@@ -1716,6 +1876,87 @@
                             wrong1: "Where are you from", 
                             wrong2: "What time is it", 
                             wrong3: "How old are you" 
+                        },
+                        // Thêm câu hỏi để đủ 15 câu
+                        { 
+                            id: 6, 
+                            question: "Shop assistant: (1) ____________?<br>Customer: Yes, I'm looking for a gift for my friend's birthday.<br>Shop assistant: (2) ____________?<br>Customer: She likes reading books.<br>Shop assistant: (3) ____________?<br>Customer: That's a great idea. I'll take it.<br>(1) is:", 
+                            correct: "Can I help you", 
+                            wrong1: "How are you today", 
+                            wrong2: "What time is it", 
+                            wrong3: "Where are you from" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "Doctor: (1) ____________?<br>Patient: I have a headache and a sore throat.<br>Doctor: (2) ____________?<br>Patient: For two days.<br>Doctor: (3) ____________?<br>Patient: No, I don't have a fever.<br>(1) is:", 
+                            correct: "What's wrong with you", 
+                            wrong1: "How old are you", 
+                            wrong2: "Where do you live", 
+                            wrong3: "What's your job" 
+                        },
+                        { 
+                            id: 8, 
+                            question: "Teacher: (1) ____________?<br>Student: I'm sorry, I don't understand this question.<br>Teacher: (2) ____________?<br>Student: Could you explain it again, please?<br>Teacher: (3) ____________?<br>Student: Yes, thank you very much.<br>(1) is:", 
+                            correct: "Do you have any questions", 
+                            wrong1: "What time is it", 
+                            wrong2: "Where is your book", 
+                            wrong3: "How are you today" 
+                        },
+                        { 
+                            id: 9, 
+                            question: "Interviewer: (1) ____________?<br>Candidate: I graduated from Ha Noi University in 2020.<br>Interviewer: (2) ____________?<br>Candidate: My major was Business Administration.<br>Interviewer: (3) ____________?<br>Candidate: I have two years of experience in marketing.<br>(1) is:", 
+                            correct: "When did you graduate from university", 
+                            wrong1: "Where did you study", 
+                            wrong2: "What was your major", 
+                            wrong3: "How much experience do you have" 
+                        },
+                        { 
+                            id: 10, 
+                            question: "Travel agent: (1) ____________?<br>Customer: I'd like to book a flight to Ho Chi Minh City.<br>Travel agent: (2) ____________?<br>Customer: I want to leave on Friday and return on Sunday.<br>Travel agent: (3) ____________?<br>Customer: Just one person, please.<br>(1) is:", 
+                            correct: "How can I help you", 
+                            wrong1: "Where are you from", 
+                            wrong2: "What time is it", 
+                            wrong3: "How old are you" 
+                        },
+                        { 
+                            id: 11, 
+                            question: "Shop assistant: (1) ____________?<br>Customer: Yes, I'm looking for a gift for my friend's birthday.<br>Shop assistant: (2) ____________?<br>Customer: She likes reading books.<br>Shop assistant: (3) ____________?<br>Customer: That's a great idea. I'll take it.<br>(1) is:", 
+                            correct: "Can I help you", 
+                            wrong1: "How are you today", 
+                            wrong2: "What time is it", 
+                            wrong3: "Where are you from" 
+                        },
+                        { 
+                            id: 12, 
+                            question: "Doctor: (1) ____________?<br>Patient: I have a headache and a sore throat.<br>Doctor: (2) ____________?<br>Patient: For two days.<br>Doctor: (3) ____________?<br>Patient: No, I don't have a fever.<br>(1) is:", 
+                            correct: "What's wrong with you", 
+                            wrong1: "How old are you", 
+                            wrong2: "Where do you live", 
+                            wrong3: "What's your job" 
+                        },
+                        { 
+                            id: 13, 
+                            question: "Teacher: (1) ____________?<br>Student: I'm sorry, I don't understand this question.<br>Teacher: (2) ____________?<br>Student: Could you explain it again, please?<br>Teacher: (3) ____________?<br>Student: Yes, thank you very much.<br>(1) is:", 
+                            correct: "Do you have any questions", 
+                            wrong1: "What time is it", 
+                            wrong2: "Where is your book", 
+                            wrong3: "How are you today" 
+                        },
+                        { 
+                            id: 14, 
+                            question: "Interviewer: (1) ____________?<br>Candidate: I graduated from Ha Noi University in 2020.<br>Interviewer: (2) ____________?<br>Candidate: My major was Business Administration.<br>Interviewer: (3) ____________?<br>Candidate: I have two years of experience in marketing.<br>(1) is:", 
+                            correct: "When did you graduate from university", 
+                            wrong1: "Where did you study", 
+                            wrong2: "What was your major", 
+                            wrong3: "How much experience do you have" 
+                        },
+                        { 
+                            id: 15, 
+                            question: "Travel agent: (1) ____________?<br>Customer: I'd like to book a flight to Ho Chi Minh City.<br>Travel agent: (2) ____________?<br>Customer: I want to leave on Friday and return on Sunday.<br>Travel agent: (3) ____________?<br>Customer: Just one person, please.<br>(1) is:", 
+                            correct: "How can I help you", 
+                            wrong1: "Where are you from", 
+                            wrong2: "What time is it", 
+                            wrong3: "How old are you" 
                         }
                     ]
                 }
@@ -1759,6 +2000,87 @@
                         },
                         { 
                             id: 5, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"purple\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">RESTROOM</text></svg>' alt='Restroom sign'>", 
+                            correct: "Nhà vệ sinh", 
+                            wrong1: "Phòng nghỉ", 
+                            wrong2: "Phòng ăn", 
+                            wrong3: "Phòng ngủ" 
+                        },
+                        // Thêm câu hỏi để đủ 15 câu
+                        { 
+                            id: 6, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"red\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">NO SMOKING</text></svg>' alt='No smoking sign'>", 
+                            correct: "Cấm hút thuốc", 
+                            wrong1: "Cho phép hút thuốc", 
+                            wrong2: "Khu vực hút thuốc", 
+                            wrong3: "Hút thuốc gây hại" 
+                        },
+                        { 
+                            id: 7, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"blue\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">WIFI</text></svg>' alt='Wifi sign'>", 
+                            correct: "Khu vực có wifi", 
+                            wrong1: "Cấm dùng wifi", 
+                            wrong2: "Hỏi mật khẩu wifi", 
+                            wrong3: "Wifi miễn phí" 
+                        },
+                        { 
+                            id: 8, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"green\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">EXIT</text></svg>' alt='Exit sign'>", 
+                            correct: "Lối thoát", 
+                            wrong1: "Lối vào", 
+                            wrong2: "Cấm vào", 
+                            wrong3: "Cấm ra" 
+                        },
+                        { 
+                            id: 9, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"orange\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\">CAUTION</text></svg>' alt='Caution sign'>", 
+                            correct: "Cảnh báo", 
+                            wrong1: "Nguy hiểm", 
+                            wrong2: "An toàn", 
+                            wrong3: "Yêu cầu" 
+                        },
+                        { 
+                            id: 10, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"purple\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">RESTROOM</text></svg>' alt='Restroom sign'>", 
+                            correct: "Nhà vệ sinh", 
+                            wrong1: "Phòng nghỉ", 
+                            wrong2: "Phòng ăn", 
+                            wrong3: "Phòng ngủ" 
+                        },
+                        { 
+                            id: 11, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"red\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">NO SMOKING</text></svg>' alt='No smoking sign'>", 
+                            correct: "Cấm hút thuốc", 
+                            wrong1: "Cho phép hút thuốc", 
+                            wrong2: "Khu vực hút thuốc", 
+                            wrong3: "Hút thuốc gây hại" 
+                        },
+                        { 
+                            id: 12, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"blue\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">WIFI</text></svg>' alt='Wifi sign'>", 
+                            correct: "Khu vực có wifi", 
+                            wrong1: "Cấm dùng wifi", 
+                            wrong2: "Hỏi mật khẩu wifi", 
+                            wrong3: "Wifi miễn phí" 
+                        },
+                        { 
+                            id: 13, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"green\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">EXIT</text></svg>' alt='Exit sign'>", 
+                            correct: "Lối thoát", 
+                            wrong1: "Lối vào", 
+                            wrong2: "Cấm vào", 
+                            wrong3: "Cấm ra" 
+                        },
+                        { 
+                            id: 14, 
+                            question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"orange\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\">CAUTION</text></svg>' alt='Caution sign'>", 
+                            correct: "Cảnh báo", 
+                            wrong1: "Nguy hiểm", 
+                            wrong2: "An toàn", 
+                            wrong3: "Yêu cầu" 
+                        },
+                        { 
+                            id: 15, 
                             question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"purple\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">RESTROOM</text></svg>' alt='Restroom sign'>", 
                             correct: "Nhà vệ sinh", 
                             wrong1: "Phòng nghỉ", 
@@ -1812,6 +2134,47 @@
                             wrong1: "Because the weather was bad, they went to school.", 
                             wrong2: "In spite of the bad weather, but they went to school.", 
                             wrong3: "Because of the bad weather, they went to school." 
+                        },
+                        // Thêm câu hỏi để đủ 10 câu
+                        { 
+                            id: 6, 
+                            question: "I am not as tall as my brother.", 
+                            correct: "My brother is taller than me.", 
+                            wrong1: "My brother is not as tall as me.", 
+                            wrong2: "My brother is the tallest.", 
+                            wrong3: "I am taller than my brother." 
+                        },
+                        { 
+                            id: 7, 
+                            question: "No one in my class is more intelligent than Lan.", 
+                            correct: "Lan is the most intelligent student in my class.", 
+                            wrong1: "Lan is more intelligent than no one in my class.", 
+                            wrong2: "Lan is as intelligent as no one in my class.", 
+                            wrong3: "No one is as intelligent as Lan in my class." 
+                        },
+                        { 
+                            id: 8, 
+                            question: "The last time I saw him was two weeks ago.", 
+                            correct: "I haven't seen him for two weeks.", 
+                            wrong1: "I last saw him for two weeks.", 
+                            wrong2: "I saw him two weeks ago.", 
+                            wrong3: "I have seen him for two weeks." 
+                        },
+                        { 
+                            id: 9, 
+                            question: "It takes me 30 minutes to go to school by bike.", 
+                            correct: "I spend 30 minutes going to school by bike.", 
+                            wrong1: "I spend 30 minutes to go to school by bike.", 
+                            wrong2: "It takes 30 minutes for me to go to school by bike.", 
+                            wrong3: "Going to school by bike takes me 30 minutes." 
+                        },
+                        { 
+                            id: 10, 
+                            question: "Despite the bad weather, they went to school.", 
+                            correct: "Although the weather was bad, they went to school.", 
+                            wrong1: "Because the weather was bad, they went to school.", 
+                            wrong2: "In spite of the bad weather, but they went to school.", 
+                            wrong3: "Because of the bad weather, they went to school." 
                         }
                     ]
                 }
@@ -1855,6 +2218,47 @@
                         },
                         { 
                             id: 5, 
+                            question: "Rearrange the words: Book / this / is / interesting / an.", 
+                            correct: "This is an interesting book.", 
+                            wrong1: "This an interesting book is.", 
+                            wrong2: "An interesting book this is.", 
+                            wrong3: "Is this an interesting book." 
+                        },
+                        // Thêm câu hỏi để đủ 10 câu
+                        { 
+                            id: 6, 
+                            question: "Rearrange the words: I / to / every / go / school / day.", 
+                            correct: "I go to school every day.", 
+                            wrong1: "I every day go to school.", 
+                            wrong2: "Every day I go to school.", 
+                            wrong3: "Go to school I every day." 
+                        },
+                        { 
+                            id: 7, 
+                            question: "Rearrange the words: She / is / a / student / good.", 
+                            correct: "She is a good student.", 
+                            wrong1: "She a good student is.", 
+                            wrong2: "A good student she is.", 
+                            wrong3: "Is she a good student." 
+                        },
+                        { 
+                            id: 8, 
+                            question: "Rearrange the words: They / football / played / yesterday.", 
+                            correct: "They played football yesterday.", 
+                            wrong1: "They football played yesterday.", 
+                            wrong2: "Played they football yesterday.", 
+                            wrong3: "Yesterday they played football." 
+                        },
+                        { 
+                            id: 9, 
+                            question: "Rearrange the words: English / I / like / very much.", 
+                            correct: "I like English very much.", 
+                            wrong1: "I very much like English.", 
+                            wrong2: "English I like very much.", 
+                            wrong3: "Like English I very much." 
+                        },
+                        { 
+                            id: 10, 
                             question: "Rearrange the words: Book / this / is / interesting / an.", 
                             correct: "This is an interesting book.", 
                             wrong1: "This an interesting book is.", 
@@ -8974,6 +9378,7 @@
                 }
             ]
         };
+
       
         // Kho đề cho L9GK1
         const L9GK1 = {
@@ -13960,7 +14365,6 @@
 
 
 
-
         // Định nghĩa tất cả các kho đề
         const questionBank = {
             L4GK1: L4GK1,
@@ -14021,6 +14425,221 @@
             }
         }
 
+        // Cấu hình cho từng bộ bài tập
+        const exerciseSetConfigs = {
+            FULL: {
+                title: "TỔNG HỢP",
+                parts: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10', 'P11', 'P12'],
+                questionCounts: {
+                    P1: 2,
+                    P2: 2,
+                    P3: 4,
+                    P4: 3,
+                    P5: 9,
+                    P6: 5,
+                    P7: 5,
+                    P8: 2,
+                    P9: 2,
+                    P10: 2,
+                    P11: 2,
+                    P12: 2
+                },
+                partTimes: {
+                    P1: 40,
+                    P2: 40,
+                    P3: 90,
+                    P4: 120,
+                    P5: 270,
+                    P6: 240,
+                    P7: 240,
+                    P8: 120,
+                    P9: 120,
+                    P10: 120,
+                    P11: 120,
+                    P12: 120
+                }
+            },
+            PRONUNCIATION_VOCABULARY_GRAMMAR: {
+                title: "PHÁT ÂM, TRỌNG ÂM, TỪ VỰNG VÀ NGỮ PHÁP",
+                parts: ['P1', 'P2', 'P3', 'P5'],
+                questionCounts: {
+                    P1: 4,
+                    P2: 4,
+                    P3: 6,
+                    P5: 16
+                },
+                partTimes: {
+                    P1: 80,
+                    P2: 80,
+                    P3: 200,
+                    P5: 480
+                }
+            },
+            ERROR_READING_COMMUNICATION_REWRITE: {
+                title: "TÌM LỖI SAI, ĐỌC HIỂU, GIAO TIẾP VÀ VIẾT LẠI CÂU",
+                parts: ['P4', 'P7', 'P9', 'P11'],
+                questionCounts: {
+                    P4: 6,
+                    P7: 5,
+                    P9: 4,
+                    P11: 4
+                },
+                partTimes: {
+                    P4: 240,
+                    P7: 240,
+                    P9: 240,
+                    P11: 240
+                }
+            },
+            FILL_ARRANGE_SIGNS_WORDS: {
+                title: "ĐIỀN KHUYẾT, SẮP XẾP CÁC CÂU, BIỂN BÁO VÀ SẮP XẾP CÁC TỪ",
+                parts: ['P6', 'P8', 'P10', 'P12'],
+                questionCounts: {
+                    P6: 5,
+                    P8: 4,
+                    P10: 4,
+                    P12: 4
+                },
+                partTimes: {
+                    P6: 240,
+                    P8: 240,
+                    P10: 240,
+                    P12: 240
+                }
+            },
+            // Các cấu hình mới cho 12 phần riêng lẻ
+            P1: {
+                title: "Phần 1 – PHÁT ÂM",
+                parts: ['P1'],
+                questionCounts: {
+                    P1: 20
+                },
+                partTimes: {
+                    P1: 300 // 20 câu * 15 giây
+                },
+                perQuestionTime: 15
+            },
+            P2: {
+                title: "Phần 2 – TRỌNG ÂM",
+                parts: ['P2'],
+                questionCounts: {
+                    P2: 20
+                },
+                partTimes: {
+                    P2: 300 // 20 câu * 15 giây
+                },
+                perQuestionTime: 15
+            },
+            P3: {
+                title: "Phần 3 – ĐỒNG NGHĨA NGƯỢC NGHĨA",
+                parts: ['P3'],
+                questionCounts: {
+                    P3: 15
+                },
+                partTimes: {
+                    P3: 300 // 15 câu * 20 giây
+                },
+                perQuestionTime: 20
+            },
+            P4: {
+                title: "Phần 4 – TÌM LỖI SAI",
+                parts: ['P4'],
+                questionCounts: {
+                    P4: 10
+                },
+                partTimes: {
+                    P4: 300 // 10 câu * 30 giây
+                },
+                perQuestionTime: 30
+            },
+            P5: {
+                title: "Phần 5 – TỪ VỰNG NGỮ PHÁP",
+                parts: ['P5'],
+                questionCounts: {
+                    P5: 20
+                },
+                partTimes: {
+                    P5: 300 // 20 câu * 15 giây
+                },
+                perQuestionTime: 15
+            },
+            P6: {
+                title: "Phần 6 – ĐIỀM KHUYẾT",
+                parts: ['P6'],
+                questionCounts: {
+                    P6: 5
+                },
+                partTimes: {
+                    P6: 240
+                }
+            },
+            P7: {
+                title: "Phần 7 – ĐỌC HIỂU",
+                parts: ['P7'],
+                questionCounts: {
+                    P7: 5
+                },
+                partTimes: {
+                    P7: 240
+                }
+            },
+            P8: {
+                title: "Phần 8 – SẮP XẾP CÁC CÂU",
+                parts: ['P8'],
+                questionCounts: {
+                    P8: 10
+                },
+                partTimes: {
+                    P8: 300 // 10 câu * 30 giây
+                },
+                perQuestionTime: 30
+            },
+            P9: {
+                title: "Phần 9 – GIAO TIẾP",
+                parts: ['P9'],
+                questionCounts: {
+                    P9: 15
+                },
+                partTimes: {
+                    P9: 300 // 15 câu * 20 giây
+                },
+                perQuestionTime: 20
+            },
+            P10: {
+                title: "Phần 10 – BIẾN BÁO TIN TỨC",
+                parts: ['P10'],
+                questionCounts: {
+                    P10: 15
+                },
+                partTimes: {
+                    P10: 300 // 15 câu * 20 giây
+                },
+                perQuestionTime: 20
+            },
+            P11: {
+                title: "Phần 11 – VIẾT LẠI CÂU CÓ NGHĨA KHÔNG ĐỔI",
+                parts: ['P11'],
+                questionCounts: {
+                    P11: 10
+                },
+                partTimes: {
+                    P11: 300 // 10 câu * 30 giây
+                },
+                perQuestionTime: 30
+            },
+            P12: {
+                title: "Phần 12 – SẮP XẾP CÁC TỪ THÀNH CÂU",
+                parts: ['P12'],
+                questionCounts: {
+                    P12: 10
+                },
+                partTimes: {
+                    P12: 300 // 10 câu * 30 giây
+                },
+                perQuestionTime: 30
+            }
+        };
+
         // Biến toàn cục
         let currentScreen = 'main';
         let currentExam = '';
@@ -14038,38 +14657,11 @@
         let blurTime = null; // Thời điểm khi người dùng rời khỏi trang
         let focusTime = null; // Thời điểm khi người dùng quay lại trang
         let isPageVisible = true; // Trạng thái hiển thị của trang
-
-        // Thời gian cho từng phần
-        const partTimes = {
-            P1: 40,    // 40 giây
-            P2: 40,    // 40 giây
-            P3: 90,    // 1 phút 30 giây
-            P4: 120,   // 2 phút
-            P5: 270,   // 4 phút 30 giây
-            P6: 240,   // 4 phút
-            P7: 240,   // 4 phút
-            P8: 120,    // 2 phút
-            P9: 120,    // 2 phút
-            P10: 120,   // 2 phút
-            P11: 120,  // 2 phút
-            P12: 120   // 2 phút
-        };
-
-        // Số câu hỏi cho từng phần
-        const questionCounts = {
-            P1: 2,
-            P2: 2,
-            P3: 4,
-            P4: 3,
-            P5: 9,     // Giảm từ 11 xuống 9 câu
-            P6: 5,
-            P7: 5,
-            P8: 2,     // Thay đổi từ 1 lên 2 câu
-            P9: 2,     // Thay đổi từ 1 lên 2 câu
-            P10: 2,    // Thay đổi từ 1 lên 2 câu
-            P11: 2,
-            P12: 2     // Giảm từ 3 xuống 2 câu
-        };
+        let currentExerciseSet = 'FULL'; // Bộ bài tập hiện tại
+        let currentConfig = exerciseSetConfigs.FULL; // Cấu hình hiện tại
+        let currentQuestionIndex = 0; // Chỉ số câu hỏi hiện tại trong phần (dùng cho các phần mới)
+        let currentPartQuestionCount = 0; // Tổng số câu hỏi trong phần hiện tại
+        let isSinglePartMode = false; // Chế độ làm bài từng câu một (cho các phần mới)
 
         // Xử lý sự kiện khi trang tải xong
         document.addEventListener('DOMContentLoaded', function() {
@@ -14129,18 +14721,18 @@
             const exam = questionBank[examKey];
             if (!exam) return false;
             
-            // Kiểm tra từng phần
-            for (let part = 1; part <= 12; part++) {
-                const partKey = `P${part}`;
-                if (exam[partKey]) {
+            // Kiểm tra từng phần trong cấu hình hiện tại
+            for (let part of currentConfig.parts) {
+                if (exam[part]) {
                     // Với các phần từ 1-5, 8-12: kiểm tra phần đầu tiên (index 0) có câu hỏi không
-                    if (part <= 5 || part >= 8) {
-                        if (exam[partKey][0] && exam[partKey][0].questions && exam[partKey][0].questions.length > 0) {
+                    if (part === 'P1' || part === 'P2' || part === 'P3' || part === 'P4' || part === 'P5' || 
+                        part === 'P8' || part === 'P9' || part === 'P10' || part === 'P11' || part === 'P12') {
+                        if (exam[part][0] && exam[part][0].questions && exam[part][0].questions.length > 0) {
                             return true;
                         }
                     } else {
                         // Với phần 6 và 7: kiểm tra các phần con (C1, C2, ...) có câu hỏi không
-                        for (let section of exam[partKey]) {
+                        for (let section of exam[part]) {
                             if (section.questions && section.questions.length > 0) {
                                 return true;
                             }
@@ -14157,6 +14749,7 @@
             const studentName = document.getElementById('studentName').value.trim();
             const classSelect = document.getElementById('classSelect').value;
             const examSelect = document.getElementById('examSelect').value;
+            const exerciseSet = document.getElementById('exerciseSetSelect').value;
             
             if (!studentName) {
                 alert('Vui lòng nhập tên của bạn!');
@@ -14164,6 +14757,8 @@
             }
             
             currentExam = classSelect + examSelect;
+            currentExerciseSet = exerciseSet;
+            currentConfig = exerciseSetConfigs[exerciseSet];
             
             // Kiểm tra xem đề thi có dữ liệu không
             if (!hasExamData(currentExam)) {
@@ -14172,8 +14767,9 @@
                 return;
             }
             
-            currentPart = 1;
+            currentPart = 0; // Sử dụng index thay vì số phần
             currentQuestion = 1;
+            currentQuestionIndex = 0;
             selectedAnswers = {};
             selectedQuestions = {};
             answerOrders = {};
@@ -14184,6 +14780,9 @@
             isPageVisible = true;
             startTime = new Date();
             
+            // Kiểm tra xem có phải là chế độ làm bài từng câu không
+            isSinglePartMode = currentConfig.perQuestionTime !== undefined;
+            
             // Chọn câu hỏi ngẫu nhiên cho từng phần
             selectRandomQuestions();
             
@@ -14191,7 +14790,7 @@
             showScreen('exam');
             
             // Hiển thị phần đầu tiên
-            showPart(1);
+            showPart(0);
         }
 
         // Chọn câu hỏi ngẫu nhiên cho từng phần
@@ -14204,203 +14803,65 @@
                 return;
             }
             
-            // Phần 1: Chọn 2 câu ngẫu nhiên
-            if (examData.P1 && examData.P1[0] && examData.P1[0].questions && examData.P1[0].questions.length >= 2) {
-                selectedQuestions.P1 = getRandomItems(examData.P1[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P1.forEach((question, index) => {
-                    questionCodes[`P1.${index + 1}`] = {
-                        sectionId: examData.P1[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P1 = [];
-            }
-            
-            // Phần 2: Chọn 2 câu ngẫu nhiên
-            if (examData.P2 && examData.P2[0] && examData.P2[0].questions && examData.P2[0].questions.length >= 2) {
-                selectedQuestions.P2 = getRandomItems(examData.P2[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P2.forEach((question, index) => {
-                    questionCodes[`P2.${index + 1}`] = {
-                        sectionId: examData.P2[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P2 = [];
-            }
-            
-            // Phần 3: Chọn 4 câu ngẫu nhiên
-            if (examData.P3 && examData.P3[0] && examData.P3[0].questions && examData.P3[0].questions.length >= 4) {
-                selectedQuestions.P3 = getRandomItems(examData.P3[0].questions, 4);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P3.forEach((question, index) => {
-                    questionCodes[`P3.${index + 1}`] = {
-                        sectionId: examData.P3[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P3 = [];
-            }
-            
-            // Phần 4: Chọn 3 câu ngẫu nhiên
-            if (examData.P4 && examData.P4[0] && examData.P4[0].questions && examData.P4[0].questions.length >= 3) {
-                selectedQuestions.P4 = getRandomItems(examData.P4[0].questions, 3);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P4.forEach((question, index) => {
-                    questionCodes[`P4.${index + 1}`] = {
-                        sectionId: examData.P4[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P4 = [];
-            }
-            
-            // Phần 5: Chọn 9 câu ngẫu nhiên (giảm từ 11 xuống 9)
-            if (examData.P5 && examData.P5[0] && examData.P5[0].questions && examData.P5[0].questions.length >= 9) {
-                selectedQuestions.P5 = getRandomItems(examData.P5[0].questions, 9);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P5.forEach((question, index) => {
-                    questionCodes[`P5.${index + 1}`] = {
-                        sectionId: examData.P5[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P5 = [];
-            }
-            
-            // Phần 6: Chọn 1 yêu cầu ngẫu nhiên, giữ nguyên thứ tự câu hỏi
-            if (examData.P6 && examData.P6.length > 0) {
-                const sectionsWithQuestions = examData.P6.filter(section => section.questions && section.questions.length > 0);
-                if (sectionsWithQuestions.length > 0) {
-                    const randomSection = sectionsWithQuestions[Math.floor(Math.random() * sectionsWithQuestions.length)];
-                    selectedQuestions.P6 = {
-                        section: randomSection,
-                        questions: randomSection.questions
-                    };
-                    // Lưu mã nguồn cho từng câu hỏi
-                    randomSection.questions.forEach((question, index) => {
-                        questionCodes[`P6.${index + 1}`] = {
-                            sectionId: randomSection.id,
-                            questionId: question.id
+            // Duyệt qua tất cả các phần trong cấu hình
+            for (let partKey of currentConfig.parts) {
+                // Lấy số câu cần chọn cho phần này từ cấu hình
+                const questionCount = currentConfig.questionCounts[partKey];
+                
+                // Xử lý từng phần theo loại
+                if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                    partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
+                    // Các phần chỉ có 1 yêu cầu
+                    if (examData[partKey] && examData[partKey][0] && examData[partKey][0].questions && examData[partKey][0].questions.length >= questionCount) {
+                        selectedQuestions[partKey] = getRandomItems(examData[partKey][0].questions, questionCount);
+                        // Lưu mã nguồn cho từng câu hỏi
+                        selectedQuestions[partKey].forEach((question, index) => {
+                            questionCodes[`${partKey}.${index + 1}`] = {
+                                sectionId: examData[partKey][0].id,
+                                questionId: question.id
+                            };
+                        });
+                    } else {
+                        selectedQuestions[partKey] = [];
+                    }
+                } else if (partKey === 'P6' || partKey === 'P7') {
+                    // Các phần có nhiều yêu cầu
+                    if (examData[partKey] && examData[partKey].length > 0) {
+                        const sectionsWithQuestions = examData[partKey].filter(section => section.questions && section.questions.length > 0);
+                        if (sectionsWithQuestions.length > 0) {
+                            const randomSection = sectionsWithQuestions[Math.floor(Math.random() * sectionsWithQuestions.length)];
+                            let selectedQuestionsInSection;
+                            if (partKey === 'P6') {
+                                // Phần 6: giữ nguyên thứ tự câu hỏi
+                                selectedQuestionsInSection = randomSection.questions.slice(0, questionCount);
+                            } else {
+                                // Phần 7: chọn ngẫu nhiên
+                                selectedQuestionsInSection = getRandomItems(randomSection.questions, questionCount);
+                            }
+                            selectedQuestions[partKey] = {
+                                section: randomSection,
+                                questions: selectedQuestionsInSection
+                            };
+                            // Lưu mã nguồn cho từng câu hỏi
+                            selectedQuestionsInSection.forEach((question, index) => {
+                                questionCodes[`${partKey}.${index + 1}`] = {
+                                    sectionId: randomSection.id,
+                                    questionId: question.id
+                                };
+                            });
+                        } else {
+                            selectedQuestions[partKey] = {
+                                section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
+                                questions: []
+                            };
+                        }
+                    } else {
+                        selectedQuestions[partKey] = {
+                            section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
+                            questions: []
                         };
-                    });
-                } else {
-                    selectedQuestions.P6 = {
-                        section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
-                        questions: []
-                    };
+                    }
                 }
-            } else {
-                selectedQuestions.P6 = {
-                    section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
-                    questions: []
-                };
-            }
-            
-            // Phần 7: Chọn 1 yêu cầu ngẫu nhiên, sau đó chọn 5 câu ngẫu nhiên
-            if (examData.P7 && examData.P7.length > 0) {
-                const sectionsWithQuestions = examData.P7.filter(section => section.questions && section.questions.length > 0);
-                if (sectionsWithQuestions.length > 0) {
-                    const randomSection = sectionsWithQuestions[Math.floor(Math.random() * sectionsWithQuestions.length)];
-                    const selectedQuestionsInSection = getRandomItems(randomSection.questions, Math.min(5, randomSection.questions.length));
-                    selectedQuestions.P7 = {
-                        section: randomSection,
-                        questions: selectedQuestionsInSection
-                    };
-                    // Lưu mã nguồn cho từng câu hỏi
-                    selectedQuestionsInSection.forEach((question, index) => {
-                        questionCodes[`P7.${index + 1}`] = {
-                            sectionId: randomSection.id,
-                            questionId: question.id
-                        };
-                    });
-                } else {
-                    selectedQuestions.P7 = {
-                        section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
-                        questions: []
-                    };
-                }
-            } else {
-                selectedQuestions.P7 = {
-                    section: { id: "C1", passage: "Không có dữ liệu", questions: [] },
-                    questions: []
-                };
-            }
-            
-            // Phần 8: Chọn 2 câu ngẫu nhiên (thay đổi từ 1 lên 2)
-            if (examData.P8 && examData.P8[0] && examData.P8[0].questions && examData.P8[0].questions.length >= 2) {
-                selectedQuestions.P8 = getRandomItems(examData.P8[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P8.forEach((question, index) => {
-                    questionCodes[`P8.${index + 1}`] = {
-                        sectionId: examData.P8[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P8 = [];
-            }
-            
-            // Phần 9: Chọn 2 câu ngẫu nhiên (thay đổi từ 1 lên 2)
-            if (examData.P9 && examData.P9[0] && examData.P9[0].questions && examData.P9[0].questions.length >= 2) {
-                selectedQuestions.P9 = getRandomItems(examData.P9[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P9.forEach((question, index) => {
-                    questionCodes[`P9.${index + 1}`] = {
-                        sectionId: examData.P9[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P9 = [];
-            }
-            
-            // Phần 10: Chọn 2 câu ngẫu nhiên (thay đổi từ 1 lên 2)
-            if (examData.P10 && examData.P10[0] && examData.P10[0].questions && examData.P10[0].questions.length >= 2) {
-                selectedQuestions.P10 = getRandomItems(examData.P10[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P10.forEach((question, index) => {
-                    questionCodes[`P10.${index + 1}`] = {
-                        sectionId: examData.P10[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P10 = [];
-            }
-            
-            // Phần 11: Chọn 2 câu ngẫu nhiên
-            if (examData.P11 && examData.P11[0] && examData.P11[0].questions && examData.P11[0].questions.length >= 2) {
-                selectedQuestions.P11 = getRandomItems(examData.P11[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P11.forEach((question, index) => {
-                    questionCodes[`P11.${index + 1}`] = {
-                        sectionId: examData.P11[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P11 = [];
-            }
-            
-            // Phần 12: Chọn 2 câu ngẫu nhiên (giảm từ 3 xuống 2)
-            if (examData.P12 && examData.P12[0] && examData.P12[0].questions && examData.P12[0].questions.length >= 2) {
-                selectedQuestions.P12 = getRandomItems(examData.P12[0].questions, 2);
-                // Lưu mã nguồn cho từng câu hỏi
-                selectedQuestions.P12.forEach((question, index) => {
-                    questionCodes[`P12.${index + 1}`] = {
-                        sectionId: examData.P12[0].id,
-                        questionId: question.id
-                    };
-                });
-            } else {
-                selectedQuestions.P12 = [];
             }
         }
 
@@ -14433,9 +14894,25 @@
         }
 
         // Hiển thị phần thi
-        function showPart(partNumber) {
-            currentPart = partNumber;
-            currentQuestion = 1;
+        function showPart(partIndex) {
+            if (partIndex >= currentConfig.parts.length) {
+                // Kết thúc bài thi
+                endTime = new Date();
+                showReport();
+                return;
+            }
+            
+            const partKey = currentConfig.parts[partIndex];
+            currentPart = partIndex;
+            currentQuestionIndex = 0;
+            
+            // Xác định số câu hỏi trong phần này
+            if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
+                currentPartQuestionCount = selectedQuestions[partKey] ? selectedQuestions[partKey].length : 0;
+            } else if (partKey === 'P6' || partKey === 'P7') {
+                currentPartQuestionCount = selectedQuestions[partKey] && selectedQuestions[partKey].questions ? selectedQuestions[partKey].questions.length : 0;
+            }
             
             // Dừng đồng hồ đếm ngược cũ
             if (timer) {
@@ -14448,16 +14925,15 @@
             document.getElementById('examSubtitle').textContent = `${classText} – ${examText}`;
             
             // Cập nhật mã đề
-            const partKey = `P${partNumber}`;
             let examCode = `${currentExam} – ${partKey}`;
             
-            if (partNumber === 1 || partNumber === 2 || partNumber === 3 || partNumber === 4 || partNumber === 5 || 
-                partNumber === 8 || partNumber === 9 || partNumber === 10 || partNumber === 11 || partNumber === 12) {
+            if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
                 // Các phần chỉ có 1 yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
                     examCode += `.C1`;
                 }
-            } else if (partNumber === 6 || partNumber === 7) {
+            } else if (partKey === 'P6' || partKey === 'P7') {
                 // Các phần có nhiều yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
                     examCode += `.${selectedQuestions[partKey].section.id}`;
@@ -14465,19 +14941,19 @@
             }
             
             document.getElementById('examCode').textContent = examCode;
-            document.getElementById('examPart').textContent = `Phần ${partNumber}`;
+            document.getElementById('examPart').textContent = `Phần ${partKey.substring(1)}`;
             
             // Hiển thị yêu cầu của đề bài
             const examData = questionBank[currentExam];
             let instruction = '';
             
-            if (partNumber === 1 || partNumber === 2 || partNumber === 3 || partNumber === 4 || partNumber === 5 || 
-                partNumber === 8 || partNumber === 9 || partNumber === 10 || partNumber === 11 || partNumber === 12) {
+            if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
                 // Các phần chỉ có 1 yêu cầu
                 if (examData && examData[partKey] && examData[partKey][0]) {
                     instruction = examData[partKey][0].passage;
                 }
-            } else if (partNumber === 6 || partNumber === 7) {
+            } else if (partKey === 'P6' || partKey === 'P7') {
                 // Các phần có nhiều yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
                     instruction = selectedQuestions[partKey].section.passage;
@@ -14486,54 +14962,66 @@
             
             document.getElementById('instruction').innerHTML = instruction;
             
-            // Hiển thị các nút câu hỏi
+            // Hiển thị các nút câu hỏi (chỉ cho các phần không phải chế độ từng câu)
             const questionButtonsContainer = document.getElementById('questionButtons');
             questionButtonsContainer.innerHTML = '';
             
-            const questionCount = questionCounts[partKey];
-            for (let i = 1; i <= questionCount; i++) {
-                const button = document.createElement('button');
-                button.className = 'question-button';
-                button.textContent = `CÂU ${i}`;
-                button.dataset.question = i;
-                
-                // Đánh dấu câu đã trả lời
-                if (selectedAnswers[`${partKey}.${i}`] !== undefined) {
-                    button.classList.add('answered');
+            if (!isSinglePartMode) {
+                const questionCount = currentConfig.questionCounts[partKey];
+                for (let i = 1; i <= questionCount; i++) {
+                    const button = document.createElement('button');
+                    button.className = 'question-button';
+                    button.textContent = `CÂU ${i}`;
+                    button.dataset.question = i;
+                    
+                    // Đánh dấu câu đã trả lời
+                    if (selectedAnswers[`${partKey}.${i}`] !== undefined) {
+                        button.classList.add('answered');
+                    }
+                    
+                    // Thêm sự kiện click
+                    button.addEventListener('click', function() {
+                        showQuestion(partKey, i);
+                    });
+                    
+                    questionButtonsContainer.appendChild(button);
                 }
-                
-                // Thêm sự kiện click
-                button.addEventListener('click', function() {
-                    showQuestion(partNumber, i);
-                });
-                
-                questionButtonsContainer.appendChild(button);
             }
             
             // Hiển thị câu hỏi đầu tiên
-            showQuestion(partNumber, 1);
+            showQuestion(partKey, 1);
             
             // Bắt đầu đồng hồ đếm ngược
-            timeLeft = partTimes[partKey];
-            updateTimer();
-            timer = setInterval(updateTimer, 1000);
+            if (isSinglePartMode) {
+                // Chế độ từng câu: bắt đầu với thời gian cho câu đầu tiên
+                timeLeft = currentConfig.perQuestionTime;
+                updateTimer();
+                timer = setInterval(updateTimer, 1000);
+            } else {
+                // Chế độ thông thường: bắt đầu với tổng thời gian cho phần
+                timeLeft = currentConfig.partTimes[partKey];
+                updateTimer();
+                timer = setInterval(updateTimer, 1000);
+            }
         }
 
         // Hiển thị câu hỏi
-        function showQuestion(partNumber, questionNumber) {
+        function showQuestion(partKey, questionNumber) {
             currentQuestion = questionNumber;
-            const partKey = `P${partNumber}`;
+            currentQuestionIndex = questionNumber - 1;
             const questionKey = `${partKey}.${questionNumber}`;
             
-            // Cập nhật trạng thái các nút câu hỏi
-            const questionButtons = document.querySelectorAll('.question-button');
-            questionButtons.forEach(button => {
-                if (parseInt(button.dataset.question) === questionNumber) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
-            });
+            // Cập nhật trạng thái các nút câu hỏi (chỉ cho các phần không phải chế độ từng câu)
+            if (!isSinglePartMode) {
+                const questionButtons = document.querySelectorAll('.question-button');
+                questionButtons.forEach(button => {
+                    if (parseInt(button.dataset.question) === questionNumber) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+            }
             
             // Cập nhật mã đề với mã nguồn của câu hỏi hiện tại
             const currentExamCode = document.getElementById('examCode').textContent;
@@ -14560,13 +15048,13 @@
             // Lấy dữ liệu câu hỏi
             let questionData = null;
             
-            if (partNumber === 1 || partNumber === 2 || partNumber === 3 || partNumber === 4 || partNumber === 5 || 
-                partNumber === 8 || partNumber === 9 || partNumber === 10 || partNumber === 11 || partNumber === 12) {
+            if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
                 // Các phần chỉ có 1 yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= questionNumber) {
                     questionData = selectedQuestions[partKey][questionNumber - 1];
                 }
-            } else if (partNumber === 6 || partNumber === 7) {
+            } else if (partKey === 'P6' || partKey === 'P7') {
                 // Các phần có nhiều yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= questionNumber) {
                     questionData = selectedQuestions[partKey].questions[questionNumber - 1];
@@ -14579,7 +15067,7 @@
                 questionDiv.className = 'question-text';
                 
                 // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                if (partNumber === 1) {
+                if (partKey === 'P1') {
                     questionDiv.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${questionData.question}`;
                 } else {
                     questionDiv.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${questionData.question}`;
@@ -14615,181 +15103,205 @@
                 }
                 
                 // Tạo các nút đáp án
+                const answerLabels = ['A', 'B', 'C', 'D'];
                 shuffledAnswers.forEach((answer, index) => {
                     const answerDiv = document.createElement('div');
                     answerDiv.className = 'answer-option';
+                    answerDiv.innerHTML = `<strong>${answerLabels[index]}</strong>. ${answer.text}`;
+                    answerDiv.dataset.answer = answerLabels[index];
                     
-                    // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
-                    if (partNumber === 1) {
-                        answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                    } else {
-                        answerDiv.innerHTML = `${String.fromCharCode(65 + index)}. ${answer.text}`;
-                    }
-                    
-                    // Kiểm tra nếu đã chọn đáp án này
-                    if (selectedAnswers[questionKey] === index) {
+                    // Kiểm tra nếu đáp án này đã được chọn
+                    if (selectedAnswers[questionKey] === answerLabels[index]) {
                         answerDiv.classList.add('selected');
                     }
                     
                     // Thêm sự kiện click
                     answerDiv.addEventListener('click', function() {
-                        selectAnswer(questionKey, index);
+                        // Đánh dấu đáp án đã chọn
+                        selectedAnswers[questionKey] = answerLabels[index];
+                        
+                        // Cập nhật giao diện
+                        const allOptions = document.querySelectorAll('.answer-option');
+                        allOptions.forEach(opt => opt.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        // Cập nhật trạng thái nút câu hỏi (chỉ cho các phần không phải chế độ từng câu)
+                        if (!isSinglePartMode) {
+                            const questionButton = document.querySelector(`.question-button[data-question="${questionNumber}"]`);
+                            if (questionButton) {
+                                questionButton.classList.add('answered');
+                            }
+                        }
+                        
+                        // Nếu đang ở chế độ từng câu, tự động chuyển câu sau khi chọn đáp án
+                        if (isSinglePartMode) {
+                            // Dừng đồng hồ đếm ngược
+                            if (timer) {
+                                clearInterval(timer);
+                            }
+                            
+                            // Chuyển câu sau 1 giây
+                            setTimeout(() => {
+                                nextQuestion();
+                            }, 1000);
+                        }
                     });
                     
                     answersDiv.appendChild(answerDiv);
                 });
                 
                 questionContent.appendChild(answersDiv);
+            } else {
+                // Nếu không có dữ liệu câu hỏi
+                questionContent.innerHTML = '<p>Không có câu hỏi để hiển thị.</p>';
             }
         }
 
-        // Chọn đáp án - ĐÃ SỬA LỖI
-        function selectAnswer(questionKey, answerIndex) {
-            // Lưu đáp án được chọn
-            selectedAnswers[questionKey] = answerIndex;
+        // Chuyển sang câu tiếp theo (chỉ cho chế độ từng câu)
+        function nextQuestion() {
+            // Tăng chỉ số câu hỏi hiện tại
+            currentQuestionIndex++;
             
-            // Cập nhật giao diện - Sửa lỗi ở đây
-            const answerOptions = document.querySelectorAll('.answer-option');
-            answerOptions.forEach((option, index) => {
-                if (index === answerIndex) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
+            // Kiểm tra xem còn câu hỏi nào không
+            if (currentQuestionIndex < currentPartQuestionCount) {
+                // Hiển thị câu hỏi tiếp theo
+                const partKey = currentConfig.parts[currentPart];
+                showQuestion(partKey, currentQuestionIndex + 1);
+                
+                // Reset và bắt đầu đồng hồ đếm ngược mới
+                timeLeft = currentConfig.perQuestionTime;
+                updateTimer();
+                if (timer) {
+                    clearInterval(timer);
                 }
-            });
-            
-            // Đánh dấu nút câu hỏi đã được trả lời
-            const partKey = questionKey.split('.')[0];
-            const questionNumber = parseInt(questionKey.split('.')[1]);
-            const questionButtons = document.querySelectorAll('.question-button');
-            questionButtons.forEach(button => {
-                if (parseInt(button.dataset.question) === questionNumber) {
-                    button.classList.add('answered');
-                }
-            });
-        }
-
-        // Cập nhật đồng hồ đếm ngược
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('progressText').textContent = `Thời gian còn lại: ${minutes} phút ${seconds} giây`;
-            
-            // Cập nhật thanh progress
-            const totalTime = partTimes[`P${currentPart}`];
-            const percentage = (timeLeft / totalTime) * 100;
-            document.getElementById('progressBar').style.width = `${percentage}%`;
-            
-            // Giảm thời gian
-            timeLeft--;
-            
-            // Kiểm tra nếu hết thời gian
-            if (timeLeft < 0) {
-                clearInterval(timer);
+                timer = setInterval(updateTimer, 1000);
+            } else {
+                // Nếu đã hết câu hỏi trong phần này, chuyển sang phần tiếp theo
                 nextPart();
             }
         }
 
-        // Chuyển đến phần tiếp theo
+        // Chuyển sang phần tiếp theo
         function nextPart() {
-            if (isTabSwitched) {
-                showReport();
+            // Dừng đồng hồ đếm ngược
+            if (timer) {
+                clearInterval(timer);
+            }
+            
+            // Chuyển sang phần tiếp theo
+            showPart(currentPart + 1);
+        }
+
+        // Cập nhật đồng hồ đếm ngược
+        function updateTimer() {
+            // Cập nhật thanh tiến trình
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            if (isSinglePartMode) {
+                // Chế độ từng câu
+                const totalTime = currentConfig.perQuestionTime;
+                const percentage = (timeLeft / totalTime) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `Thời gian còn lại: ${timeLeft} giây`;
+            } else {
+                // Chế độ thông thường
+                const totalTime = currentConfig.partTimes[currentConfig.parts[currentPart]];
+                const percentage = (timeLeft / totalTime) * 100;
+                progressBar.style.width = `${percentage}%`;
+                
+                // Chuyển đổi thời gian thành phút:giây
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                progressText.textContent = `Thời gian còn lại: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+            
+            // Kiểm tra nếu hết thời gian
+            if (timeLeft <= 0) {
+                if (isSinglePartMode) {
+                    // Chế độ từng câu: tự động chuyển câu
+                    nextQuestion();
+                } else {
+                    // Chế độ thông thường: tự động chuyển phần
+                    nextPart();
+                }
                 return;
             }
             
-            if (currentPart < 12) {
-                showPart(currentPart + 1);
-            } else {
-                // Kết thúc bài thi
-                endTime = new Date();
-                showReport();
-            }
+            timeLeft--;
         }
 
-        // Xử lý sự kiện khi trang thay đổi trạng thái hiển thị
+        // Xử lý sự kiện khi người dùng chuyển tab - CẢI TIẾN: KẾT THÚC BÀI THI NGAY
         function handleVisibilityChange() {
-            if (currentScreen === 'exam') {
-                if (document.hidden) {
-                    // Trang không còn hiển thị (người dùng chuyển tab)
-                    isPageVisible = false;
-                    isTabSwitched = true;
-                    showWarningMessage();
-                    setTimeout(() => {
-                        showReport();
-                    }, 2000); // Hiển thị cảnh báo trong 2 giây trước khi chuyển sang báo cáo
-                } else {
-                    // Trang hiển thị lại
-                    isPageVisible = true;
-                }
-            }
-        }
-
-        // Xử lý sự kiện khi người dùng rời khỏi trang
-        function handleBlur() {
-            if (currentScreen === 'exam') {
+            if (document.hidden) {
+                // Người dùng chuyển sang tab khác
                 blurTime = new Date();
                 isPageVisible = false;
+                
+                // Kết thúc bài thi ngay lập tức
+                endExamDueToCheating();
+            } else {
+                // Người dùng quay lại tab
+                focusTime = new Date();
+                isPageVisible = true;
             }
+        }
+
+        // Xử lý sự kiện khi người dùng rời khỏi trang - CẢI TIẾN: KẾT THÚC BÀI THI NGAY
+        function handleBlur() {
+            blurTime = new Date();
+            isPageVisible = false;
+            
+            // Kết thúc bài thi ngay lập tức
+            endExamDueToCheating();
         }
 
         // Xử lý sự kiện khi người dùng quay lại trang
         function handleFocus() {
-            if (currentScreen === 'exam' && blurTime) {
-                focusTime = new Date();
-                const timeAway = focusTime - blurTime; // Thời gian rời khỏi trang (ms)
-                
-                // Nếu thời gian rời khỏi trang lớn hơn 3 giây, coi là gian lận
-                if (timeAway > 3000) {
-                    isTabSwitched = true;
-                    showWarningMessage();
-                    setTimeout(() => {
-                        showReport();
-                    }, 2000); // Hiển thị cảnh báo trong 2 giây trước khi chuyển sang báo cáo
-                }
-                
-                blurTime = null;
-                focusTime = null;
-                isPageVisible = true;
-            }
+            focusTime = new Date();
+            isPageVisible = true;
         }
 
         // Xử lý sự kiện khi chuột rời khỏi trang
         function handleMouseLeave() {
             if (currentScreen === 'exam') {
-                // Bắt đầu đếm thời gian khi chuột rời khỏi trang
-                blurTime = new Date();
+                // Chỉ hiển thị cảnh báo khi đang làm bài
+                showCheatingWarning();
             }
         }
 
         // Xử lý sự kiện khi chuột quay lại trang
         function handleMouseEnter() {
-            if (currentScreen === 'exam' && blurTime) {
-                focusTime = new Date();
-                const timeAway = focusTime - blurTime; // Thời gian rời khỏi trang (ms)
-                
-                // Nếu thời gian rời khỏi trang lớn hơn 5 giây, coi là gian lận
-                if (timeAway > 5000) {
-                    isTabSwitched = true;
-                    showWarningMessage();
-                    setTimeout(() => {
-                        showReport();
-                    }, 2000); // Hiển thị cảnh báo trong 2 giây trước khi chuyển sang báo cáo
-                }
-                
-                blurTime = null;
-                focusTime = null;
+            // Ẩn cảnh báo khi chuột quay lại
+            hideCheatingWarning();
+        }
+
+        // Hiển thị cảnh báo gian lận
+        function showCheatingWarning() {
+            const warningMessage = document.getElementById('warningMessage');
+            if (warningMessage) {
+                warningMessage.style.display = 'block';
+                setTimeout(() => {
+                    warningMessage.style.display = 'none';
+                }, 3000);
             }
         }
 
-        // Hiển thị thông báo cảnh báo gian lận
-        function showWarningMessage() {
-            const warningElement = document.getElementById('warningMessage');
-            warningElement.style.display = 'block';
-            
-            // Tự động ẩn sau 5 giây
-            setTimeout(() => {
-                warningElement.style.display = 'none';
-            }, 5000);
+        // Ẩn cảnh báo gian lận
+        function hideCheatingWarning() {
+            const warningMessage = document.getElementById('warningMessage');
+            if (warningMessage) {
+                warningMessage.style.display = 'none';
+            }
+        }
+
+        // Kết thúc bài thi do gian lận
+        function endExamDueToCheating() {
+            if (currentScreen === 'exam') {
+                isTabSwitched = true;
+                endTime = new Date();
+                showReport();
+            }
         }
 
         // Hiển thị báo cáo kết quả
@@ -14799,12 +15311,7 @@
                 clearInterval(timer);
             }
             
-            // Nếu chưa có thời gian kết thúc, đặt thời gian hiện tại
-            if (!endTime) {
-                endTime = new Date();
-            }
-            
-            // Hiển thị màn hình báo cáo
+            // Hiển thị giao diện báo cáo
             showScreen('report');
             
             // Cập nhật tiêu đề
@@ -14812,226 +15319,199 @@
             const examText = document.getElementById('examSelect').options[document.getElementById('examSelect').selectedIndex].text;
             document.getElementById('reportSubtitle').textContent = `${classText} – ${examText}`;
             
-            // Cập nhật thông tin người làm bài
-            const studentName = document.getElementById('studentName').value.trim();
-            document.getElementById('reportStudentName').textContent = studentName;
+            // Cập nhật tiêu đề kết quả theo bộ bài tập đã chọn
+            document.getElementById('resultTitle').textContent = `KẾT QUẢ – ${currentConfig.title}`;
+            
+            // Cập nhật thông tin học viên
+            document.getElementById('reportStudentName').textContent = document.getElementById('studentName').value;
             
             // Cập nhật thời gian
-            document.getElementById('startTime').textContent = formatDateTime(startTime);
-            document.getElementById('endTime').textContent = formatDateTime(endTime);
+            const startTimeStr = startTime.toLocaleTimeString('vi-VN');
+            const endTimeStr = endTime.toLocaleTimeString('vi-VN');
+            const totalTimeInSeconds = Math.floor((endTime - startTime) / 1000);
+            const totalMinutes = Math.floor(totalTimeInSeconds / 60);
+            const totalSeconds = totalTimeInSeconds % 60;
             
-            // Tính tổng thời gian làm bài
-            const totalTime = Math.floor((endTime - startTime) / 1000); // Tổng số giây
-            const totalMinutes = Math.floor(totalTime / 60);
-            const totalSeconds = totalTime % 60;
+            document.getElementById('startTime').textContent = startTimeStr;
+            document.getElementById('endTime').textContent = endTimeStr;
             document.getElementById('totalTime').textContent = `${totalMinutes} phút ${totalSeconds} giây`;
             
-            // Tính số câu đúng và tỷ lệ đúng
+            // Tính kết quả
             const result = calculateResult();
-            document.getElementById('correctCount').textContent = `${result.correct} / ${result.total}`;
-            document.getElementById('correctRate').textContent = `${result.percentage}%`;
+            
+            // Cập nhật số câu đúng và tỷ lệ
+            document.getElementById('correctCount').textContent = `${result.correctCount} / ${result.totalCount}`;
+            document.getElementById('correctRate').textContent = `${result.correctPercentage}%`;
             
             // Hiển thị cảnh báo gian lận nếu có
             if (isTabSwitched) {
                 document.getElementById('cheatingWarning').style.display = 'block';
-            } else {
-                document.getElementById('cheatingWarning').style.display = 'none';
             }
             
-            // Cập nhật thanh progress tổng thể
+            // Cập nhật thanh tiến trình tổng
             const overallProgressBar = document.getElementById('overallProgressBar');
-            overallProgressBar.style.width = `${result.percentage}%`;
+            overallProgressBar.style.width = `${result.correctPercentage}%`;
             
-            if (result.percentage >= 80) {
-                overallProgressBar.style.backgroundColor = '#52c41a'; // Xanh
-            } else if (result.percentage >= 51) {
-                overallProgressBar.style.backgroundColor = '#faad14'; // Vàng
-            } else {
-                overallProgressBar.style.backgroundColor = '#f5222d'; // Đỏ
-            }
+            // Hiển thị biểu đồ kết quả
+            displayResultChart(result.partResults);
             
-            // Hiển thị biểu đồ kết quả từng phần
-            showResultChart(result.partResults);
-            
-            // Hiển thị danh sách các câu đã làm
-            showQuestionList(result.partResults);
+            // Hiển thị danh sách câu hỏi
+            displayQuestionList(result.partResults);
         }
 
-        // Định dạng ngày giờ
-        function formatDateTime(date) {
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            
-            return `${hours}:${minutes} - ${day}/${month}/${year}`;
-        }
-
-        // Tính kết quả
+        // Tính toán kết quả
         function calculateResult() {
-            const result = {
-                correct: 0,
-                total: 0,
-                percentage: 0,
-                partResults: {}
-            };
+            let correctCount = 0;
+            let totalCount = 0;
+            const partResults = {};
             
-            // Duyệt qua từng phần
-            for (let part = 1; part <= 12; part++) {
-                const partKey = `P${part}`;
-                const partResult = {
-                    correct: 0,
-                    total: 0,
-                    percentage: 0
-                };
+            // Duyệt qua tất cả các phần
+            for (let partKey of currentConfig.parts) {
+                const questionCount = currentConfig.questionCounts[partKey];
+                let partCorrectCount = 0;
                 
-                // Xác định số câu hỏi thực tế cho phần
-                let actualQuestionCount = 0;
-                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
-                    if (selectedQuestions[partKey]) {
-                        actualQuestionCount = selectedQuestions[partKey].length;
-                    }
-                } else if (part === 6 || part === 7) {
-                    if (selectedQuestions[partKey] && selectedQuestions[partKey].questions) {
-                        actualQuestionCount = selectedQuestions[partKey].questions.length;
-                    }
-                }
-                
-                // Duyệt qua từng câu hỏi trong phần
-                for (let question = 1; question <= actualQuestionCount; question++) {
-                    const questionKey = `${partKey}.${question}`;
+                for (let i = 1; i <= questionCount; i++) {
+                    const questionKey = `${partKey}.${i}`;
+                    totalCount++;
                     
-                    // Lấy dữ liệu câu hỏi
-                    let questionData = null;
-                    
-                    if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                        part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
-                        // Các phần chỉ có 1 yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= question) {
-                            questionData = selectedQuestions[partKey][question - 1];
-                        }
-                    } else if (part === 6 || part === 7) {
-                        // Các phần có nhiều yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= question) {
-                            questionData = selectedQuestions[partKey].questions[question - 1];
-                        }
-                    }
-                    
-                    if (questionData) {
-                        result.total++;
-                        partResult.total++;
+                    // Kiểm tra nếu câu hỏi có dữ liệu và đã được trả lời
+                    if (selectedAnswers[questionKey] !== undefined) {
+                        let questionData = null;
                         
-                        // Kiểm tra nếu đã chọn đáp án
-                        if (selectedAnswers[questionKey] !== undefined) {
-                            // Lấy thứ tự các đáp án đã đảo
-                            const shuffledAnswers = answerOrders[questionKey];
+                        if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                            partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
+                            // Các phần chỉ có 1 yêu cầu
+                            if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= i) {
+                                questionData = selectedQuestions[partKey][i - 1];
+                            }
+                        } else if (partKey === 'P6' || partKey === 'P7') {
+                            // Các phần có nhiều yêu cầu
+                            if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= i) {
+                                questionData = selectedQuestions[partKey].questions[i - 1];
+                            }
+                        }
+                        
+                        if (questionData) {
+                            // Kiểm tra đáp án
+                            const selectedAnswer = selectedAnswers[questionKey];
+                            const correctAnswer = getCorrectAnswer(questionData, answerOrders[questionKey]);
                             
-                            if (shuffledAnswers && shuffledAnswers[selectedAnswers[questionKey]]) {
-                                // Xử lý đặc biệt cho phần 1 - so sánh nội dung thực tế thay vì HTML
-                                if (part === 1) {
-                                    // Lấy nội dung thực tế của đáp án đúng (loại bỏ thẻ HTML)
-                                    const correctText = questionData.correct.replace(/<[^>]*>/g, '');
-                                    const selectedText = shuffledAnswers[selectedAnswers[questionKey]].text.replace(/<[^>]*>/g, '');
-                                    
-                                    if (selectedText === correctText) {
-                                        result.correct++;
-                                        partResult.correct++;
-                                    }
-                                } else {
-                                    // Các phần khác - so sánh đơn giản
-                                    if (shuffledAnswers[selectedAnswers[questionKey]].isCorrect) {
-                                        result.correct++;
-                                        partResult.correct++;
-                                    }
-                                }
+                            if (selectedAnswer === correctAnswer) {
+                                correctCount++;
+                                partCorrectCount++;
                             }
                         }
                     }
                 }
                 
-                // Tính tỷ lệ đúng cho phần
-                if (partResult.total > 0) {
-                    partResult.percentage = Math.round((partResult.correct / partResult.total) * 100);
-                } else {
-                    partResult.percentage = 0;
-                }
-                
-                result.partResults[partKey] = partResult;
+                // Tính tỷ lệ đúng cho phần này
+                const partPercentage = questionCount > 0 ? Math.round((partCorrectCount / questionCount) * 100) : 0;
+                partResults[partKey] = {
+                    correctCount: partCorrectCount,
+                    totalCount: questionCount,
+                    percentage: partPercentage
+                };
             }
             
-            // Tính tỷ lệ đúng tổng thể
-            if (result.total > 0) {
-                result.percentage = Math.round((result.correct / result.total) * 100);
-            } else {
-                result.percentage = 0;
-            }
+            // Tính tỷ lệ đúng tổng
+            const correctPercentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
             
-            return result;
+            return {
+                correctCount,
+                totalCount,
+                correctPercentage,
+                partResults
+            };
         }
 
-        // Hiển thị biểu đồ kết quả từng phần
-        function showResultChart(partResults) {
+        // Lấy đáp án đúng từ dữ liệu câu hỏi và thứ tự đáp án
+        function getCorrectAnswer(questionData, answerOrder) {
+            // Tìm đáp án đúng trong thứ tự đã xáo trộn
+            for (let i = 0; i < answerOrder.length; i++) {
+                const answer = answerOrder[i];
+                if (answer.isCorrect) {
+                    // Trả về nhãn (A, B, C, D) tương ứng
+                    return ['A', 'B', 'C', 'D'][i];
+                }
+            }
+            return null;
+        }
+
+        // Hiển thị biểu đồ kết quả
+        function displayResultChart(partResults) {
             const chartContainer = document.getElementById('resultChart');
             chartContainer.innerHTML = '';
             
-            // Tạo phần tử cho mỗi phần - sắp xếp theo lưới 4x3
-            for (let part = 1; part <= 12; part++) {
-                const partKey = `P${part}`;
-                const partResult = partResults[partKey] || { correct: 0, total: 0, percentage: 0 };
+            // Tạo phần tử cho mỗi phần
+            for (let partKey of currentConfig.parts) {
+                const result = partResults[partKey];
+                const partNumber = partKey.substring(1); // Lấy số phần (bỏ chữ P)
+                const partName = getPartName(partKey);
                 
                 const partDiv = document.createElement('div');
                 partDiv.className = 'part-result';
                 
-                const partName = document.createElement('div');
-                partName.className = 'part-name';
-                partName.textContent = `Phần ${part}`;
-                
-                const partProgress = document.createElement('div');
-                partProgress.className = 'part-progress';
-                
-                const partProgressBar = document.createElement('div');
-                partProgressBar.className = 'part-progress-bar';
-                partProgressBar.style.width = `${partResult.percentage}%`;
-                
-                if (partResult.percentage >= 80) {
-                    partProgressBar.classList.add('high');
-                } else if (partResult.percentage >= 51) {
-                    partProgressBar.classList.add('medium');
-                } else {
-                    partProgressBar.classList.add('low');
+                // Xác định màu sắc dựa trên tỷ lệ đúng
+                let progressClass = 'low';
+                if (result.percentage >= 70) {
+                    progressClass = 'high';
+                } else if (result.percentage >= 40) {
+                    progressClass = 'medium';
                 }
                 
-                const partPercentage = document.createElement('div');
-                partPercentage.className = 'part-percentage';
-                partPercentage.textContent = `${partResult.correct}/${partResult.total} (${partResult.percentage}%)`;
-                
-                partProgress.appendChild(partProgressBar);
-                partDiv.appendChild(partName);
-                partDiv.appendChild(partProgress);
-                partDiv.appendChild(partPercentage);
+                partDiv.innerHTML = `
+                    <div class="part-name">Phần ${partNumber}</div>
+                    <div class="part-progress">
+                        <div class="part-progress-bar ${progressClass}" style="width: ${result.percentage}%"></div>
+                    </div>
+                    <div class="part-percentage">${result.percentage}%</div>
+                `;
                 
                 chartContainer.appendChild(partDiv);
             }
         }
 
-        // Hiển thị danh sách các câu đã làm
-        function showQuestionList(partResults) {
+        // Lấy tên phần
+        function getPartName(partKey) {
+            const partNames = {
+                P1: 'Phát âm',
+                P2: 'Trọng âm',
+                P3: 'Từ vựng',
+                P4: 'Tìm lỗi sai',
+                P5: 'Ngữ pháp',
+                P6: 'Điền khuyết',
+                P7: 'Đọc hiểu',
+                P8: 'Sắp xếp câu',
+                P9: 'Giao tiếp',
+                P10: 'Biển báo',
+                P11: 'Viết lại câu',
+                P12: 'Sắp xếp từ'
+            };
+            
+            return partNames[partKey] || `Phần ${partKey.substring(1)}`;
+        }
+
+        // Hiển thị danh sách câu hỏi
+        function displayQuestionList(partResults) {
             const questionListContainer = document.getElementById('questionList');
             questionListContainer.innerHTML = '';
             
-            // Tạo phần tử cho mỗi phần
-            for (let part = 1; part <= 12; part++) {
-                const partKey = `P${part}`;
-                const partResult = partResults[partKey] || { correct: 0, total: 0, percentage: 0 };
+            // Duyệt qua tất cả các phần
+            for (let partKey of currentConfig.parts) {
+                const partNumber = partKey.substring(1);
+                const partName = getPartName(partKey);
+                const partResult = partResults[partKey];
                 
+                // Tạo phần tử cho phần này
                 const partSection = document.createElement('div');
                 partSection.className = 'part-section';
                 
                 const partHeader = document.createElement('div');
                 partHeader.className = 'part-header';
-                partHeader.textContent = `Phần ${part} (${partResult.correct}/${partResult.total} - ${partResult.percentage}%)`;
+                partHeader.innerHTML = `
+                    Phần ${partNumber}: ${partName} 
+                    <span>(${partResult.correctCount}/${partResult.totalCount} - ${partResult.percentage}%)</span>
+                `;
                 
                 const partQuestions = document.createElement('div');
                 partQuestions.className = 'part-questions';
@@ -15042,121 +15522,122 @@
                     partQuestions.classList.toggle('show');
                 });
                 
-                // Xác định số câu hỏi thực tế cho phần
-                let actualQuestionCount = 0;
-                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
-                    if (selectedQuestions[partKey]) {
-                        actualQuestionCount = selectedQuestions[partKey].length;
-                    }
-                } else if (part === 6 || part === 7) {
-                    if (selectedQuestions[partKey] && selectedQuestions[partKey].questions) {
-                        actualQuestionCount = selectedQuestions[partKey].questions.length;
-                    }
-                }
+                // Thêm mã đề của phần
+                const examCodeDiv = document.createElement('div');
+                examCodeDiv.className = 'part-exam-code';
                 
-                // Hiển thị mã nguồn của phần
-                const partExamCode = document.createElement('div');
-                partExamCode.className = 'part-exam-code';
-                
-                if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                    part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
+                let examCode = `${currentExam} – ${partKey}`;
+                if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                    partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
                     // Các phần chỉ có 1 yêu cầu
                     if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
-                        partExamCode.textContent = `Mã nguồn: ${currentExam} – ${partKey}.C1`;
+                        examCode += `.C1`;
                     }
-                } else if (part === 6 || part === 7) {
+                } else if (partKey === 'P6' || partKey === 'P7') {
                     // Các phần có nhiều yêu cầu
                     if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
-                        partExamCode.textContent = `Mã nguồn: ${currentExam} – ${partKey}.${selectedQuestions[partKey].section.id}`;
+                        examCode += `.${selectedQuestions[partKey].section.id}`;
                     }
                 }
                 
-                partQuestions.appendChild(partExamCode);
+                examCodeDiv.textContent = examCode;
+                partQuestions.appendChild(examCodeDiv);
                 
-                // Hiển thị đoạn văn cho phần 6 và 7
-                if ((part === 6 || part === 7) && selectedQuestions[partKey] && selectedQuestions[partKey].section) {
-                    const passage = document.createElement('div');
-                    passage.className = 'part-passage';
-                    passage.innerHTML = selectedQuestions[partKey].section.passage;
-                    partQuestions.appendChild(passage);
+                // Thêm đoạn văn (nếu có)
+                if (partKey === 'P6' || partKey === 'P7') {
+                    const passageDiv = document.createElement('div');
+                    passageDiv.className = 'part-passage';
+                    if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
+                        passageDiv.innerHTML = selectedQuestions[partKey].section.passage;
+                    }
+                    partQuestions.appendChild(passageDiv);
                 }
                 
-                // Duyệt qua từng câu hỏi trong phần
-                for (let question = 1; question <= actualQuestionCount; question++) {
-                    const questionKey = `${partKey}.${question}`;
+                // Duyệt qua tất cả câu hỏi trong phần
+                const questionCount = currentConfig.questionCounts[partKey];
+                for (let i = 1; i <= questionCount; i++) {
+                    const questionKey = `${partKey}.${i}`;
+                    const questionNumber = i;
                     
-                    // Lấy dữ liệu câu hỏi
+                    // Kiểm tra nếu câu hỏi có dữ liệu
                     let questionData = null;
                     
-                    if (part === 1 || part === 2 || part === 3 || part === 4 || part === 5 || 
-                        part === 8 || part === 9 || part === 10 || part === 11 || part === 12) {
+                    if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
+                        partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
                         // Các phần chỉ có 1 yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= question) {
-                            questionData = selectedQuestions[partKey][question - 1];
+                        if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= i) {
+                            questionData = selectedQuestions[partKey][i - 1];
                         }
-                    } else if (part === 6 || part === 7) {
+                    } else if (partKey === 'P6' || partKey === 'P7') {
                         // Các phần có nhiều yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= question) {
-                            questionData = selectedQuestions[partKey].questions[question - 1];
+                        if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= i) {
+                            questionData = selectedQuestions[partKey].questions[i - 1];
                         }
                     }
                     
-                    if (questionData) {
+                    // Nếu câu hỏi có dữ liệu và đã được trả lời, hiển thị
+                    if (questionData && selectedAnswers[questionKey] !== undefined) {
                         const questionItem = document.createElement('div');
                         questionItem.className = 'question-item';
                         
+                        // Hiển thị nội dung câu hỏi
                         const questionText = document.createElement('div');
                         questionText.className = 'question-text';
+                        questionText.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${questionData.question}`;
+                        questionItem.appendChild(questionText);
                         
-                        // Thêm mã nguồn của câu hỏi
-                        let sourceCode = '';
-                        if (questionCodes[questionKey]) {
-                            const { sectionId, questionId } = questionCodes[questionKey];
-                            sourceCode = ` (${sectionId}.${questionId})`;
-                        }
-                        
-                        questionText.innerHTML = `<strong>Câu ${question}${sourceCode}:</strong> ${questionData.question}`;
-                        
+                        // Hiển thị các đáp án với đánh dấu đúng/sai
                         const answerStatus = document.createElement('div');
                         answerStatus.className = 'answer-status';
                         
-                        // Lấy thứ tự các đáp án đã đảo
-                        const shuffledAnswers = answerOrders[questionKey] || [];
+                        // Lấy thứ tự đáp án đã xáo trộn
+                        const answerOrder = answerOrders[questionKey] || [
+                            { text: questionData.correct, isCorrect: true },
+                            { text: questionData.wrong1, isCorrect: false },
+                            { text: questionData.wrong2, isCorrect: false },
+                            { text: questionData.wrong3, isCorrect: false }
+                        ];
                         
-                        // Tạo các phần tử đáp án
-                        for (let i = 0; i < 4; i++) {
+                        // Tìm đáp án đúng
+                        const correctAnswerIndex = answerOrder.findIndex(answer => answer.isCorrect);
+                        const correctAnswerLabel = ['A', 'B', 'C', 'D'][correctAnswerIndex];
+                        
+                        // Đáp án người dùng đã chọn
+                        const userAnswer = selectedAnswers[questionKey];
+                        
+                        // Tạo các đáp án
+                        const answerLabels = ['A', 'B', 'C', 'D'];
+                        answerOrder.forEach((answer, index) => {
+                            const answerLabel = answerLabels[index];
                             const answerDiv = document.createElement('div');
+                            answerDiv.className = 'report-answer-option';
                             
-                            if (shuffledAnswers[i]) {
-                                const answer = shuffledAnswers[i];
-                                let status = 'no-answer';
-                                
-                                // Kiểm tra xem đáp án này có phải là đáp án đúng không
-                                if (answer.isCorrect) {
-                                    status = 'correct-answer';
-                                }
-                                
-                                // Kiểm tra xem đáp án này có được chọn không
-                                if (selectedAnswers[questionKey] === i) {
-                                    if (answer.isCorrect) {
-                                        status = 'correct-answer';
-                                    } else {
-                                        status = 'incorrect-answer';
-                                    }
-                                }
-                                
-                                answerDiv.className = status;
-                                answerDiv.innerHTML = `${String.fromCharCode(65 + i)}. ${answer.text}`;
+                            // Xác định trạng thái của đáp án
+                            if (answerLabel === correctAnswerLabel) {
+                                // Đáp án đúng
+                                answerDiv.classList.add('correct');
+                                answerDiv.innerHTML = `
+                                    <span class="report-answer-marker correct">✓</span>
+                                    <strong>${answerLabel}.</strong> ${answer.text}
+                                `;
+                            } else if (answerLabel === userAnswer && answerLabel !== correctAnswerLabel) {
+                                // Đáp án sai mà người dùng đã chọn
+                                answerDiv.classList.add('incorrect');
+                                answerDiv.innerHTML = `
+                                    <span class="report-answer-marker incorrect">✗</span>
+                                    <strong>${answerLabel}.</strong> ${answer.text}
+                                `;
                             } else {
-                                answerDiv.className = 'no-answer';
-                                answerDiv.innerHTML = `${String.fromCharCode(65 + i)}. `;
+                                // Đáp án không được chọn và không phải đáp án đúng
+                                answerDiv.classList.add('normal');
+                                answerDiv.innerHTML = `
+                                    <strong>${answerLabel}.</strong> ${answer.text}
+                                `;
                             }
                             
                             answerStatus.appendChild(answerDiv);
-                        }
+                        });
                         
-                        questionItem.appendChild(questionText);
                         questionItem.appendChild(answerStatus);
                         partQuestions.appendChild(questionItem);
                     }
@@ -15170,10 +15651,23 @@
 
         // Làm lại bài thi
         function retryExam() {
-            startExam();
+            // Reset các biến
+            selectedAnswers = {};
+            isTabSwitched = false;
+            blurTime = null;
+            focusTime = null;
+            
+            // Chọn lại câu hỏi ngẫu nhiên
+            selectRandomQuestions();
+            
+            // Hiển thị giao diện làm bài
+            showScreen('exam');
+            
+            // Hiển thị phần đầu tiên
+            showPart(0);
         }
 
-        // Làm mới (quay về giao diện chính)
+        // Làm mới bài thi (quay về giao diện chính)
         function newExam() {
             showScreen('main');
         }
