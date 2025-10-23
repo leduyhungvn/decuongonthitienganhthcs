@@ -231,7 +231,6 @@
             margin-bottom: 15px;
         }
 
-        /* CSS mới cho bố cục 4 cột 3 hàng */
         .part-results-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -267,15 +266,15 @@
         }
 
         .part-progress-bar.high {
-            background-color: #52c41a; /* Xanh */
+            background-color: #52c41a;
         }
 
         .part-progress-bar.medium {
-            background-color: #faad14; /* Vàng */
+            background-color: #faad14;
         }
 
         .part-progress-bar.low {
-            background-color: #f5222d; /* Đỏ */
+            background-color: #f5222d;
         }
 
         .part-percentage {
@@ -411,7 +410,6 @@
             display: none;
         }
 
-        /* Thêm CSS cho phần thông tin liên hệ */
         .contact-info {
             margin-top: 30px;
             padding: 15px;
@@ -461,7 +459,6 @@
             text-decoration: underline;
         }
 
-        /* CSS mới cho hiển thị đáp án trong báo cáo */
         .report-answer-option {
             padding: 6px 10px;
             margin-bottom: 5px;
@@ -497,6 +494,20 @@
         .report-answer-marker.incorrect {
             color: #f5222d;
         }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            z-index: 2000;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -504,6 +515,9 @@
     <div id="warningMessage" class="warning-message">
         CẢNH BÁO: Đã phát hiện hành vi gian lận! Bài thi sẽ được kết thúc.
     </div>
+
+    <!-- Thông báo -->
+    <div id="notification" class="notification"></div>
 
     <!-- Giao diện chính -->
     <div id="mainScreen" class="screen">
@@ -537,23 +551,19 @@
                 </select>
             </div>
             
-            <!-- Thêm dropdown chọn bộ bài tập -->
             <div class="form-group">
                 <label for="exerciseSetSelect">Chọn bộ bài tập:</label>
                 <select id="exerciseSetSelect">
-                    <!-- Các lựa chọn ban đầu -->
                     <option value="FULL">TỔNG HỢP</option>
                     <option value="PRONUNCIATION_VOCABULARY_GRAMMAR">PHÁT ÂM, TRỌNG ÂM, TỪ VỰNG VÀ NGỮ PHÁP</option>
                     <option value="ERROR_READING_COMMUNICATION_REWRITE">TÌM LỖI SAI, ĐỌC HIỂU, GIAO TIẾP VÀ VIẾT LẠI CÂU</option>
                     <option value="FILL_ARRANGE_SIGNS_WORDS">ĐIỀN KHUYẾT, SẮP XẾP CÁC CÂU, BIỂN BÁO VÀ SẮP XẾP CÁC TỪ</option>
-                    
-                    <!-- Các lựa chọn mới -->
                     <option value="P1">Phần 1 – PHÁT ÂM</option>
                     <option value="P2">Phần 2 – TRỌNG ÂM</option>
                     <option value="P3">Phần 3 – ĐỒNG NGHĨA NGƯỢC NGHĨA</option>
                     <option value="P4">Phần 4 – TÌM LỖI SAI</option>
                     <option value="P5">Phần 5 – TỪ VỰNG NGỮ PHÁP</option>
-                    <option value="P6">Phần 6 – ĐIỀM KHUYẾT</option>
+                    <option value="P6">Phần 6 – ĐIỀN KHUYẾT</option>
                     <option value="P7">Phần 7 – ĐỌC HIỂU</option>
                     <option value="P8">Phần 8 – SẮP XẾP CÁC CÂU</option>
                     <option value="P9">Phần 9 – GIAO TIẾP</option>
@@ -565,7 +575,6 @@
             
             <button id="startButton" class="btn-primary">Bắt đầu làm bài</button>
             
-            <!-- Thêm phần thông tin liên hệ -->
             <div class="contact-info">
                 <div class="contact-title">THÔNG TIN LIÊN HỆ</div>
                 
@@ -732,7 +741,6 @@
                             wrong2: "wav<span style=\"text-decoration: underline; color: red;\">es</span>", 
                             wrong3: "studi<span style=\"text-decoration: underline; color: red;\">es</span>" 
                         },
-                        // Thêm câu hỏi để đủ 20 câu
                         { 
                             id: 6, 
                             question: "underlined", 
@@ -896,7 +904,6 @@
                             wrong2: "advice", 
                             wrong3: "computer" 
                         },
-                        // Thêm câu hỏi để đủ 20 câu
                         { 
                             id: 5, 
                             question: "stress", 
@@ -1113,7 +1120,6 @@
                             wrong2: "afternoon", 
                             wrong3: "evening" 
                         },
-                        // Thêm câu hỏi để đủ 15 câu
                         { 
                             id: 11, 
                             question: "The opposite of 'light' is:", 
@@ -1227,7 +1233,6 @@
                             wrong2: "C. some", 
                             wrong3: "D. money" 
                         },
-                        // Thêm câu hỏi để đủ 10 câu
                         { 
                             id: 9, 
                             question: "She <span style=\"text-decoration: underline; color: red;\">go</span> to school every day.", 
@@ -1389,7 +1394,6 @@
                             wrong2: "lost", 
                             wrong3: "am losing" 
                         },
-                        // Thêm câu hỏi để đủ 20 câu
                         { 
                             id: 18, 
                             question: "She _____ to school every day.", 
@@ -1788,7 +1792,6 @@
                             wrong2: "c - b - d - a", 
                             wrong3: "d - b - c - a" 
                         },
-                        // Thêm câu hỏi để đủ 10 câu
                         { 
                             id: 6, 
                             question: "a. Finally, they visited the museum.<br>b. First, they went to the beach.<br>c. Last Sunday, Tom and his friends went on a trip.<br>d. Then, they had lunch at a restaurant.", 
@@ -1877,7 +1880,6 @@
                             wrong2: "What time is it", 
                             wrong3: "How old are you" 
                         },
-                        // Thêm câu hỏi để đủ 15 câu
                         { 
                             id: 6, 
                             question: "Shop assistant: (1) ____________?<br>Customer: Yes, I'm looking for a gift for my friend's birthday.<br>Shop assistant: (2) ____________?<br>Customer: She likes reading books.<br>Shop assistant: (3) ____________?<br>Customer: That's a great idea. I'll take it.<br>(1) is:", 
@@ -2006,7 +2008,6 @@
                             wrong2: "Phòng ăn", 
                             wrong3: "Phòng ngủ" 
                         },
-                        // Thêm câu hỏi để đủ 15 câu
                         { 
                             id: 6, 
                             question: "<img src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"red\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"16\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\">NO SMOKING</text></svg>' alt='No smoking sign'>", 
@@ -2135,7 +2136,6 @@
                             wrong2: "In spite of the bad weather, but they went to school.", 
                             wrong3: "Because of the bad weather, they went to school." 
                         },
-                        // Thêm câu hỏi để đủ 10 câu
                         { 
                             id: 6, 
                             question: "I am not as tall as my brother.", 
@@ -2224,7 +2224,6 @@
                             wrong2: "An interesting book this is.", 
                             wrong3: "Is this an interesting book." 
                         },
-                        // Thêm câu hỏi để đủ 10 câu
                         { 
                             id: 6, 
                             question: "Rearrange the words: I / to / every / go / school / day.", 
@@ -2269,6 +2268,7 @@
                 }
             ]
         };
+
 // Kho đề cho L6GK1
         const L6GK1 = {
             P1: [
@@ -14515,7 +14515,7 @@
                     P1: 20
                 },
                 partTimes: {
-                    P1: 300 // 20 câu * 15 giây
+                    P1: 300
                 },
                 perQuestionTime: 15
             },
@@ -14526,7 +14526,7 @@
                     P2: 20
                 },
                 partTimes: {
-                    P2: 300 // 20 câu * 15 giây
+                    P2: 300
                 },
                 perQuestionTime: 15
             },
@@ -14537,7 +14537,7 @@
                     P3: 15
                 },
                 partTimes: {
-                    P3: 300 // 15 câu * 20 giây
+                    P3: 300
                 },
                 perQuestionTime: 20
             },
@@ -14548,7 +14548,7 @@
                     P4: 10
                 },
                 partTimes: {
-                    P4: 300 // 10 câu * 30 giây
+                    P4: 300
                 },
                 perQuestionTime: 30
             },
@@ -14559,7 +14559,7 @@
                     P5: 20
                 },
                 partTimes: {
-                    P5: 300 // 20 câu * 15 giây
+                    P5: 300
                 },
                 perQuestionTime: 15
             },
@@ -14590,7 +14590,7 @@
                     P8: 10
                 },
                 partTimes: {
-                    P8: 300 // 10 câu * 30 giây
+                    P8: 300
                 },
                 perQuestionTime: 30
             },
@@ -14601,7 +14601,7 @@
                     P9: 15
                 },
                 partTimes: {
-                    P9: 300 // 15 câu * 20 giây
+                    P9: 300
                 },
                 perQuestionTime: 20
             },
@@ -14612,7 +14612,7 @@
                     P10: 15
                 },
                 partTimes: {
-                    P10: 300 // 15 câu * 20 giây
+                    P10: 300
                 },
                 perQuestionTime: 20
             },
@@ -14623,7 +14623,7 @@
                     P11: 10
                 },
                 partTimes: {
-                    P11: 300 // 10 câu * 30 giây
+                    P11: 300
                 },
                 perQuestionTime: 30
             },
@@ -14634,7 +14634,7 @@
                     P12: 10
                 },
                 partTimes: {
-                    P12: 300 // 10 câu * 30 giây
+                    P12: 300
                 },
                 perQuestionTime: 30
             }
@@ -14652,16 +14652,18 @@
         let endTime = null;
         let selectedQuestions = {};
         let isTabSwitched = false;
-        let answerOrders = {}; // Lưu trữ thứ tự đáp án đã đảo cho mỗi câu hỏi
-        let questionCodes = {}; // Lưu trữ mã nguồn của từng câu hỏi
-        let blurTime = null; // Thời điểm khi người dùng rời khỏi trang
-        let focusTime = null; // Thời điểm khi người dùng quay lại trang
-        let isPageVisible = true; // Trạng thái hiển thị của trang
-        let currentExerciseSet = 'FULL'; // Bộ bài tập hiện tại
-        let currentConfig = exerciseSetConfigs.FULL; // Cấu hình hiện tại
-        let currentQuestionIndex = 0; // Chỉ số câu hỏi hiện tại trong phần (dùng cho các phần mới)
-        let currentPartQuestionCount = 0; // Tổng số câu hỏi trong phần hiện tại
-        let isSinglePartMode = false; // Chế độ làm bài từng câu một (cho các phần mới)
+        let answerOrders = {};
+        let questionCodes = {};
+        let blurTime = null;
+        let focusTime = null;
+        let isPageVisible = true;
+        let currentExerciseSet = 'FULL';
+        let currentConfig = exerciseSetConfigs.FULL;
+        let currentQuestionIndex = 0;
+        let currentPartQuestionCount = 0;
+        let isSinglePartMode = false;
+        let selectedQuestionDetails = {};
+        let retryCount = 0; // Đếm số lần làm lại
 
         // Xử lý sự kiện khi trang tải xong
         document.addEventListener('DOMContentLoaded', function() {
@@ -14695,7 +14697,6 @@
             const examScreen = document.getElementById('examScreen');
             if (examScreen) {
                 examScreen.addEventListener('click', function(event) {
-                    // Kiểm tra xem phần tử được click có phải là các phần tử được phép không
                     if (!event.target.closest('.question-button') && 
                         !event.target.closest('.answer-option') && 
                         !event.target.closest('#nextButton')) {
@@ -14705,7 +14706,6 @@
                 });
 
                 examScreen.addEventListener('contextmenu', function(event) {
-                    // Kiểm tra xem phần tử được click có phải là các phần tử được phép không
                     if (!event.target.closest('.question-button') && 
                         !event.target.closest('.answer-option') && 
                         !event.target.closest('#nextButton')) {
@@ -14762,16 +14762,16 @@
             
             // Kiểm tra xem đề thi có dữ liệu không
             if (!hasExamData(currentExam)) {
-                // Hiển thị giao diện lỗi
                 showScreen('error');
                 return;
             }
             
-            currentPart = 0; // Sử dụng index thay vì số phần
+            currentPart = 0;
             currentQuestion = 1;
             currentQuestionIndex = 0;
             selectedAnswers = {};
             selectedQuestions = {};
+            selectedQuestionDetails = {};
             answerOrders = {};
             questionCodes = {};
             isTabSwitched = false;
@@ -14779,6 +14779,7 @@
             focusTime = null;
             isPageVisible = true;
             startTime = new Date();
+            retryCount = 0; // Reset số lần làm lại
             
             // Kiểm tra xem có phải là chế độ làm bài từng câu không
             isSinglePartMode = currentConfig.perQuestionTime !== undefined;
@@ -14797,7 +14798,6 @@
         function selectRandomQuestions() {
             const examData = questionBank[currentExam];
             
-            // Kiểm tra xem examData có tồn tại không
             if (!examData) {
                 console.error("Không tìm thấy dữ liệu đề thi:", currentExam);
                 return;
@@ -14805,7 +14805,6 @@
             
             // Duyệt qua tất cả các phần trong cấu hình
             for (let partKey of currentConfig.parts) {
-                // Lấy số câu cần chọn cho phần này từ cấu hình
                 const questionCount = currentConfig.questionCounts[partKey];
                 
                 // Xử lý từng phần theo loại
@@ -14814,9 +14813,16 @@
                     // Các phần chỉ có 1 yêu cầu
                     if (examData[partKey] && examData[partKey][0] && examData[partKey][0].questions && examData[partKey][0].questions.length >= questionCount) {
                         selectedQuestions[partKey] = getRandomItems(examData[partKey][0].questions, questionCount);
-                        // Lưu mã nguồn cho từng câu hỏi
+                        
+                        // Lưu chi tiết câu hỏi và mã nguồn cho từng câu hỏi
                         selectedQuestions[partKey].forEach((question, index) => {
-                            questionCodes[`${partKey}.${index + 1}`] = {
+                            const questionKey = `${partKey}.${index + 1}`;
+                            selectedQuestionDetails[questionKey] = {
+                                question: question,
+                                sectionId: examData[partKey][0].id,
+                                questionId: question.id
+                            };
+                            questionCodes[questionKey] = {
                                 sectionId: examData[partKey][0].id,
                                 questionId: question.id
                             };
@@ -14842,9 +14848,16 @@
                                 section: randomSection,
                                 questions: selectedQuestionsInSection
                             };
-                            // Lưu mã nguồn cho từng câu hỏi
+                            
+                            // Lưu chi tiết câu hỏi và mã nguồn cho từng câu hỏi
                             selectedQuestionsInSection.forEach((question, index) => {
-                                questionCodes[`${partKey}.${index + 1}`] = {
+                                const questionKey = `${partKey}.${index + 1}`;
+                                selectedQuestionDetails[questionKey] = {
+                                    question: question,
+                                    sectionId: randomSection.id,
+                                    questionId: question.id
+                                };
+                                questionCodes[questionKey] = {
                                     sectionId: randomSection.id,
                                     questionId: question.id
                                 };
@@ -14929,12 +14942,10 @@
             
             if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
                 partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                // Các phần chỉ có 1 yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
                     examCode += `.C1`;
                 }
             } else if (partKey === 'P6' || partKey === 'P7') {
-                // Các phần có nhiều yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
                     examCode += `.${selectedQuestions[partKey].section.id}`;
                 }
@@ -14949,12 +14960,10 @@
             
             if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
                 partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                // Các phần chỉ có 1 yêu cầu
                 if (examData && examData[partKey] && examData[partKey][0]) {
                     instruction = examData[partKey][0].passage;
                 }
             } else if (partKey === 'P6' || partKey === 'P7') {
-                // Các phần có nhiều yêu cầu
                 if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
                     instruction = selectedQuestions[partKey].section.passage;
                 }
@@ -14993,12 +15002,10 @@
             
             // Bắt đầu đồng hồ đếm ngược
             if (isSinglePartMode) {
-                // Chế độ từng câu: bắt đầu với thời gian cho câu đầu tiên
                 timeLeft = currentConfig.perQuestionTime;
                 updateTimer();
                 timer = setInterval(updateTimer, 1000);
             } else {
-                // Chế độ thông thường: bắt đầu với tổng thời gian cho phần
                 timeLeft = currentConfig.partTimes[partKey];
                 updateTimer();
                 timer = setInterval(updateTimer, 1000);
@@ -15029,12 +15036,9 @@
             
             if (questionCodes[questionKey]) {
                 const { sectionId, questionId } = questionCodes[questionKey];
-                // Thay thế hoặc thêm mã câu hỏi vào cuối
                 if (newExamCode.includes(`.${sectionId}`)) {
-                    // Nếu đã có mã phần, thay thế mã câu hỏi
                     newExamCode = newExamCode.replace(new RegExp(`\\.${sectionId}\\.\\d+$`), `.${sectionId}.${questionId}`);
                 } else {
-                    // Nếu chưa có mã phần, thêm mã câu hỏi
                     newExamCode += `.${sectionId}.${questionId}`;
                 }
             }
@@ -15045,20 +15049,11 @@
             const questionContent = document.getElementById('questionContent');
             questionContent.innerHTML = '';
             
-            // Lấy dữ liệu câu hỏi
+            // Lấy dữ liệu câu hỏi từ selectedQuestionDetails
             let questionData = null;
             
-            if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
-                partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                // Các phần chỉ có 1 yêu cầu
-                if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= questionNumber) {
-                    questionData = selectedQuestions[partKey][questionNumber - 1];
-                }
-            } else if (partKey === 'P6' || partKey === 'P7') {
-                // Các phần có nhiều yêu cầu
-                if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= questionNumber) {
-                    questionData = selectedQuestions[partKey].questions[questionNumber - 1];
-                }
+            if (selectedQuestionDetails[questionKey]) {
+                questionData = selectedQuestionDetails[questionKey].question;
             }
             
             if (questionData) {
@@ -15066,7 +15061,6 @@
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question-text';
                 
-                // Xử lý hiển thị gạch chân và tô đỏ cho phần 1
                 if (partKey === 'P1') {
                     questionDiv.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${questionData.question}`;
                 } else {
@@ -15090,10 +15084,8 @@
                 // Kiểm tra nếu đã có thứ tự đáp án đã lưu
                 let shuffledAnswers;
                 if (answerOrders[questionKey]) {
-                    // Sử dụng thứ tự đã lưu
                     shuffledAnswers = answerOrders[questionKey];
                 } else {
-                    // Tạo thứ tự mới và lưu lại
                     shuffledAnswers = [...answers];
                     for (let i = shuffledAnswers.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
@@ -15117,15 +15109,12 @@
                     
                     // Thêm sự kiện click
                     answerDiv.addEventListener('click', function() {
-                        // Đánh dấu đáp án đã chọn
                         selectedAnswers[questionKey] = answerLabels[index];
                         
-                        // Cập nhật giao diện
                         const allOptions = document.querySelectorAll('.answer-option');
                         allOptions.forEach(opt => opt.classList.remove('selected'));
                         this.classList.add('selected');
                         
-                        // Cập nhật trạng thái nút câu hỏi (chỉ cho các phần không phải chế độ từng câu)
                         if (!isSinglePartMode) {
                             const questionButton = document.querySelector(`.question-button[data-question="${questionNumber}"]`);
                             if (questionButton) {
@@ -15133,14 +15122,11 @@
                             }
                         }
                         
-                        // Nếu đang ở chế độ từng câu, tự động chuyển câu sau khi chọn đáp án
                         if (isSinglePartMode) {
-                            // Dừng đồng hồ đếm ngược
                             if (timer) {
                                 clearInterval(timer);
                             }
                             
-                            // Chuyển câu sau 1 giây
                             setTimeout(() => {
                                 nextQuestion();
                             }, 1000);
@@ -15152,23 +15138,18 @@
                 
                 questionContent.appendChild(answersDiv);
             } else {
-                // Nếu không có dữ liệu câu hỏi
                 questionContent.innerHTML = '<p>Không có câu hỏi để hiển thị.</p>';
             }
         }
 
         // Chuyển sang câu tiếp theo (chỉ cho chế độ từng câu)
         function nextQuestion() {
-            // Tăng chỉ số câu hỏi hiện tại
             currentQuestionIndex++;
             
-            // Kiểm tra xem còn câu hỏi nào không
             if (currentQuestionIndex < currentPartQuestionCount) {
-                // Hiển thị câu hỏi tiếp theo
                 const partKey = currentConfig.parts[currentPart];
                 showQuestion(partKey, currentQuestionIndex + 1);
                 
-                // Reset và bắt đầu đồng hồ đếm ngược mới
                 timeLeft = currentConfig.perQuestionTime;
                 updateTimer();
                 if (timer) {
@@ -15176,53 +15157,43 @@
                 }
                 timer = setInterval(updateTimer, 1000);
             } else {
-                // Nếu đã hết câu hỏi trong phần này, chuyển sang phần tiếp theo
                 nextPart();
             }
         }
 
         // Chuyển sang phần tiếp theo
         function nextPart() {
-            // Dừng đồng hồ đếm ngược
             if (timer) {
                 clearInterval(timer);
             }
             
-            // Chuyển sang phần tiếp theo
             showPart(currentPart + 1);
         }
 
         // Cập nhật đồng hồ đếm ngược
         function updateTimer() {
-            // Cập nhật thanh tiến trình
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
             
             if (isSinglePartMode) {
-                // Chế độ từng câu
                 const totalTime = currentConfig.perQuestionTime;
                 const percentage = (timeLeft / totalTime) * 100;
                 progressBar.style.width = `${percentage}%`;
                 progressText.textContent = `Thời gian còn lại: ${timeLeft} giây`;
             } else {
-                // Chế độ thông thường
                 const totalTime = currentConfig.partTimes[currentConfig.parts[currentPart]];
                 const percentage = (timeLeft / totalTime) * 100;
                 progressBar.style.width = `${percentage}%`;
                 
-                // Chuyển đổi thời gian thành phút:giây
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
                 progressText.textContent = `Thời gian còn lại: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             }
             
-            // Kiểm tra nếu hết thời gian
             if (timeLeft <= 0) {
                 if (isSinglePartMode) {
-                    // Chế độ từng câu: tự động chuyển câu
                     nextQuestion();
                 } else {
-                    // Chế độ thông thường: tự động chuyển phần
                     nextPart();
                 }
                 return;
@@ -15231,28 +15202,22 @@
             timeLeft--;
         }
 
-        // Xử lý sự kiện khi người dùng chuyển tab - CẢI TIẾN: KẾT THÚC BÀI THI NGAY
+        // Xử lý sự kiện khi người dùng chuyển tab
         function handleVisibilityChange() {
             if (document.hidden) {
-                // Người dùng chuyển sang tab khác
                 blurTime = new Date();
                 isPageVisible = false;
-                
-                // Kết thúc bài thi ngay lập tức
                 endExamDueToCheating();
             } else {
-                // Người dùng quay lại tab
                 focusTime = new Date();
                 isPageVisible = true;
             }
         }
 
-        // Xử lý sự kiện khi người dùng rời khỏi trang - CẢI TIẾN: KẾT THÚC BÀI THI NGAY
+        // Xử lý sự kiện khi người dùng rời khỏi trang
         function handleBlur() {
             blurTime = new Date();
             isPageVisible = false;
-            
-            // Kết thúc bài thi ngay lập tức
             endExamDueToCheating();
         }
 
@@ -15265,14 +15230,12 @@
         // Xử lý sự kiện khi chuột rời khỏi trang
         function handleMouseLeave() {
             if (currentScreen === 'exam') {
-                // Chỉ hiển thị cảnh báo khi đang làm bài
                 showCheatingWarning();
             }
         }
 
         // Xử lý sự kiện khi chuột quay lại trang
         function handleMouseEnter() {
-            // Ẩn cảnh báo khi chuột quay lại
             hideCheatingWarning();
         }
 
@@ -15306,26 +15269,20 @@
 
         // Hiển thị báo cáo kết quả
         function showReport() {
-            // Dừng đồng hồ đếm ngược
             if (timer) {
                 clearInterval(timer);
             }
             
-            // Hiển thị giao diện báo cáo
             showScreen('report');
             
-            // Cập nhật tiêu đề
             const classText = document.getElementById('classSelect').options[document.getElementById('classSelect').selectedIndex].text;
             const examText = document.getElementById('examSelect').options[document.getElementById('examSelect').selectedIndex].text;
             document.getElementById('reportSubtitle').textContent = `${classText} – ${examText}`;
             
-            // Cập nhật tiêu đề kết quả theo bộ bài tập đã chọn
             document.getElementById('resultTitle').textContent = `KẾT QUẢ – ${currentConfig.title}`;
             
-            // Cập nhật thông tin học viên
             document.getElementById('reportStudentName').textContent = document.getElementById('studentName').value;
             
-            // Cập nhật thời gian
             const startTimeStr = startTime.toLocaleTimeString('vi-VN');
             const endTimeStr = endTime.toLocaleTimeString('vi-VN');
             const totalTimeInSeconds = Math.floor((endTime - startTime) / 1000);
@@ -15336,26 +15293,19 @@
             document.getElementById('endTime').textContent = endTimeStr;
             document.getElementById('totalTime').textContent = `${totalMinutes} phút ${totalSeconds} giây`;
             
-            // Tính kết quả
             const result = calculateResult();
             
-            // Cập nhật số câu đúng và tỷ lệ
             document.getElementById('correctCount').textContent = `${result.correctCount} / ${result.totalCount}`;
             document.getElementById('correctRate').textContent = `${result.correctPercentage}%`;
             
-            // Hiển thị cảnh báo gian lận nếu có
             if (isTabSwitched) {
                 document.getElementById('cheatingWarning').style.display = 'block';
             }
             
-            // Cập nhật thanh tiến trình tổng
             const overallProgressBar = document.getElementById('overallProgressBar');
             overallProgressBar.style.width = `${result.correctPercentage}%`;
             
-            // Hiển thị biểu đồ kết quả
             displayResultChart(result.partResults);
-            
-            // Hiển thị danh sách câu hỏi
             displayQuestionList(result.partResults);
         }
 
@@ -15365,7 +15315,6 @@
             let totalCount = 0;
             const partResults = {};
             
-            // Duyệt qua tất cả các phần
             for (let partKey of currentConfig.parts) {
                 const questionCount = currentConfig.questionCounts[partKey];
                 let partCorrectCount = 0;
@@ -15374,37 +15323,19 @@
                     const questionKey = `${partKey}.${i}`;
                     totalCount++;
                     
-                    // Kiểm tra nếu câu hỏi có dữ liệu và đã được trả lời
-                    if (selectedAnswers[questionKey] !== undefined) {
-                        let questionData = null;
+                    if (selectedAnswers[questionKey] !== undefined && selectedQuestionDetails[questionKey]) {
+                        const questionData = selectedQuestionDetails[questionKey].question;
                         
-                        if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
-                            partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                            // Các phần chỉ có 1 yêu cầu
-                            if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= i) {
-                                questionData = selectedQuestions[partKey][i - 1];
-                            }
-                        } else if (partKey === 'P6' || partKey === 'P7') {
-                            // Các phần có nhiều yêu cầu
-                            if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= i) {
-                                questionData = selectedQuestions[partKey].questions[i - 1];
-                            }
-                        }
+                        const selectedAnswer = selectedAnswers[questionKey];
+                        const correctAnswer = getCorrectAnswer(questionData, answerOrders[questionKey]);
                         
-                        if (questionData) {
-                            // Kiểm tra đáp án
-                            const selectedAnswer = selectedAnswers[questionKey];
-                            const correctAnswer = getCorrectAnswer(questionData, answerOrders[questionKey]);
-                            
-                            if (selectedAnswer === correctAnswer) {
-                                correctCount++;
-                                partCorrectCount++;
-                            }
+                        if (selectedAnswer === correctAnswer) {
+                            correctCount++;
+                            partCorrectCount++;
                         }
                     }
                 }
                 
-                // Tính tỷ lệ đúng cho phần này
                 const partPercentage = questionCount > 0 ? Math.round((partCorrectCount / questionCount) * 100) : 0;
                 partResults[partKey] = {
                     correctCount: partCorrectCount,
@@ -15413,7 +15344,6 @@
                 };
             }
             
-            // Tính tỷ lệ đúng tổng
             const correctPercentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
             
             return {
@@ -15426,11 +15356,9 @@
 
         // Lấy đáp án đúng từ dữ liệu câu hỏi và thứ tự đáp án
         function getCorrectAnswer(questionData, answerOrder) {
-            // Tìm đáp án đúng trong thứ tự đã xáo trộn
             for (let i = 0; i < answerOrder.length; i++) {
                 const answer = answerOrder[i];
                 if (answer.isCorrect) {
-                    // Trả về nhãn (A, B, C, D) tương ứng
                     return ['A', 'B', 'C', 'D'][i];
                 }
             }
@@ -15442,16 +15370,14 @@
             const chartContainer = document.getElementById('resultChart');
             chartContainer.innerHTML = '';
             
-            // Tạo phần tử cho mỗi phần
             for (let partKey of currentConfig.parts) {
                 const result = partResults[partKey];
-                const partNumber = partKey.substring(1); // Lấy số phần (bỏ chữ P)
+                const partNumber = partKey.substring(1);
                 const partName = getPartName(partKey);
                 
                 const partDiv = document.createElement('div');
                 partDiv.className = 'part-result';
                 
-                // Xác định màu sắc dựa trên tỷ lệ đúng
                 let progressClass = 'low';
                 if (result.percentage >= 70) {
                     progressClass = 'high';
@@ -15496,13 +15422,11 @@
             const questionListContainer = document.getElementById('questionList');
             questionListContainer.innerHTML = '';
             
-            // Duyệt qua tất cả các phần
             for (let partKey of currentConfig.parts) {
                 const partNumber = partKey.substring(1);
                 const partName = getPartName(partKey);
                 const partResult = partResults[partKey];
                 
-                // Tạo phần tử cho phần này
                 const partSection = document.createElement('div');
                 partSection.className = 'part-section';
                 
@@ -15516,25 +15440,21 @@
                 const partQuestions = document.createElement('div');
                 partQuestions.className = 'part-questions';
                 
-                // Thêm sự kiện click để mở/đóng phần
                 partHeader.addEventListener('click', function() {
                     partHeader.classList.toggle('expanded');
                     partQuestions.classList.toggle('show');
                 });
                 
-                // Thêm mã đề của phần
                 const examCodeDiv = document.createElement('div');
                 examCodeDiv.className = 'part-exam-code';
                 
                 let examCode = `${currentExam} – ${partKey}`;
                 if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
                     partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                    // Các phần chỉ có 1 yêu cầu
                     if (selectedQuestions[partKey] && selectedQuestions[partKey].length > 0) {
                         examCode += `.C1`;
                     }
                 } else if (partKey === 'P6' || partKey === 'P7') {
-                    // Các phần có nhiều yêu cầu
                     if (selectedQuestions[partKey] && selectedQuestions[partKey].section) {
                         examCode += `.${selectedQuestions[partKey].section.id}`;
                     }
@@ -15543,7 +15463,6 @@
                 examCodeDiv.textContent = examCode;
                 partQuestions.appendChild(examCodeDiv);
                 
-                // Thêm đoạn văn (nếu có)
                 if (partKey === 'P6' || partKey === 'P7') {
                     const passageDiv = document.createElement('div');
                     passageDiv.className = 'part-passage';
@@ -15553,44 +15472,39 @@
                     partQuestions.appendChild(passageDiv);
                 }
                 
-                // Duyệt qua tất cả câu hỏi trong phần
                 const questionCount = currentConfig.questionCounts[partKey];
                 for (let i = 1; i <= questionCount; i++) {
                     const questionKey = `${partKey}.${i}`;
                     const questionNumber = i;
                     
-                    // Kiểm tra nếu câu hỏi có dữ liệu
-                    let questionData = null;
-                    
-                    if (partKey === 'P1' || partKey === 'P2' || partKey === 'P3' || partKey === 'P4' || partKey === 'P5' || 
-                        partKey === 'P8' || partKey === 'P9' || partKey === 'P10' || partKey === 'P11' || partKey === 'P12') {
-                        // Các phần chỉ có 1 yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].length >= i) {
-                            questionData = selectedQuestions[partKey][i - 1];
-                        }
-                    } else if (partKey === 'P6' || partKey === 'P7') {
-                        // Các phần có nhiều yêu cầu
-                        if (selectedQuestions[partKey] && selectedQuestions[partKey].questions && selectedQuestions[partKey].questions.length >= i) {
-                            questionData = selectedQuestions[partKey].questions[i - 1];
-                        }
-                    }
-                    
-                    // Nếu câu hỏi có dữ liệu và đã được trả lời, hiển thị
-                    if (questionData && selectedAnswers[questionKey] !== undefined) {
+                    if (selectedQuestionDetails[questionKey] && selectedAnswers[questionKey] !== undefined) {
+                        const questionData = selectedQuestionDetails[questionKey].question;
+                        
                         const questionItem = document.createElement('div');
                         questionItem.className = 'question-item';
                         
-                        // Hiển thị nội dung câu hỏi
+                        const questionCodeDiv = document.createElement('div');
+                        questionCodeDiv.className = 'part-exam-code';
+                        questionCodeDiv.style.fontWeight = 'bold';
+                        questionCodeDiv.style.marginBottom = '5px';
+                        
+                        let fullQuestionCode = `${currentExam} – ${partKey}`;
+                        if (questionCodes[questionKey]) {
+                            const { sectionId, questionId } = questionCodes[questionKey];
+                            fullQuestionCode += `.${sectionId}.${questionId}`;
+                        }
+                        
+                        questionCodeDiv.textContent = fullQuestionCode;
+                        questionItem.appendChild(questionCodeDiv);
+                        
                         const questionText = document.createElement('div');
                         questionText.className = 'question-text';
                         questionText.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${questionData.question}`;
                         questionItem.appendChild(questionText);
                         
-                        // Hiển thị các đáp án với đánh dấu đúng/sai
                         const answerStatus = document.createElement('div');
                         answerStatus.className = 'answer-status';
                         
-                        // Lấy thứ tự đáp án đã xáo trộn
                         const answerOrder = answerOrders[questionKey] || [
                             { text: questionData.correct, isCorrect: true },
                             { text: questionData.wrong1, isCorrect: false },
@@ -15598,37 +15512,30 @@
                             { text: questionData.wrong3, isCorrect: false }
                         ];
                         
-                        // Tìm đáp án đúng
                         const correctAnswerIndex = answerOrder.findIndex(answer => answer.isCorrect);
                         const correctAnswerLabel = ['A', 'B', 'C', 'D'][correctAnswerIndex];
                         
-                        // Đáp án người dùng đã chọn
                         const userAnswer = selectedAnswers[questionKey];
                         
-                        // Tạo các đáp án
                         const answerLabels = ['A', 'B', 'C', 'D'];
                         answerOrder.forEach((answer, index) => {
                             const answerLabel = answerLabels[index];
                             const answerDiv = document.createElement('div');
                             answerDiv.className = 'report-answer-option';
                             
-                            // Xác định trạng thái của đáp án
                             if (answerLabel === correctAnswerLabel) {
-                                // Đáp án đúng
                                 answerDiv.classList.add('correct');
                                 answerDiv.innerHTML = `
                                     <span class="report-answer-marker correct">✓</span>
                                     <strong>${answerLabel}.</strong> ${answer.text}
                                 `;
                             } else if (answerLabel === userAnswer && answerLabel !== correctAnswerLabel) {
-                                // Đáp án sai mà người dùng đã chọn
                                 answerDiv.classList.add('incorrect');
                                 answerDiv.innerHTML = `
                                     <span class="report-answer-marker incorrect">✗</span>
                                     <strong>${answerLabel}.</strong> ${answer.text}
                                 `;
                             } else {
-                                // Đáp án không được chọn và không phải đáp án đúng
                                 answerDiv.classList.add('normal');
                                 answerDiv.innerHTML = `
                                     <strong>${answerLabel}.</strong> ${answer.text}
@@ -15649,13 +15556,35 @@
             }
         }
 
-        // Làm lại bài thi
+        // Hiển thị thông báo
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // Làm lại bài thi - CẢI TIẾN: Reset thời điểm bắt đầu
         function retryExam() {
+            // Hiển thị thông báo
+            showNotification('Đang chuẩn bị làm lại bài...');
+            
             // Reset các biến
             selectedAnswers = {};
+            selectedQuestions = {};
+            selectedQuestionDetails = {};
+            answerOrders = {};
+            questionCodes = {};
             isTabSwitched = false;
             blurTime = null;
             focusTime = null;
+            
+            // Reset thời điểm bắt đầu làm bài - ĐÂY LÀ PHẦN CẢI TIẾN
+            startTime = new Date();
+            retryCount++; // Tăng số lần làm lại
             
             // Chọn lại câu hỏi ngẫu nhiên
             selectRandomQuestions();
@@ -15669,6 +15598,24 @@
 
         // Làm mới bài thi (quay về giao diện chính)
         function newExam() {
+            selectedAnswers = {};
+            selectedQuestions = {};
+            selectedQuestionDetails = {};
+            answerOrders = {};
+            questionCodes = {};
+            isTabSwitched = false;
+            blurTime = null;
+            focusTime = null;
+            currentExam = '';
+            currentExerciseSet = 'FULL';
+            currentConfig = exerciseSetConfigs.FULL;
+            retryCount = 0;
+            
+            document.getElementById('studentName').value = '';
+            document.getElementById('classSelect').selectedIndex = 0;
+            document.getElementById('examSelect').selectedIndex = 0;
+            document.getElementById('exerciseSetSelect').selectedIndex = 0;
+            
             showScreen('main');
         }
 
