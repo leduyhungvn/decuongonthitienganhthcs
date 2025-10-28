@@ -265,16 +265,28 @@
             transition: width 0.5s;
         }
 
-        .part-progress-bar.high {
-            background-color: #52c41a;
+        .part-progress-bar.low {
+            background-color: #f5222d;
         }
 
         .part-progress-bar.medium {
             background-color: #faad14;
         }
 
-        .part-progress-bar.low {
-            background-color: #f5222d;
+        .part-progress-bar.high {
+            background-color: #52c41a;
+        }
+
+        .part-progress-bar.very-high {
+            background-color: #13c2c2;
+        }
+
+        .part-progress-bar.excellent {
+            background-color: #1890ff;
+        }
+
+        .part-progress-bar.perfect {
+            background-color: #722ed1;
         }
 
         .part-percentage {
@@ -2268,6 +2280,7 @@
                 }
             ]
         };
+
 // Kho đề cho L6GK1
         const L6GK1 = {
             P1: [
@@ -9620,7 +9633,6 @@
                 }
             ]
         };
-
       
         // Kho đề cho L9GK1
         const L9GK1 = {
@@ -14675,9 +14687,9 @@
                 questionCounts: {
                     P1: 2,
                     P2: 2,
-                    P3: 4,
+                    P3: 3,
                     P4: 3,
-                    P5: 9,
+                    P5: 10,
                     P6: 5,
                     P7: 5,
                     P8: 2,
@@ -14691,7 +14703,7 @@
                     P2: 40,
                     P3: 90,
                     P4: 120,
-                    P5: 270,
+                    P5: 240,
                     P6: 240,
                     P7: 240,
                     P8: 120,
@@ -14803,7 +14815,7 @@
                 partTimes: {
                     P5: 300
                 },
-                perQuestionTime: 15
+                perQuestionTime: 20
             },
             P6: {
                 title: "Phần 6 – ĐIỀM KHUYẾT",
@@ -14840,23 +14852,23 @@
                 title: "Phần 9 – GIAO TIẾP",
                 parts: ['P9'],
                 questionCounts: {
-                    P9: 15
+                    P9: 10
                 },
                 partTimes: {
                     P9: 300
                 },
-                perQuestionTime: 20
+                perQuestionTime: 30
             },
             P10: {
                 title: "Phần 10 – BIẾN BÁO TIN TỨC",
                 parts: ['P10'],
                 questionCounts: {
-                    P10: 15
+                    P10: 10
                 },
                 partTimes: {
                     P10: 300
                 },
-                perQuestionTime: 20
+                perQuestionTime: 30
             },
             P11: {
                 title: "Phần 11 – VIẾT LẠI CÂU CÓ NGHĨA KHÔNG ĐỔI",
@@ -15547,6 +15559,21 @@
             const overallProgressBar = document.getElementById('overallProgressBar');
             overallProgressBar.style.width = `${result.correctPercentage}%`;
             
+            // Áp dụng màu sắc cho thanh tiến trình tổng thể
+            if (result.correctPercentage === 100) {
+                overallProgressBar.style.backgroundColor = '#722ed1'; // Tím
+            } else if (result.correctPercentage >= 90) {
+                overallProgressBar.style.backgroundColor = '#1890ff'; // Xanh blue
+            } else if (result.correctPercentage >= 80) {
+                overallProgressBar.style.backgroundColor = '#13c2c2'; // Xanh ngọc
+            } else if (result.correctPercentage >= 70) {
+                overallProgressBar.style.backgroundColor = '#52c41a'; // Xanh lá
+            } else if (result.correctPercentage >= 50) {
+                overallProgressBar.style.backgroundColor = '#faad14'; // Vàng
+            } else {
+                overallProgressBar.style.backgroundColor = '#f5222d'; // Đỏ
+            }
+            
             displayResultChart(result.partResults);
             displayQuestionList(result.partResults);
         }
@@ -15620,11 +15647,20 @@
                 const partDiv = document.createElement('div');
                 partDiv.className = 'part-result';
                 
-                let progressClass = 'low';
-                if (result.percentage >= 70) {
-                    progressClass = 'high';
-                } else if (result.percentage >= 40) {
-                    progressClass = 'medium';
+                // Xác định lớp CSS dựa trên tỷ lệ phần trăm
+                let progressClass = '';
+                if (result.percentage === 100) {
+                    progressClass = 'perfect'; // Tím
+                } else if (result.percentage >= 90) {
+                    progressClass = 'excellent'; // Xanh blue
+                } else if (result.percentage >= 80) {
+                    progressClass = 'very-high'; // Xanh ngọc
+                } else if (result.percentage >= 70) {
+                    progressClass = 'high'; // Xanh lá
+                } else if (result.percentage >= 50) {
+                    progressClass = 'medium'; // Vàng
+                } else {
+                    progressClass = 'low'; // Đỏ
                 }
                 
                 partDiv.innerHTML = `
