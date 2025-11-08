@@ -2280,7 +2280,6 @@
                 }
             ]
         };
-
 // Kho đề cho L6GK1
         const L6GK1 = {
             P1: [
@@ -9633,6 +9632,7 @@
                 }
             ]
         };
+
       
         // Kho đề cho L9GK1
         const L9GK1 = {
@@ -15537,8 +15537,8 @@
             
             document.getElementById('reportStudentName').textContent = document.getElementById('studentName').value;
             
-            const startTimeStr = startTime.toLocaleTimeString('vi-VN');
-            const endTimeStr = endTime.toLocaleTimeString('vi-VN');
+	const startTimeStr = `${startTime.getDate()}/${startTime.getMonth() + 1}/${startTime.getFullYear()} - ${startTime.toLocaleTimeString('vi-VN')}`;
+    	const endTimeStr = `${endTime.getDate()}/${endTime.getMonth() + 1}/${endTime.getFullYear()} - ${endTime.toLocaleTimeString('vi-VN')}`;
             const totalTimeInSeconds = Math.floor((endTime - startTime) / 1000);
             const totalMinutes = Math.floor(totalTimeInSeconds / 60);
             const totalSeconds = totalTimeInSeconds % 60;
